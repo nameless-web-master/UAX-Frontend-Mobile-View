@@ -17,7 +17,7 @@ const cellStyle = {
 };
 const noDataStyle = {
   textAlign: 'center',
-  height: '55vh',
+  height: '30vh',
   backgroundColor: '#000',
   borderBottom: "none",
   position: "relative"
@@ -178,7 +178,7 @@ const ViewOffers = () => {
                         :
                         <tr>
                           <td colSpan="6" style={noDataStyle}>
-                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"} style={{ width: "6vw", position: "relative", top: "40%" }} />
+                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"} style={{ width: 60, position: "relative", top: "30%" }} />
                           </td>
                         </tr>
                       }

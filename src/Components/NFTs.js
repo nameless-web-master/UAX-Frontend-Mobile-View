@@ -4,6 +4,7 @@ import Marketplace from './Marketplace';
 import CreateNFT from './CreateNFT';
 import Viewoffer from './ViewOffers';
 import ReserveFundsAndPower from './ReserveFundsAndPower';
+import { UserInfor } from './UserInfor';
 
 const NFTs = () => {
   const [activeTab, setActiveTab] = useState("pills-profile");
@@ -48,6 +49,7 @@ const NFTs = () => {
 
   return (
     <>
+      <UserInfor />
       <div className="container" style={{ minHeight: "100vh" }}>
         <div className='mt-3'>
           <div className='dashboard_box_001____ mb-3'>

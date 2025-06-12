@@ -1089,4 +1089,9 @@ td {
     display: none !important;
   }
 
+  .small_back {
+    background-color: transparent !important;
+    border: none !important;
+  }
+
 }

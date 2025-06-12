@@ -171,14 +171,14 @@ const MyCollections = () => {
     return (
         <>
             {loader ?
-                <div className='' style={{ height: "80vh", position: "relative", backgroundImage: 'linear-gradient(#2B2330, #2218260F)', borderRadius: 6 }}>
+                <div className='' style={{ height: "40vh", position: "relative", backgroundImage: 'linear-gradient(#2B2330, #2218260F)', borderRadius: 6 }}>
                     <center style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}>
                         <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "3vw" }} />
                     </center>
                 </div>
                 :
                 <>
-                    <div className='row'>
+                    <div className='row w-100 m-auto'>
                         {nft_list.length > 0 ?
                             <>
                                 {nft_list.map(index => {
@@ -277,9 +277,9 @@ const MyCollections = () => {
                                 })}
                             </>
                             :
-                            <div className='' style={{ height: "80vh", position: "relative", backgroundImage: 'linear-gradient(#2B2330, #2218260F)', borderRadius: 6 }}>
+                            <div className='w-100' style={{ height: "40vh", position: "relative", backgroundImage: 'linear-gradient(#2B2330, #2218260F)', borderRadius: 6 }}>
                                 <center style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}>
-                                    <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"} style={{ width: "6vw" }} />
+                                    <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"} style={{ width: "" }} />
                                 </center>
                             </div>
                         }

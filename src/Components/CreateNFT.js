@@ -16,14 +16,14 @@ const CreateNft = () => {
   const [disable_create_nft_button, setdisable_create_nft_button] = useState(false);
   const [NftSupply, setNftSupply] = useState(1);
 
-  
+
   const allowedTypes = ["image/png", "image/jpeg", "image/svg+xml", "video/mp4"];
   const maxFileSize = 100 * 1024 * 1024; // 5MB in bytes
 
   const CreateNFT = async () => {
     setdisable_create_nft_button(true)
     setmsg(
-      <img src={"https://images.uaxdlts.com/uax-dashboard/images/loader3.gif"} style={{width:"3vw"}}/>
+      <img src={"https://images.uaxdlts.com/uax-dashboard/images/loader3.gif"} style={{ width: "3vw" }} />
     );
     if (name.length > 0 && naftcreatorname.length > 0 && parseFloat(minvalue) > 0 && description.length > 0) {
       if (selectedFile) {
@@ -57,17 +57,17 @@ const CreateNft = () => {
         formData.append('nft_supply', NftSupply);
 
         const response = await axios.post('https://services.uaxwallet.com/api/createNFT', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${token}`
-              }
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
+          }
         });
 
         if (response.data.success) {
           setmsg(response.data.message);
-          setTimeout(()=>{
+          setTimeout(() => {
             window.location.reload();
-          },2000)
+          }, 2000)
         } else {
           setmsg(response.data.message || 'Failed to create NFT.');
           setdisable_create_nft_button(false)
@@ -113,7 +113,42 @@ const CreateNft = () => {
 
   return (
     <>
-      <div className="nft_box_0001____ p-4">
+      <div
+        className="my-3 small_view"
+        style={{
+          border: "1px solid #2f2d2f",
+          position: "relative",
+          height: "100%",
+          borderRadius: "7px",
+          backgroundColor: '#211f24',
+          borderRadius: 6
+        }} onClick={handleFileSelect}>
+        {selectedImage ? (
+          <>
+            <div className="nftUplaod">
+              <img
+                src={selectedImage}
+                alt="Selected Image"
+                style={{
+                  width: "100%",
+                  borderRadius: ".25rem",
+                }}
+              />
+            </div>
+          </>
+        ) : (
+          <div className="nftUplaod" style={{ position: "relative", }}>
+            <center className="absCenter" style={{ fontSize: "13px" }}>
+              <i
+                className="fa fa-upload mt-4"
+                style={{ fontSize: "30px" }}
+              ></i>
+              <p className="my-3">JPG, PNG, GIF, SVG, MP4 <span style={{ color: '#E12DFF' }}>Max size: 100MB</span></p>
+            </center>
+          </div>
+        )}
+      </div>
+      <div className="nft_box_0001____ small_back p-md-4 p-0 py-4">
         <p style={{ fontSize: "25px", fontWeight: "700", marginBottom: "5px" }}>
           Create an NFT
         </p>
@@ -121,7 +156,7 @@ const CreateNft = () => {
           Once your item is minted you will not be able to change any of its information.
         </p>
         <div className="row">
-          <div className="col-md-6 col-sm-12 mt-2">
+          <div className="col-lg-6 col-12 mt-2">
             <form>
               <div className="form-group">
                 <label htmlFor="" style={{ fontWeight: "700" }}>
@@ -134,13 +169,13 @@ const CreateNft = () => {
                   aria-describedby=""
                   placeholder="Name your NFT"
                   style={{ backgroundColor: '#403242' }}
-                  onChange={(e)=>setname(e.target.value)}
+                  onChange={(e) => setname(e.target.value)}
                 />
               </div>
-              <br/>
+              <br />
               <div className="form-group">
                 <label htmlFor="" style={{ fontWeight: "700" }}>
-                NFT Creator*
+                  NFT Creator*
                 </label>
                 <input
                   type=""
@@ -149,10 +184,10 @@ const CreateNft = () => {
                   aria-describedby=""
                   placeholder="NFT Creator Name"
                   style={{ backgroundColor: '#403242' }}
-                  onChange={(e)=>setnaftcreatorname(e.target.value)}
+                  onChange={(e) => setnaftcreatorname(e.target.value)}
                 />
               </div>
-              <br/>
+              <br />
               <div className="form-group">
                 <label htmlFor="" style={{ fontWeight: "700" }}>
                   Fixed Price*
@@ -164,10 +199,10 @@ const CreateNft = () => {
                   aria-describedby=""
                   placeholder="Enter Minimum Price"
                   style={{ backgroundColor: '#403242' }}
-                  onChange={(e)=>setminvalue(e.target.value)}
+                  onChange={(e) => setminvalue(e.target.value)}
                 />
               </div>
-              <br/>
+              <br />
               <div className="form-group">
                 <label htmlFor="" style={{ fontWeight: "700" }}>
                   Total Supply*
@@ -180,10 +215,10 @@ const CreateNft = () => {
                   placeholder="Enter Supply"
                   value={NftSupply}
                   style={{ backgroundColor: '#403242' }}
-                  onChange={(e)=>setNftSupply(e.target.value)}
+                  onChange={(e) => setNftSupply(e.target.value)}
                 />
               </div>
-              <br/>
+              <br />
               <div className="form-group">
                 <label htmlFor="" style={{ fontWeight: "700" }}>
                   Description*
@@ -195,10 +230,10 @@ const CreateNft = () => {
                   id="searchQueryInput"
                   aria-describedby=""
                   style={{ backgroundColor: '#403242' }}
-                  onChange={(e)=>setdescription(e.target.value)}
+                  onChange={(e) => setdescription(e.target.value)}
                 ></textarea>
               </div>
-              <br/>
+              <br />
               <div className="form-group">
                 <label htmlFor="" style={{ fontWeight: "700" }}>
                   External Link
@@ -210,58 +245,58 @@ const CreateNft = () => {
                   aria-describedby=""
                   placeholder="https://sample.iofitem/test"
                   style={{ backgroundColor: '#403242' }}
-                  onChange={(e)=>setexternallink(e.target.value)}
+                  onChange={(e) => setexternallink(e.target.value)}
                 />
               </div>
             </form>
-            {disable_create_nft_button?
-             <button
-             className="headerGrad"
-             style={{
-               cursor: "pointer",
-               backgroundColor: "grey",
-               marginTop: "15px",
-               color: "white",
-               minWidth: "100%",
-               fontWeight: "600",
-               fontSize: "16px",
-               border: "none",
-               marginRight: "0px",
-               minHeight: "5vh",
-               borderRadius: ".25rem",
-             }}
-             disabled
-           >
-             <span style={{ fontSize: "14px" }}> Create</span>
-           </button>
-           :
-           <button
-           className="headerGrad"
-           style={{
-             cursor: "pointer",
-             backgroundColor: "#c006df ",
-             marginTop: "15px",
-             color: "white",
-             minWidth: "100%",
-             fontWeight: "600",
-             fontSize: "16px",
-             border: "1px solid #c006df",
-             marginRight: "0px",
-             minHeight: "5vh",
-             borderRadius: ".25rem",
-           }}
-           onClick={CreateNFT}
-         >
-           <span style={{ fontSize: "14px" }}> Create</span>
-         </button>
-          }
+            {disable_create_nft_button ?
+              <button
+                className="headerGrad"
+                style={{
+                  cursor: "pointer",
+                  backgroundColor: "grey",
+                  marginTop: "15px",
+                  color: "white",
+                  minWidth: "100%",
+                  fontWeight: "600",
+                  fontSize: "16px",
+                  border: "none",
+                  marginRight: "0px",
+                  minHeight: "5vh",
+                  borderRadius: ".25rem",
+                }}
+                disabled
+              >
+                <span style={{ fontSize: "14px" }}> Create</span>
+              </button>
+              :
+              <button
+                className="headerGrad"
+                style={{
+                  cursor: "pointer",
+                  backgroundColor: "#c006df ",
+                  marginTop: "15px",
+                  color: "white",
+                  minWidth: "100%",
+                  fontWeight: "600",
+                  fontSize: "16px",
+                  border: "1px solid #c006df",
+                  marginRight: "0px",
+                  minHeight: "5vh",
+                  borderRadius: ".25rem",
+                }}
+                onClick={CreateNFT}
+              >
+                <span style={{ fontSize: "14px" }}> Create</span>
+              </button>
+            }
             {msg && (
               <div className="alert alert-success mt-3 text-center" role="alert">
                 {msg}
               </div>
             )}
           </div>
-          <div className="col-md-6 col-sm-12 mt-2" style={{}}>
+          <div className="col-md-6 col-12 mt-2 large_view" style={{}}>
             <div style={{ border: "1px solid #2f2d2f", position: "relative", height: "100%", borderRadius: "7px", padding: "5px" }}>
               {selectedImage ? (
                 <>
@@ -287,7 +322,6 @@ const CreateNft = () => {
                         src={selectedImage}
                         alt="Selected Image"
                         style={{
-                          height: "77vh",
                           width: "100%",
                           borderRadius: ".25rem",
                         }}
