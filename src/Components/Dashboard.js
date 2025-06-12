@@ -15,6 +15,7 @@ import Footer from './Footer'
 import { Html5Qrcode } from "html5-qrcode";
 import Txlist from "./Txlist";
 import { UserInfor } from './UserInfor';
+import StakingInfor from "./StakeingInfor";
 
 import Circle from '../media/circle.png';
 
@@ -718,54 +719,8 @@ const Dashboard = () => {
                 <div className="mt-3 mt-sm-5">
                   <h5>Staking Information</h5>
                 </div>
-                <div className='dashboard_box_001____ px-4 mb-4 '>
-                  <div className='my-3 my-lg-5 for_device_difference____mx_5____'>
-                    <div>
-                      <div className='row'>
-                        <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                          <div className="section_balance_and_stake____ h-100">
-                            <span style={{ fontWeight: "500" }}>Balance</span><br />
-                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"} style={{ width: "18px" }} />
-                            <span style={{ color: "#0ce456", fontSize: "18px", marginLeft: "10px", fontWeight: "900" }}>
-                              {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> :
-                                <>
-                                  {
-                                    (parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(3)} UAXN
-                                </>
-                              }
-                            </span>
-                          </div>
-                        </div>
-                        <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                          <div className="section_balance_and_stake_brown____ h-100">
-                            <span style={{ fontWeight: "500" }}>Staked / Validators</span><br />
-                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/mining .svg"} style={{ width: "18px" }} />
-                            <span style={{ color: "#f99f1b", fontSize: "18px", marginLeft: "10px", fontWeight: "900" }}>
-                              {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${stakedAmtState || 0} / ${stakedDevices || 0}`}
-                            </span>
-                          </div>
-                        </div>
-                        <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                          <div className="section_balance_and_stake_white____ h-100">
-                            <span style={{ fontWeight: "500" }}>Generated Bandwidth</span><br />
-                            <PowerSettingsNewIcon style={{ color: "#fff" }} />
-                            <span style={{ color: "#fff", fontSize: "18px", marginLeft: "5px", fontWeight: "900" }}>
-                              {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${parseFloat(generatedPower).toFixed(2)}`}
-                            </span>
-                          </div>
-                        </div>
-                        <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                          <div className="section_balance_and_stake_blue____ h-100">
-                            <span style={{ fontWeight: "500" }}>Stake Rewards</span><br />
-                            <Reward style={{ color: "#fff" }} />
-                            <span style={{ color: "#447be1", fontSize: "18px", marginLeft: "5px", fontWeight: "900" }}>
-                              {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${parseFloat(earnedAmtState).toFixed(2)} UAXN`}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className='dashboard_box_001____ p-4 mb-4 '>
+                  <StakingInfor />
                 </div>
               </div>
 
@@ -1066,13 +1021,11 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-12 mt-2">
-                  <div className="col-lg-6 col-md-12 mt-2 p-4">
-                    <p className='mb-1' style={{ fontWeight: '600', fontSize: 16 }}>
-                      Latest Transactions
-                    </p>
-                    <Txlist />
-                  </div>
+                <div className="col-lg-6 col-md-12 mt-2 p-4">
+                  <p className='mb-1' style={{ fontWeight: '600', fontSize: 16 }}>
+                    Latest Transactions
+                  </p>
+                  <Txlist />
                 </div>
               </div>
             </div>

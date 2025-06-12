@@ -158,7 +158,7 @@ const Txlist = ({ state = false }) => {
     return (
         <>
             {loader ? (
-                <div className='' style={{ height: '80vh', position: 'relative', backgroundColor: '#000' }}>
+                <div className='' style={{ position: 'relative', backgroundColor: '#000' }}>
                     <center style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }}>
                         <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "3vw" }} />
                     </center>

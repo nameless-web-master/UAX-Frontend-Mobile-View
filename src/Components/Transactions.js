@@ -4,7 +4,10 @@ import axios from 'axios';
 import PowerSettingsNewIcon from '@mui/icons-material/Bolt';
 import ReactPaginate from 'react-paginate';
 import { Button } from 'react-bootstrap';
+import Txlist from './Txlist';
+import { UserInfor } from './UserInfor';
 
+import StakingInfor from './StakeingInfor';
 import Icon from '../media/icon.png';
 
 const noDataStyle = {
@@ -156,68 +159,23 @@ const Transactions = () => {
   // console.log("stakedAmtState",stakedAmtState)
   return (
     <>
+      <UserInfor />
       {loader ? (
-        <div className='' style={{ height: '80vh', position: 'relative', backgroundColor: '#000' }}>
+        <div className='' style={{ position: 'relative', backgroundColor: '#000' }}>
           <center style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }}>
             <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "3vw" }} />
           </center>
         </div>
       ) : (
-        <div className='container' style={{ minHeight: '100vh' }}>
+        <div className='container'>
           <div className='mt-3'>
             <div className='dashboard_box_001____ px-4 mb-4'>
               <div className='my-3 for_device_difference____mx_5____'>
-                <div className=''>
-                  <div className='row'>
-                    <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                      <div className='section_balance_and_stake____'>
-                        <span style={{ fontWeight: '500' }}>Balance</span>
-                        <br />
-                        <img src={"https://images.uaxdlts.com/uax-landing/assets/images/logo/uax%20favicon.png"} style={{ width: '18px' }} />
-                        <span style={{ color: '#0ce456', fontSize: '18px', marginLeft: '10px', fontWeight: '900' }}>
-                          {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${(parseFloat(balanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(2)} UAXN`}
-                        </span>
-                      </div>
-                    </div>
-                    <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                      <div className="section_balance_and_stake_brown____">
-                        <span style={{ fontWeight: "500" }}>Staked / Validators</span><br />
-                        <img src={"https://images.uaxdlts.com/uax-dashboard/images/mining .svg"} style={{ width: "18px" }} />
-                        <span style={{ color: "#f99f1b", fontSize: "18px", marginLeft: "10px", fontWeight: "900" }}>
-                          {/* {stakedAmtState == 0 ? '0 / 0' :
-                            <> */}
-                          {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${(stakedAmtState.staked_amt)} / ${stakedAmtState.total_devices}`}
-                          {/* </>
-                          } */}
-                        </span>
-                      </div>
-                    </div>
-                    <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                      <div className='section_balance_and_stake_white____'>
-                        <span style={{ fontWeight: '500' }}>Bandwidth</span>
-                        <br />
-                        <PowerSettingsNewIcon style={{ padding: '', backgroundColor: '', color: '#fff' }} />
-                        <span style={{ color: '#fff', fontSize: '18px', marginLeft: '5px', fontWeight: '900' }}>
-                          {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${(parseFloat(balanceAndPower.bandwidth) - parseFloat(reserved_power)).toFixed(2)}`}
-                        </span>
-                      </div>
-                    </div>
-                    <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                      <div className='section_balance_and_stake_red____'>
-                        <span style={{ fontWeight: '500' }}>Avg. Utilized Bandwidth</span>
-                        <br />
-                        <PowerSettingsNewIcon style={{ padding: '', backgroundColor: '', color: 'red' }} />
-                        <span style={{ color: 'red', fontSize: '18px', marginLeft: '5px', fontWeight: '900' }}>
-                          {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${parseFloat(walletTransactionsSent.length * 100).toFixed(2)}`}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <StakingInfor />
               </div>
             </div>
 
-            <div className='dashboard_box_001____ px-4' style={{ minHeight: "80vh", position: "relative", maxWidth: "100vw" }}>
+            <div className='dashboard_box_001____ px-4' style={{ position: "relative", maxWidth: "100vw" }}>
               <div className='my-4'>
                 <p className='' style={{ fontWeight: '900', fontSize: '20px' }}>
                   Transactions
@@ -325,99 +283,9 @@ const Transactions = () => {
 
                       </tbody>
                     </Table>
-                    <ul className='mobile_view'>
-                      {displayTransactions.length > 0 ?
-                        <>
-                          {displayTransactions.map((index) =>
-                            <li className='d-flex justify-content-between align-items-center border-bottom border-2 py-2 border-dark'>
-                              <div className='d-flex'>
-                                <div
-                                  className='d-flex justify-content-center align-items-center'
-                                  style={{
-                                    marginRight: 5
-                                  }}
-                                >
-                                  <img src={Icon} alt='No icons' />
-                                </div>
-                                <div>
-                                  <div className='d-flex align-items-center'>
-                                    <h1
-                                      className='m-0'
-                                      style={{
-                                        fontSize: 12,
-                                        fontWeight: '600',
-                                      }}
-                                    >
-                                      UAXN
-                                    </h1>
-                                    {index.recipient === 'xjYL2vLJCFSZ.uax' ? (
-                                      <Button style={{ padding: '10px', borderRadius: '5px', backgroundColor: '#403242', color: '#fff' }}>
-                                        <PowerSettingsNewIcon style={{ padding: '', backgroundColor: '', color: '#fff' }} />
-                                        Get Bandwidth
-                                      </Button>
-                                    ) : (
-                                      <>
-                                        {index.recipient === walletAddress ? (
-                                          <span style={{ color: '#31bf24', fontSize: 12 }}>(Deposit)</span>
-                                        ) : (
-                                          <span style={{ color: 'red', fontSize: 12 }}>(Withdraw)</span>
-                                        )}
-                                      </>
-                                    )}
-                                  </div>
-                                  <div style={{
-                                    fontSize: 12,
-                                    color: '#A8A8A8'
-                                  }}
-                                  >
-                                    {
-                                      walletAddress === index.recipient ? (
-                                        index.sender === 'EfDz4LTNHAlh.uaxn' ? (
-                                          <>
-                                            <img
-                                              src="https://images.uaxdlts.com/explorer/mining%20.svg"
-                                              alt="Reward"
-                                              style={{ display: 'inline-block', marginRight: 3, width: 16 }}
-                                            />
-                                            Reward
-                                          </>
-                                        ) : index.sender === 'POFXyOvAjhF6.uaxn' ? (
-                                          <>
-                                            <img
-                                              src="https://images.uaxdlts.com/uax-dashboard/images/staking-menu.svg"
-                                              alt="Airdrop"
-                                              style={{ marginRight: 3, width: 16 }}
-                                            />
-                                            Airdrop
-                                          </>
-                                        ) : (
-                                          index.sender
-                                        )) : index.recipient
-                                    }
-                                  </div>
-                                </div>
-                              </div>
-                              <div className='d-flex flex-column'>
-                                <span style={{ color: '#31bf24' }}>{parseFloat(index.amount).toFixed(2)} UAXN</span>
-                                <span style={{
-                                  fontSize: 12,
-                                  color: '#A8A8A8'
-                                }}>
-                                  {new Date(index.timestamp).toLocaleString()}
-                                </span>
-                              </div>
-                            </li>
-                          )}
-                        </>
-                        :
-                        <li className=' border-bottom border-2 py-2 border-dark'>
-                          <td colSpan="6" style={noDataStyle}>
-                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"}
-                              style={{ width: "6vw", position: "relative", top: "40%" }} />
-                          </td>
-                        </li>
-                      }
-                    </ul>
+                    <div className='mobile_view'>
+                      <Txlist />
+                    </div>
                   </div>
                   {displayTransactions.length > 0 ?
                     <div className='pagination-container'>
