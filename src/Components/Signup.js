@@ -78,57 +78,57 @@ const Signup = () => {
     setSignupMsg(<img src={"https://images.uaxdlts.com/uax-dashboard/images/loader3.gif"} style={{ width: "3vw" }} />);
 
     if (password === cpassword) {
-      if (email.length > 5 ){ 
-        if(validatePassword(password) && validatePassword(cpassword)) {
-        var encryptedemail = CryptoJS.AES.encrypt(email, "key").toString();
-        var encryptedpass = CryptoJS.AES.encrypt(password, "key").toString();
+      if (email.length > 5) {
+        if (validatePassword(password) && validatePassword(cpassword)) {
+          var encryptedemail = CryptoJS.AES.encrypt(email, "key").toString();
+          var encryptedpass = CryptoJS.AES.encrypt(password, "key").toString();
 
-        if (captchaToken.length > 0) {
-          axios.post("https://services.uaxwallet.com/api/signup", {
-            encryptedemail,
-            encryptedpass,
-            captchaToken,
-            referred_by: r_email.length > 0 ? r_email : referredBy,
-            ip: login_details ? login_details.ip : 'Not Detected',
-            country_code: login_details ? login_details.country_code : 'Not Detected'
-          })
-            .then(res => {
-              reCaptchaRef.current.execute();
-              if (!res) {
-                setSignupMsg('An error occurred. Please try again.');
-              } else {
-                setSignupMsg(res.data);
-                // setEmail('')
-                // setPassword('')
-                // setCPassword('')
-                // setReferredBy('')
-                // setr_email('')
-              }
+          if (captchaToken.length > 0) {
+            axios.post("https://services.uaxwallet.com/api/signup", {
+              encryptedemail,
+              encryptedpass,
+              captchaToken,
+              referred_by: r_email.length > 0 ? r_email : referredBy,
+              ip: login_details ? login_details.ip : 'Not Detected',
+              country_code: login_details ? login_details.country_code : 'Not Detected'
             })
-            .catch(err => {
-              reCaptchaRef.current.execute();
-              setSignupMsg('An error occurred. Please try again.');
-            });
+              .then(res => {
+                reCaptchaRef.current.execute();
+                if (!res) {
+                  setSignupMsg('An error occurred. Please try again.');
+                } else {
+                  setSignupMsg(res.data);
+                  // setEmail('')
+                  // setPassword('')
+                  // setCPassword('')
+                  // setReferredBy('')
+                  // setr_email('')
+                }
+              })
+              .catch(err => {
+                reCaptchaRef.current.execute();
+                setSignupMsg('An error occurred. Please try again.');
+              });
+          } else {
+            setSignupMsg('Please verify the captcha.');
+          }
         } else {
-          setSignupMsg('Please verify the captcha.');
+          if (password.length < 8) {
+            setSignupMsg("Password must be at least 8 characters long.")
+          }
+          else if (!/[A-Z]/.test(password)) {
+            setSignupMsg("Password must include at least one uppercase letter (A-Z).")
+          }
+          else if (!/[a-z]/.test(password)) {
+            setSignupMsg("Password must include at least one lowercase letter (a-z).")
+          }
+          else if (!/[0-9]/.test(password)) {
+            setSignupMsg("Password must include at least one number (0-9).")
+          }
+          else if (!/[^A-Za-z0-9]/.test(password)) {
+            setSignupMsg("Password must include at least one special character (e.g., !@#$%).")
+          }
         }
-      } else {
-        if(password.length < 8){
-          setSignupMsg("Password must be at least 8 characters long.")
-        }
-        else if(!/[A-Z]/.test(password)){
-          setSignupMsg("Password must include at least one uppercase letter (A-Z).")
-        }
-        else if(!/[a-z]/.test(password)){
-          setSignupMsg("Password must include at least one lowercase letter (a-z).")
-        }
-        else if(!/[0-9]/.test(password)){
-          setSignupMsg("Password must include at least one number (0-9).")
-        }
-        else if(!/[^A-Za-z0-9]/.test(password)){
-          setSignupMsg("Password must include at least one special character (e.g., !@#$%).")
-        }
-      }
       } else {
         setSignupMsg('Kindly make sure your entering valid email.');
       }
@@ -139,7 +139,7 @@ const Signup = () => {
 
   const renderTooltip = (props) => (
     <Tooltip id="password-tooltip" {...props}>
-      <div style={{textAlign:"left",width:"500px"}}>
+      <div style={{ textAlign: "left", width: "500px" }}>
         {!passwordCriteria.length && <div><FaDotCircle /> At least 8 characters long</div>}
         {!passwordCriteria.uppercase && <div><FaDotCircle /> Contains an uppercase letter</div>}
         {!passwordCriteria.lowercase && <div><FaDotCircle /> Contains a lowercase letter</div>}
@@ -167,13 +167,18 @@ const Signup = () => {
           <div className="col-lg-6 col-md-12 gap_for_mobile_____">
             <div className="parent">
               <div className="child">
-                <div className="card_design___ px-5 py-2">
-                  <center className="mt-3 mb-3">
-                  <img src={"https://images.uaxdlts.com/uax-landing/assets/images/logo/uax_white_logo.png?quality=lossless"} style={{width:"130px"}}/>              
-                  </center>
-                  <center className="mb-5">
-                    <h3>Signup</h3>
-                  </center>
+                <div className="card_design___ p-3 p-md-5">
+                  <div className='desk_view'>
+                    <center className="mt-3 mb-3">
+                      <img src={"https://images.uaxdlts.com/uax-landing/assets/images/logo/uax_white_logo.png?quality=lossless"} style={{ width: "130px" }} />
+                    </center>
+                    <center className="mb-5">
+                      <h3>Signup</h3>
+                    </center>
+                  </div>
+                  <h1 className='welcome mobile_view'>
+                    Create an <span>Account!</span>
+                  </h1>
                   <Form onSubmit={signUp}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                       <Form.Label>Email</Form.Label>
@@ -300,7 +305,11 @@ const Signup = () => {
         size="invisible"
         ref={reCaptchaRef}
       />
-      <Footer/>
+      <div
+        className='d-md-block d-none'
+      >
+        <Footer />
+      </div>
     </>
   );
 };

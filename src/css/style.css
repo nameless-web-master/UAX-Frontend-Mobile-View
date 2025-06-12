@@ -40,6 +40,41 @@ ul {
   table-layout: initial;
 }
 
+.welcome {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 43px;
+  color: #fff;
+  margin: 28px auto;
+}
+
+.welcome span {
+  color: #D60BF7;
+}
+
+@media screen and (max-width: 600px) {
+  .card_design___ {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .card_design___ input {
+    background-color: #42424280 !important;
+    padding: 12px 16px;
+    outline: none;
+    margin: 32px auto;
+  }
+
+  .card_design___ label {
+    display: none !important;
+  }
+
+  .card_design___ .primary_btnn___ {
+    padding: 14px 16px;
+  }
+}
+
 .form-control {
   background-color: transparent !important;
   color: #fff !important;

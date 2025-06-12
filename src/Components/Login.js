@@ -193,11 +193,16 @@ const Login = () => {
             <div className="parent">
               <div className="child">
                 <div className="card_design___ p-3 p-sm-5">
-                  <center className="my-4">
-                    <img src={"https://images.uaxdlts.com/uax-landing/assets/images/logo/uax_white_logo.png?quality=lossless"} style={{ width: "130px" }} />                  </center>
-                  <center className="mb-5">
-                    <h3>Login</h3>
-                  </center>
+                  <div className='desk_view'>
+                    <center className="my-4">
+                      <img src={"https://images.uaxdlts.com/uax-landing/assets/images/logo/uax_white_logo.png?quality=lossless"} style={{ width: "130px" }} />                  </center>
+                    <center className="mb-5">
+                      <h3>Login</h3>
+                    </center>
+                  </div>
+                  <h1 className='welcome mobile_view'>
+                    Welcome <span>Back!</span>
+                  </h1>
                   <Form onSubmit={handleLogin}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                       <Form.Label>Email</Form.Label>
@@ -236,8 +241,8 @@ const Login = () => {
                         </span>
                       </div>
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                      <a href="/forgotpassword" style={{ textDecoration: 'none', color: '#fff' }}>
+                    <Form.Group controlId="formBasicCheckbox">
+                      <a href="/forgotpassword" className='mb-2' style={{ textDecoration: 'none', color: '#D60BF7', float: 'right' }}>
                         <small>Forgot Password?</small>
                       </a>
                     </Form.Group>
@@ -271,7 +276,7 @@ const Login = () => {
         ref={_reCaptchaRef}
       />
 
-      <Modal show={otpmodal} onHide={handleClose}>
+      <Modal show={otpmodal} onHide={handleClose} className='d-md-block d-none'>
         <Modal.Body style={{ padding: '5%', border: 'none', color: '#fff', backgroundColor: '#1a181b' }}>
           <center>
             <img src={"https://images.uaxdlts.com/uax-dashboard/images/I21.png"} style={{ height: '15vh' }} alt="I21" />
@@ -322,7 +327,11 @@ const Login = () => {
           </center>
         </Modal.Body>
       </Modal>
-      <Footer />
+      <div
+        className='d-md-block d-none'
+      >
+        <Footer />
+      </div>
     </>
   );
 };
