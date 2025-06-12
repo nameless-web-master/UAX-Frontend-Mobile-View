@@ -6,6 +6,7 @@ import Table from 'react-bootstrap/Table';
 const tableStyle = {
   borderCollapse: 'collapse',
   width: '100%',
+  minWidth: 700,
 };
 
 const cellStyle = {
@@ -129,15 +130,21 @@ const ViewOffers = () => {
           </center>
         </div>
         :
-        <>
-          <div className='dashboard_box_001____ px-4' style={{ maxWidth: "100vw" }}>
-            <div className='my-4'>
+        <div style={{
+          width: '100%'
+        }}>
+          <div className='dashboard_box_001____ px-4 w-100' style={{ maxWidth: "100%" }}>
+            <div className='my-4 w-100'>
               <p className='' style={{ fontWeight: '900', fontSize: '20px' }}>
                 Offers
               </p>
-              <div className='mt-2'>
-                <div className=''>
-                  <Table responsive style={tableStyle}>
+              <div className='mt-2 overflow-hidden w-100'>
+                <div className='overflow-auto w-100 mw-100'
+                  style={{
+                    display: 'block',
+                  }}
+                >
+                  <Table style={tableStyle}>
                     <tbody>
                       <th className='table_header_class____'>NFT Name</th>
                       <th className='table_header_class____'>Ask Price</th>
@@ -277,7 +284,7 @@ const ViewOffers = () => {
               </center>
             </Modal.Body>
           </Modal>
-        </>
+        </div>
       }
     </>
   )

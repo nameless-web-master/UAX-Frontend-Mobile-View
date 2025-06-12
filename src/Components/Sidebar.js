@@ -412,6 +412,7 @@ export default function ResponsiveDrawer() {
                 backgroundColor: 'black',
                 color: 'white',
                 minHeight: '100vh',
+                width: '100%'
               }}
             >
               <Toolbar />
@@ -420,14 +421,16 @@ export default function ResponsiveDrawer() {
                   <CircularProgress />
                 </Box>
               ) : (
-                <>
+                <div className='w-100'>
                   {selectedIndex === 0 && (
                     <Typography paragraph>
                       <Transaction />
                     </Typography>
                   )}
                   {selectedIndex > 0 && (
-                    <Typography paragraph>
+                    <Typography paragraph style={{
+                      width: '100%'
+                    }}>
                       {menuItems[selectedIndex - 1].text === 'Get Bandwidth' ? <StakingReward /> : ''}
                       {menuItems[selectedIndex - 1].text === 'Dashboard' ? <Dashboard /> : ''}
                       {menuItems[selectedIndex - 1].text === 'Swap' ? <SwapComponent /> : ''}
@@ -439,7 +442,7 @@ export default function ResponsiveDrawer() {
                       {/* {menuItems[selectedIndex - 1].text} Content */}
                     </Typography>
                   )}
-                </>
+                </div>
               )}
             </Box>
           </Box>

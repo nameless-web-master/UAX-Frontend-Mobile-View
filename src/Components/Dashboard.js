@@ -14,6 +14,8 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Footer from './Footer'
 import { Html5Qrcode } from "html5-qrcode";
 
+import Circle from '../media/circle.png';
+
 const inputContainerStyle = {
   display: "flex",
   alignItems: "center",
@@ -378,7 +380,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="container" style={{ minHeight: "100vh" }}>
-        <div className="dashboard_box_001____ px-5 py-4 dashboard_box_001_____for_reducing_padding_in_mobile">
+        <div className="dashboard_box_001____ px-5 py-4 dashboard_box_001_____for_reducing_padding_in_mobile desk_view">
           <div className="row">
             <div className="col-md-6 mt-2">
               <p className="mb-0">Portfolio Balance</p>
@@ -389,25 +391,6 @@ const Dashboard = () => {
                   fontWeight: "900",
                 }}
               >
-                {/* {parseFloat(coin_price) > 0 ? (
-                    <>
-                      ${" "}
-                      {(
-                        parseFloat(coin_price) *
-                        (parseFloat(BalanceAndPower.balance)-parseFloat(reserved_balance))
-                      )}
-                      
-                      <p className="mb-0" style={{fontSize:"14px",color:"#c006df"}}>
-                      {(
-                        // parseFloat(coin_price) *
-                        (parseFloat(BalanceAndPower.balance)-parseFloat(reserved_balance))
-                      )
-                      } UAXN
-                      </p>
-                    </>
-                  ) : (
-                    <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{width:"3vw"}}/>
-                  )} */}
                 {parseFloat(coin_price) > 0 ? (
                   <>
                     ${" "}
@@ -440,7 +423,7 @@ const Dashboard = () => {
 
               </span>
             </div>
-            <div className="col-md-6 mt-2">
+            <div className="col-md-6 mt-2 desk_view">
               <ul
                 className="nav nav-pills mb-3 mt-2"
                 id="pills-tab"
@@ -505,69 +488,135 @@ const Dashboard = () => {
                     Receive
                   </button>
                 </li>
-
-                {/* <li className="nav-item sidebar_class_001____" role="presentation">
-                    <button
-                      onClick={() => {
-                        resetErrorsOrSuccessMsg();
-                        handleTabClick("pills-contact");
-                      }}
-                      className={`nav-link tabs_button____ mt-2 ${
-                        activeTab === "pills-contact" ? "active" : ""
-                      }`}
-                      id="pills-contact-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-contact"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-contact"
-                      aria-selected={activeTab === "pills-contact"}
-                    >
-                      <img src={"https://images.uaxdlts.com/uax-dashboard/images/icons8_buy.svg"} style={{ width: "24px" }} /> Buy
-                    </button>
-                  </li> */}
                 <li className="nav-item sidebar_class_001____" role="presentation">
-                  {/* <button
-                      onClick={() => {
-                        resetErrorsOrSuccessMsg();
-                        handleTabClick("pills-sell");
-                      }}
-                      className={`nav-link tabs_button____ mt-2 ${
-                        activeTab === "pills-sell" ? "active" : ""
-                      }`}
-                      id="pills-sell-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-sell"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-sell"
-                      aria-selected={activeTab === "pills-sell"}
-                    >
-                      <img src={SellIcon} style={{ width: "24px" }} /> Swap
-                    </button> */}
-                  {/* <button
-                      onClick={() => {
-                        resetErrorsOrSuccessMsg();
-                        handleTabClick("pills-sell");
-                      }}
-                      style={{backgroundColor:"grey",color:"#fff"}}
-                      className={`nav-link tabs_button____ mt-2 ${
-                        activeTab === "pills-sell" ? "active" : ""
-                      }`}
-                      id="pills-sell-tab"
-                      data-bs-toggle="pill"
-                      data-bs-target="#pills-sell"
-                      type="button"
-                      role="tab"
-                      aria-controls="pills-sell"
-                      aria-selected={activeTab === "pills-sell"}
-                      disabled
-                    >
-                      <img src={"https://images.uaxdlts.com/uax-dashboard/images/image 204.svg"} style={{ width: "24px" }} /> Swap
-                    </button> */}
                 </li>
               </ul>
             </div>
+          </div>
+        </div>
+        <div className="mobile_view">
+          <div
+            className="col-12 mt-2 d-flex justify-content-center position-relative mobile_view mobile_view_flex"
+          >
+            <img src={Circle} />
+            <div
+              className="col-12 mt-2 position-absolute top-50"
+              style={{
+                left: 0,
+                transform: 'translate(0,-50%)'
+              }}
+            >
+              <p className="mb-0 text-center">Portfolio Balance</p>
+              <span
+                style={{
+                  color: "#0ce456",
+                  fontSize: "25px",
+                  fontWeight: "900",
+                }}
+              >
+                {parseFloat(coin_price) > 0 ? (
+                  <>
+                    <p className="text-center">
+                      ${" "}
+                      {(() => {
+                        const amount =
+                          parseFloat(coin_price) *
+                          (parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance));
+                        return Number.isInteger(amount)
+                          ? amount
+                          : amount.toFixed(3).replace(/\.?0+$/, "");
+                      })()}
+                    </p>
+
+                    <p className="mb-0 text-center" style={{ fontSize: "14px", color: "#c006df" }}>
+                      {(() => {
+                        const amount =
+                          parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance);
+                        return Number.isInteger(amount)
+                          ? amount
+                          : amount.toFixed(3).replace(/\.?0+$/, "");
+                      })()}{" "}
+                      UAXN
+                    </p>
+                  </>
+                ) : (
+                  <img
+                    src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"}
+                    style={{ width: "3vw" }}
+                  />
+                )}
+
+              </span>
+            </div>
+          </div>
+          <div>
+            <ul
+              className="nav nav-pills mb-3 mt-2 d-flex justify-content-center"
+              id="pills-tab"
+              role="tablist"
+            >
+              <li
+                className="nav-item"
+                role="presentation"
+                style={{ display: "none" }}
+              >
+                <button
+                  className={`nav-link tabs_button____ mt-2 ${activeTab === "pills-home" ? "active" : ""
+                    }`}
+                  id="pills-home-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-home"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-home"
+                  aria-selected={activeTab === "pills-home"}
+                  onClick={() => handleTabClick("pills-home")}
+                >
+                  <img src={"https://images.uaxdlts.com/uax-dashboard/images/bitcoin-icons_send-filled.svg"} style={{ width: "24px" }} /> Default
+                </button>
+              </li>
+              <li className="nav-item" role="presentation">
+                <button
+                  onClick={() => {
+                    resetErrorsOrSuccessMsg();
+                    handleTabClick("pills-send");
+                  }}
+                  className={`nav-link tabs_button____ mt-2 ${activeTab === "pills-send" ? "active" : ""
+                    }`}
+                  id="pills-send-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-send"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-send"
+                  aria-selected={activeTab === "pills-send"}
+                >
+                  <img src={"https://images.uaxdlts.com/uax-dashboard/images/bitcoin-icons_send-filled.svg"} style={{ width: "24px" }} /> Send
+                </button>
+              </li>
+              <li className="nav-item" role="presentation">
+                <button
+                  onClick={() => {
+                    resetErrorsOrSuccessMsg();
+                    handleTabClick("pills-profile");
+                  }}
+                  className={`nav-link tabs_button____ mt-2 ${activeTab === "pills-profile" ? "active" : ""
+                    }`}
+                  id="pills-profile-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-profile"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-profile"
+                  aria-selected={activeTab === "pills-profile"}
+                >
+                  <img src={"https://images.uaxdlts.com/uax-dashboard/images/bitcoin-icons_receive-filled.svg"} style={{ width: "24px" }} />{" "}
+                  Receive
+                </button>
+              </li>
+              <li className="nav-item sidebar_class_001____" role="presentation">
+              </li>
+            </ul>
           </div>
         </div>
         <div className="mt-3 mt-sm-5">
@@ -873,7 +922,7 @@ const Dashboard = () => {
                 <div className="col-lg-6 col-md-12 mt-2">
                   <div
                     className="dashboard_box_001____ px-4"
-                    style={{ backgroundColor: "#222024", height: "100vh" }}
+                    style={{ backgroundColor: "#222024" }}
                   >
                     <p
                       className="mt-5"
@@ -893,9 +942,9 @@ const Dashboard = () => {
                                     <img
                                       src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
                                       style={{
-                                        width: "3.3vw",
+                                        width: 42,
                                         borderRadius: "50%",
-                                        height: "100%",
+                                        height: 42,
                                       }}
                                     />
                                     <i
@@ -928,7 +977,8 @@ const Dashboard = () => {
                                         <small
                                           style={{
                                             fontWeight: "100",
-                                            color: "#f7f7f7",
+                                            color: "#A8A8A8",
+                                            fontSize: 12
                                           }}
                                         >
                                           Txid:{" "}
@@ -945,7 +995,8 @@ const Dashboard = () => {
                                   <small
                                     style={{
                                       fontWeight: "100",
-                                      color: "#f7f7f7",
+                                      color: "#A8A8A8",
+                                      fontSize: 12
                                     }}
                                   >
                                     {new Date(
@@ -963,9 +1014,9 @@ const Dashboard = () => {
                                     <img
                                       src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
                                       style={{
-                                        width: "3.3vw",
+                                        width: 42,
                                         borderRadius: "50%",
-                                        height: "100%",
+                                        height: 42,
                                       }}
                                     />
                                     <i
@@ -998,7 +1049,8 @@ const Dashboard = () => {
                                         <small
                                           style={{
                                             fontWeight: "100",
-                                            color: "#f7f7f7",
+                                            color: "#A8A8A8",
+                                            fontSize: 12
                                           }}
                                         >
                                           Txid:{" "}
@@ -1014,7 +1066,8 @@ const Dashboard = () => {
                                   <small
                                     style={{
                                       fontWeight: "100",
-                                      color: "#f7f7f7",
+                                      color: "#A8A8A8",
+                                      fontSize: 12
                                     }}
                                   >
                                     {new Date(
@@ -1042,7 +1095,7 @@ const Dashboard = () => {
               <div className="row">
                 <div className="col-lg-6 col-md-12 mt-2">
                   <div
-                    className="dashboard_box_001____ text-center"
+                    className="p-3 dashboard_box_001____ text-center"
                     style={{ backgroundColor: "#222024" }}
                   >
                     <p
@@ -1161,7 +1214,7 @@ const Dashboard = () => {
                 <div className="col-lg-6 col-md-12 mt-2">
                   <div
                     className="dashboard_box_001____ px-4"
-                    style={{ backgroundColor: "#222024", height: "100vw" }}
+                    style={{ backgroundColor: "#222024", }}
                   >
                     <p
                       className="mt-5"
@@ -1203,9 +1256,9 @@ const Dashboard = () => {
                                     <img
                                       src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
                                       style={{
-                                        width: "3.3vw",
+                                        width: 42,
                                         borderRadius: "50%",
-                                        height: "100%",
+                                        height: 42,
                                       }}
                                     />
                                     <i
@@ -1238,7 +1291,8 @@ const Dashboard = () => {
                                         <small
                                           style={{
                                             fontWeight: "100",
-                                            color: "#f7f7f7",
+                                            color: "#A8A8A8",
+                                            fontSize: 12
                                           }}
                                         >
                                           Txid:{" "}
@@ -1255,7 +1309,8 @@ const Dashboard = () => {
                                   <small
                                     style={{
                                       fontWeight: "100",
-                                      color: "#f7f7f7",
+                                      color: "#A8A8A8",
+                                      fontSize: 12
                                     }}
                                   >
                                     {new Date(
@@ -1273,9 +1328,9 @@ const Dashboard = () => {
                                     <img
                                       src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
                                       style={{
-                                        width: "3.3vw",
+                                        width: 42,
                                         borderRadius: "50%",
-                                        height: "100%",
+                                        height: 42,
                                       }}
                                     />
                                     <i
@@ -1308,7 +1363,8 @@ const Dashboard = () => {
                                         <small
                                           style={{
                                             fontWeight: "100",
-                                            color: "#f7f7f7",
+                                            color: "#A8A8A8",
+                                            fontSize: 12
                                           }}
                                         >
                                           Txid:{" "}
@@ -1324,7 +1380,8 @@ const Dashboard = () => {
                                   <small
                                     style={{
                                       fontWeight: "100",
-                                      color: "#f7f7f7",
+                                      color: "#A8A8A8",
+                                      fontSize: 12
                                     }}
                                   >
                                     {new Date(
@@ -1375,7 +1432,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div >
       {/* )} */}
 
       <Modal size="lg" aria-labelledby="contained-modal-title-vcenter"
@@ -1456,7 +1513,7 @@ const Dashboard = () => {
             <p style={{ fontWeight: '700', fontSize: '20px', marginTop: '15px' }}>{MsgForClaim}</p>
           </center>
         </Modal.Body>
-      </Modal>
+      </Modal >
       <Footer />
     </>
   );

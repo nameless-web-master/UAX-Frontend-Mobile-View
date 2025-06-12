@@ -328,7 +328,7 @@ const Stake = () => {
                 <div className='mt-5'>
                   <p style={{ fontWeight: "600" }}>Get resources Bandwidth with UAXN</p>
                   <div className="row">
-                    <div className="col-lg-4 col-md-12 col-sm-12 mt-2">
+                    <div className="col-xl-4 col-12 mt-xl-2 mt-4">
                       <div style={{ display: 'block', alignItems: 'center', backgroundColor: '#211f24', borderRadius: '5px', padding: '6px 16px' }}>
                         <select
                           className="w-100 no-arrow"
@@ -349,7 +349,7 @@ const Stake = () => {
                         </select>
                       </div>
                     </div>
-                    <div className="col-lg-4 col-md-12 col-sm-12 mt-2">
+                    <div className="col-xl-4 col-12 mt-xl-2 mt-4">
                       <div style={{ display: 'block', alignItems: 'center', backgroundColor: '#211f24', borderRadius: '5px', padding: '6px 16px' }}>
                         <input
                           type="text"
@@ -362,7 +362,7 @@ const Stake = () => {
                         />
                       </div>
                     </div>
-                    <div className="col-lg-4 col-md-12 col-sm-12 mt-2">
+                    <div className="col-xl-4 col-12 mt-xl-2 mt-4">
                       <div style={{ display: 'block', alignItems: 'center', backgroundColor: '#211f24', borderRadius: '5px', padding: '6px 16px' }}>
                         <input
                           type="number"
@@ -414,7 +414,7 @@ const Stake = () => {
 
 
 
-          <div className='dashboard_box_001____ px-4' style={{ minHeight: "", position: "relative", width: "100vw" }}>
+          <div className='dashboard_box_001____ px-4' style={{ minHeight: "", position: "relative",  }}>
             <div className='my-4'>
               <p className='' style={{ fontWeight: '900', fontSize: '20px' }}>
                 Stake History

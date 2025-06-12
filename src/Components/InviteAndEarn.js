@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import RewardHistory from './RewardHistory'
 import axios from 'axios';
@@ -13,222 +13,222 @@ const InviteAndEarn = () => {
     const [copied_to_clipboard, setcopied_to_clipboard] = useState('');
     const [copied_to_clipboard_code, setcopied_to_clipboard_code] = useState('');
 
-    const rewardHistory = () =>{
+    const rewardHistory = () => {
         setshowReward(true)
     }
-    const claimReward = async() =>{
+    const claimReward = async () => {
         setclaim_reward_msg(
-            <img src={"https://images.uaxdlts.com/uax-dashboard/images/loader3.gif"} style={{width:"3vw"}}/>
+            <img src={"https://images.uaxdlts.com/uax-dashboard/images/loader3.gif"} style={{ width: "3vw" }} />
         )
         var token = localStorage.getItem("token")
         var email = localStorage.getItem("email")
         const config = {
             headers: { Authorization: `Bearer ${token}` }
-          };
-        const claimed = await axios.post("https://services.uaxwallet.com/api/claimReferralReward",{
-            email:email
-        },config)
+        };
+        const claimed = await axios.post("https://services.uaxwallet.com/api/claimReferralReward", {
+            email: email
+        }, config)
         setclaim_reward_msg(claimed.data)
     }
 
-    const copyRefLink = async() =>{
+    const copyRefLink = async () => {
         copy(`https://uaxwallet.com/signup?ref_id=${my_ref_id}`);
         setcopied_to_clipboard("Copied to clipboard!")
-        setTimeout(()=>{
+        setTimeout(() => {
             setcopied_to_clipboard('')
-        },2000)
+        }, 2000)
     }
-    const copyRefCode = async() =>{
+    const copyRefCode = async () => {
         copy(my_ref_id);
         setcopied_to_clipboard_code("Copied to clipboard!")
-        setTimeout(()=>{
+        setTimeout(() => {
             setcopied_to_clipboard_code('')
-        },2000)
+        }, 2000)
     }
 
     useEffect(() => {
         const initial = async () => {
-          const token = localStorage.getItem("token");
-          const email = localStorage.getItem("email");
-      
-          if (token && email) {
-            const config = {
-              headers: { Authorization: `Bearer ${token}` },
-            };
-      
-            try {
-              // Perform API calls concurrently
-              const [referralDetailsResponse, referralIdResponse] = await Promise.all([
-                axios.post("https://services.uaxwallet.com/api/getReferralBalanceAndNumber", { email: email }, config),
-                axios.post("https://services.uaxwallet.com/api/getReferralId", { email: email }, config)
-              ]);
-      
-              // Set state with the responses
-              setreferral_details(referralDetailsResponse.data);
-              setmy_ref_id(referralIdResponse.data);
-              setloader(false);
-      
-            } catch (error) {
-              console.error("Error during API calls:", error);
-              // Handle error (e.g., show error message, retry, etc.)
+            const token = localStorage.getItem("token");
+            const email = localStorage.getItem("email");
+
+            if (token && email) {
+                const config = {
+                    headers: { Authorization: `Bearer ${token}` },
+                };
+
+                try {
+                    // Perform API calls concurrently
+                    const [referralDetailsResponse, referralIdResponse] = await Promise.all([
+                        axios.post("https://services.uaxwallet.com/api/getReferralBalanceAndNumber", { email: email }, config),
+                        axios.post("https://services.uaxwallet.com/api/getReferralId", { email: email }, config)
+                    ]);
+
+                    // Set state with the responses
+                    setreferral_details(referralDetailsResponse.data);
+                    setmy_ref_id(referralIdResponse.data);
+                    setloader(false);
+
+                } catch (error) {
+                    console.error("Error during API calls:", error);
+                    // Handle error (e.g., show error message, retry, etc.)
+                }
+            } else {
+                window.location.href = '/login';
             }
-          } else {
-            window.location.href = '/login';
-          }
         };
-      
+
         initial();
-      }, []);
-      
-    return(
-    <>
-     {/* {loader?
+    }, []);
+
+    return (
+        <>
+            {/* {loader?
     <div className='' style={{height:"80vh",position:"relative",backgroundColor:"#000"}}>
       <center style={{position:"absolute",top:"50%",left:"50%",transform:"translate(-50%,-50%)"}}>
       <img src={WhiteLoader} style={{width:"3vw"}}/>
       </center>
     </div>
     :     */}
-    <>  
-    {showReward?<RewardHistory/>:
+            <>
+                {showReward ? <RewardHistory /> :
 
-    <div className="container" style={{minHeight:"100vh"}}>
-      <div className='mt-3'>
-        <div className='dashboard_box_001____ px-4 mb-4 for_invite_and_earn_banner'>
-            <div className='my-5 for_device_difference____mx_5____'>
-            <div className='mt-4'>
-            <div className="row">
-        <div className="col-lg-6 col-md-12 mt-3">
-          <div className="parent" style={{height:"100%"}}>
-            <div className="child__">
-              <h2 style={{fontWeight:"900"}}>Refer Friends, Earn Coins Together</h2>
-              <br/>
-              <small style={{color:"#a8a8a8"}}>
-              Earn up to 50% of your friends' trading fees as a reward. Refer now and take control of your earnings!
-              </small>
-              <br/>
-            <div className='row'>
-                <div className='col-md-6 col-sm-12 text-left'>
-                <Button
-                                        style={{fontWeight:"700",width:"100%"}}
-                                        className="primary_btnn___ mt-4"
-                                        variant="primary"
-                                        type="submit"
-                                        onClick={rewardHistory}
-                                        >
-                                        <i className="fa fa-trophy" aria-hidden="true" style={{marginRight:"5px"}}></i>
-                                        Reward History
-                                    </Button>
-                </div>
-                <div className='col-md-6 col-sm-12'>
-                <Button
-                                        style={{fontWeight:"700",width:"100%"}}
-                                        className="primary_btnn___ mt-4"
-                                        variant="primary"
-                                        type="submit"
-                                        onClick={claimReward}
-                                        >
-                                        <i className="fa fa-money" aria-hidden="true" style={{marginRight:"5px"}}></i>
-                                         Claim Reward
-                                    </Button>
-                                    {/* {claim_reward_msg && (
+                    <div className="container" style={{ minHeight: "100vh" }}>
+                        <div className='mt-3'>
+                            <div className='dashboard_box_001____ px-4 mb-4 for_invite_and_earn_banner'>
+                                <div className='my-5 for_device_difference____mx_5____'>
+                                    <div className='mt-4'>
+                                        <div className="row">
+                                            <div className="col-lg-6 col-md-12 mt-3">
+                                                <div className="parent" style={{ height: "100%" }}>
+                                                    <div className="child__ px-4">
+                                                        <h2 style={{ fontWeight: "900" }}>Refer Friends, Earn Coins Together</h2>
+                                                        <br />
+                                                        <small style={{ color: "#a8a8a8" }}>
+                                                            Earn up to 50% of your friends' trading fees as a reward. Refer now and take control of your earnings!
+                                                        </small>
+                                                        <br />
+                                                        <div className='row'>
+                                                            <div className='col-md-6 col-sm-12 text-left px-0'>
+                                                                <Button
+                                                                    style={{ fontWeight: "700", width: "100%" }}
+                                                                    className="primary_btnn___ mt-4"
+                                                                    variant="primary"
+                                                                    type="submit"
+                                                                    onClick={rewardHistory}
+                                                                >
+                                                                    <i className="fa fa-trophy" aria-hidden="true" style={{ marginRight: "5px" }}></i>
+                                                                    Reward History
+                                                                </Button>
+                                                            </div>
+                                                            <div className='col-md-6 col-sm-12 px-0'>
+                                                                <Button
+                                                                    style={{ fontWeight: "700", width: "100%" }}
+                                                                    className="primary_btnn___ mt-4"
+                                                                    variant="primary"
+                                                                    type="submit"
+                                                                    onClick={claimReward}
+                                                                >
+                                                                    <i className="fa fa-money" aria-hidden="true" style={{ marginRight: "5px" }}></i>
+                                                                    Claim Reward
+                                                                </Button>
+                                                                {/* {claim_reward_msg && (
                                         <div className="alert alert-success mt-3 text-center" role="alert">
                                         {claim_reward_msg}
                                         </div>
                                     )} */}
-                </div>
-                {claim_reward_msg && (
-                                        <div className="alert alert-success mt-3 text-center" role="alert">
-                                        {claim_reward_msg}
-                                        </div>
-                                    )}
-            </div>
-                                  
-                                    
-            </div>
-          </div>
-        </div>
-        <div className="col-lg-6 col-md-12 mt-3">
-              <div className="card_design_for_refer_and_earn_component___ p-4">
+                                                            </div>
+                                                            {claim_reward_msg && (
+                                                                <div className="alert alert-success mt-3 text-center" role="alert">
+                                                                    {claim_reward_msg}
+                                                                </div>
+                                                            )}
+                                                        </div>
 
-                    <div className='settings_box_0003____ d-flex justify-content-between align-items-center'>
-                        <span>
-                        Total Reward Earned
-                        <br/>
-                        <span style={{color:"#32f220",fontSize:"20px",fontWeight:"900"}}>
-                        {loader?
-                                  <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{width:"2vw"}}/>
-                            :
-                            <>
-                            {parseFloat(referral_details.ref_bonus).toFixed(2)} UAXN
-                            </>
-                        }
-                        </span>
-                        </span>
-                        <div className='' style={{textAlign:"right"}}>
-                        <span>Referred Friend</span><br/>
-                        <span style={{color:"#c006de"}}>
-                        {loader?
-                                  <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{width:"2vw"}}/>
-                            :
-                            <>
-                        {parseFloat(referral_details.ref_count)}
-                        </>
-                        }
-                        </span>
-                        </div>
-                    </div>
-                    <div className='mt-5 d-flex justify-content-between align-items-center' style={{color:"#a8a8a8"}}>
-                    <small>REFERAL REWARD SLABS</small> 
-                    <small>REQUIRED</small>               
-                    </div>
 
-                    <div className="slab-container mt-4">
-                    <div className="slab-item current-slab">
-                        <div className="slab-header">
-                        <div className="slab-percentage" style={{fontWeight:"900"}}>0%</div>
-                        <div className="slab-range" style={{fontWeight:"900"}}>0 - 500 UAXN</div>
-                        </div>
-                        <div className="slab-detail">
-                        <small style={{fontSize:"11px"}}>Starter Referrer</small>
-                        {/* <span className="current-slab-amount" style={{fontSize:"11px"}}>You have 0 UAXN</span> */}
-                        </div>
-                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-6 col-md-12 mt-3">
+                                                <div className="card_design_for_refer_and_earn_component___ p-4">
 
-                    <div className="slab-item current-slab">
-                        <div className="slab-header">
-                        <div className="slab-percentage" style={{fontWeight:"900"}}>15%</div>
-                        <div className="slab-range" style={{fontWeight:"900"}}>500 - 10,000 UAXN</div>
-                        </div>
-                        <div className="slab-detail">
-                        <small style={{fontSize:"11px"}}>Pro Referrer</small>
-                        {/* <span className="current-slab-amount" style={{fontSize:"11px"}}>You have 0 UAXN</span> */}
-                        </div>
-                    </div>
+                                                    <div className='settings_box_0003____ d-flex justify-content-between align-items-center'>
+                                                        <span>
+                                                            Total Reward Earned
+                                                            <br />
+                                                            <span style={{ color: "#32f220", fontSize: "20px", fontWeight: "900" }}>
+                                                                {loader ?
+                                                                    <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} />
+                                                                    :
+                                                                    <>
+                                                                        {parseFloat(referral_details.ref_bonus).toFixed(2)} UAXN
+                                                                    </>
+                                                                }
+                                                            </span>
+                                                        </span>
+                                                        <div className='' style={{ textAlign: "right" }}>
+                                                            <span>Referred Friend</span><br />
+                                                            <span style={{ color: "#c006de" }}>
+                                                                {loader ?
+                                                                    <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} />
+                                                                    :
+                                                                    <>
+                                                                        {parseFloat(referral_details.ref_count)}
+                                                                    </>
+                                                                }
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div className='mt-5 d-flex justify-content-between align-items-center' style={{ color: "#a8a8a8" }}>
+                                                        <small>REFERAL REWARD SLABS</small>
+                                                        <small>REQUIRED</small>
+                                                    </div>
 
-                    <div className="slab-item current-slab">
-                        <div className="slab-header">
-                        <div className="slab-percentage" style={{fontWeight:"900"}}>25%</div>
-                        <div className="slab-range" style={{fontWeight:"900"}}>10,000 - 50,000 UAXN</div>
-                        </div>
-                        <div className="slab-detail">
-                        <small style={{fontSize:"11px"}}>Elite Referrer</small>
-                        {/* <span className="current-slab-amount" style={{fontSize:"11px"}}>You have 0 UAXN</span> */}
-                        </div>
-                    </div>
+                                                    <div className="slab-container mt-4">
+                                                        <div className="slab-item current-slab">
+                                                            <div className="slab-header">
+                                                                <div className="slab-percentage" style={{ fontWeight: "900" }}>0%</div>
+                                                                <div className="slab-range" style={{ fontWeight: "900" }}>0 - 500 UAXN</div>
+                                                            </div>
+                                                            <div className="slab-detail">
+                                                                <small style={{ fontSize: "11px" }}>Starter Referrer</small>
+                                                                {/* <span className="current-slab-amount" style={{fontSize:"11px"}}>You have 0 UAXN</span> */}
+                                                            </div>
+                                                        </div>
 
-                    <div className="slab-item current-slab">
-                        <div className="slab-header">
-                        <div className="slab-percentage" style={{fontWeight:"900"}}>50%</div>
-                        <div className="slab-range" style={{fontWeight:"900"}}>{'>'} 50,000 UAXN</div>
-                        </div>
-                        <div className="slab-detail">
-                        <small style={{fontSize:"11px"}}>Master Referrer</small>
-                        {/* <span className="current-slab-amount" style={{fontSize:"11px"}}>You have 0 UAXN</span> */}
-                        </div>
-                    </div>
+                                                        <div className="slab-item current-slab">
+                                                            <div className="slab-header">
+                                                                <div className="slab-percentage" style={{ fontWeight: "900" }}>15%</div>
+                                                                <div className="slab-range" style={{ fontWeight: "900" }}>500 - 10,000 UAXN</div>
+                                                            </div>
+                                                            <div className="slab-detail">
+                                                                <small style={{ fontSize: "11px" }}>Pro Referrer</small>
+                                                                {/* <span className="current-slab-amount" style={{fontSize:"11px"}}>You have 0 UAXN</span> */}
+                                                            </div>
+                                                        </div>
 
-                    {/* <div className="slab-item">
+                                                        <div className="slab-item current-slab">
+                                                            <div className="slab-header">
+                                                                <div className="slab-percentage" style={{ fontWeight: "900" }}>25%</div>
+                                                                <div className="slab-range" style={{ fontWeight: "900" }}>10,000 - 50,000 UAXN</div>
+                                                            </div>
+                                                            <div className="slab-detail">
+                                                                <small style={{ fontSize: "11px" }}>Elite Referrer</small>
+                                                                {/* <span className="current-slab-amount" style={{fontSize:"11px"}}>You have 0 UAXN</span> */}
+                                                            </div>
+                                                        </div>
+
+                                                        <div className="slab-item current-slab">
+                                                            <div className="slab-header">
+                                                                <div className="slab-percentage" style={{ fontWeight: "900" }}>50%</div>
+                                                                <div className="slab-range" style={{ fontWeight: "900" }}>{'>'} 50,000 UAXN</div>
+                                                            </div>
+                                                            <div className="slab-detail">
+                                                                <small style={{ fontSize: "11px" }}>Master Referrer</small>
+                                                                {/* <span className="current-slab-amount" style={{fontSize:"11px"}}>You have 0 UAXN</span> */}
+                                                            </div>
+                                                        </div>
+
+                                                        {/* <div className="slab-item">
                         <div className="slab-percentage">15%</div>
                         <div className="slab-range">500 - 10,000 UAXN</div>
                     </div>
@@ -240,121 +240,122 @@ const InviteAndEarn = () => {
                         <div className="slab-percentage">50%</div>
                         <div className="slab-range">{'>'} 50,000 UAXN</div>
                     </div> */}
-                    </div>
+                                                    </div>
 
-                    <div className='mt-4 text-center'>
-                        <hr style={{borderTop:"1px solid #5f5e60"}}/>
-                        <small style={{color:"#a8a8a8"}}>SHARE NOW</small>
-                        <div className='mt-3' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <img src={"https://images.uaxdlts.com/uax-dashboard/images/logos_facebook.svg"} alt="FB" style={{ margin: '0 10px' }} />
-                        <img src={"https://images.uaxdlts.com/uax-dashboard/images/skill-icons_instagram.svg"} alt="IG" style={{ margin: '0 10px' }} />
-                        <img src={"https://images.uaxdlts.com/uax-dashboard/images/prime_twitter.svg"} alt="TW" style={{ margin: '0 10px' }} />
-                        <img src={"https://images.uaxdlts.com/uax-dashboard/images/logos_telegram.svg"} alt="IG" style={{ margin: '0 10px' }} />
-                        <i className="fa fa-link" aria-hidden="true" style={{cursor:"pointer"}} onClick={copyRefLink}></i>
-                        {/* <img src={WA} alt="WA" style={{ margin: '0 10px' }} /> */}
-                        </div>
-                    </div>
-                    <center className='mt-2'>
-                    {copied_to_clipboard && (
-                                        <div className="alert alert-success mt-3 text-center" role="alert">
-                                        {copied_to_clipboard}
+                                                    <div className='mt-4 text-center'>
+                                                        <hr style={{ borderTop: "1px solid #5f5e60" }} />
+                                                        <small style={{ color: "#a8a8a8" }}>SHARE NOW</small>
+                                                        <div className='mt-3' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/logos_facebook.svg"} alt="FB" style={{ margin: '0 10px' }} />
+                                                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/skill-icons_instagram.svg"} alt="IG" style={{ margin: '0 10px' }} />
+                                                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/prime_twitter.svg"} alt="TW" style={{ margin: '0 10px' }} />
+                                                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/logos_telegram.svg"} alt="IG" style={{ margin: '0 10px' }} />
+                                                            <i className="fa fa-link" aria-hidden="true" style={{ cursor: "pointer" }} onClick={copyRefLink}></i>
+                                                            {/* <img src={WA} alt="WA" style={{ margin: '0 10px' }} /> */}
+                                                        </div>
+                                                    </div>
+                                                    <center className='mt-2'>
+                                                        {copied_to_clipboard && (
+                                                            <div className="alert alert-success mt-3 text-center" role="alert">
+                                                                {copied_to_clipboard}
+                                                            </div>
+                                                        )}
+                                                    </center>
+                                                    <div className='mt-4 text-center'>
+                                                        <small style={{ color: "#a8a8a8" }}>YOUR REFERRAL CODE</small><br />
+                                                        <div className='mt-2'>
+                                                            <span style={{ color: "#c006df" }}>{my_ref_id} <i className="fa fa-clipboard ml-2" style={{ cursor: "pointer" }} onClick={copyRefCode} aria-hidden="true"></i></span>
+                                                            {copied_to_clipboard_code && (
+                                                                <div className="alert alert-success mt-3 text-center" role="alert">
+                                                                    {copied_to_clipboard_code}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
-                    )}
-                    </center>
-                    <div className='mt-4 text-center'>
-                    <small style={{color:"#a8a8a8"}}>YOUR REFERRAL CODE</small><br/>
-                    <div className='mt-2'>
-                    <span style={{color:"#c006df"}}>{my_ref_id} <i className="fa fa-clipboard ml-2" style={{cursor:"pointer"}} onClick={copyRefCode} aria-hidden="true"></i></span>
-                     {copied_to_clipboard_code && (
-                                        <div className="alert alert-success mt-3 text-center" role="alert">
-                                        {copied_to_clipboard_code}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className='dashboard_box_001____ px-4 mb-4'>
+                                <div className='my-5 for_device_difference____mx_5____'>
+                                    <div className='row text-center'>
+                                        <div className='col-lg-3 col-md-6 col-sm-12'>
+                                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/upto.svg"} />
+                                            <p className='mt-2'>Earn upto 50% as reward of every trading fee</p>
                                         </div>
-                    )}
-                    </div>
+                                        <div className='col-lg-3 col-md-6 col-sm-12'>
+                                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/Group 1000003219.svg"} />
+                                            <p className='mt-2'>Payout every 24 hours</p>
+                                        </div>
+                                        <div className='col-lg-3 col-md-6 col-sm-12'>
+                                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/unlimited.svg"} />
+                                            <p className='mt-2'>Unlimited referrals</p>
+                                        </div>
+                                        <div className='col-lg-3 col-md-6 col-sm-12'>
+                                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/unlimited rewards.svg"} />
+                                            <p className='mt-2'>Unlimited rewards</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <center>
+                                <p className='mt-5' style={{ fontWeight: "900", fontSize: "20px" }}>How it Works?</p>
+                            </center>
+                            <div className='row'>
+                                <div className='col-md-4 col-sm-12 mt-2'>
+                                    <div className='nft_box_0001____ p-4'>
+                                        <div className='text-center'>
+                                            <img className='img-fluid' src={"https://images.uaxdlts.com/uax-dashboard/images/get_link.png"} style={{ width: "50%" }} />
+                                            <div className='' style={{ marginTop: "2rem" }}>
+                                                <h5 style={{ fontWeight: "700", marginBottom: "1rem" }}>Get your link</h5>
+                                                <small style={{ color: "#a8a8a8" }}>Join UAX and get your unique referral link.You'll earn for customers who signup through
+                                                    this link.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-md-4 col-sm-12 mt-2'>
+                                    <div className='nft_box_0001____ p-4'>
+                                        <div className='text-center'>
+                                            <img className='img-fluid' src={"https://images.uaxdlts.com/uax-dashboard/images/share_link.png"} />
+                                            <div className='' style={{ marginTop: "2rem" }}>
+                                                <h5 style={{ fontWeight: "700", marginBottom: "1rem" }}>Share your link</h5>
+                                                <small style={{ color: "#a8a8a8" }}>
+                                                    Share your referral link via Telegram, Twitter, Emails, Whatsapp or anyway you want.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-md-4 col-sm-12 mt-2'>
+                                    <div className='nft_box_0001____ p-4'>
+                                        <div className='text-center'>
+                                            <img className='img-fluid' src={"https://images.uaxdlts.com/uax-dashboard/images/HODL.png"} style={{ width: "80%" }} />
+                                            <div className='' style={{ marginTop: "2rem" }}>
+                                                <h5 style={{ fontWeight: "700", marginBottom: "1rem" }}>HODL, Trade & Earn</h5>
+                                                <small style={{ color: "#a8a8a8" }}>
+                                                    HODL UAX, Trade a minimum of $1000 in the last 30 days, and earn upto 50% of your referral
+                                                    trading fee as a reward.
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
-              </div>
-        </div>
-      </div>
-            </div>
-            </div>
-        </div>
-
-        <div className='dashboard_box_001____ px-4 mb-4'>
-            <div className='my-5 for_device_difference____mx_5____'>
-                <div className='row text-center'>
-                    <div className='col-lg-3 col-md-6 col-sm-12'>
-                        <img src={"https://images.uaxdlts.com/uax-dashboard/images/upto.svg"}/>
-                        <p className='mt-2'>Earn upto 50% as reward of every trading fee</p>
-                    </div>
-                    <div className='col-lg-3 col-md-6 col-sm-12'>
-                        <img src={"https://images.uaxdlts.com/uax-dashboard/images/Group 1000003219.svg"}/>
-                        <p className='mt-2'>Payout every 24 hours</p>
-                    </div>
-                    <div className='col-lg-3 col-md-6 col-sm-12'>
-                        <img src={"https://images.uaxdlts.com/uax-dashboard/images/unlimited.svg"}/>
-                        <p className='mt-2'>Unlimited referrals</p>
-                    </div>
-                    <div className='col-lg-3 col-md-6 col-sm-12'>
-                        <img src={"https://images.uaxdlts.com/uax-dashboard/images/unlimited rewards.svg"}/>
-                        <p className='mt-2'>Unlimited rewards</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <center>
-        <p className='mt-5' style={{fontWeight:"900",fontSize:"20px"}}>How it Works?</p>
-        </center>
-             <div className='row'>
-                        <div className='col-md-4 col-sm-12 mt-2'>
-                            <div className='nft_box_0001____ p-4'>
-                                <div className='text-center'>
-                                <img className='img-fluid' src={"https://images.uaxdlts.com/uax-dashboard/images/get_link.png"} style={{width:"50%"}}/>
-                                <div className='' style={{marginTop:"2rem"}}>
-                                <h5 style={{fontWeight:"700",marginBottom:"1rem"}}>Get your link</h5>
-                                <small style={{color:"#a8a8a8"}}>Join UAX and get your unique referral link.You'll earn for customers who signup through
-                                    this link.
-                                </small>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-md-4 col-sm-12 mt-2'>
-                            <div className='nft_box_0001____ p-4'>
-                                <div className='text-center'>
-                                <img className='img-fluid' src={"https://images.uaxdlts.com/uax-dashboard/images/share_link.png"}/>
-                                <div className='' style={{marginTop:"2rem"}}>
-                                <h5 style={{fontWeight:"700",marginBottom:"1rem"}}>Share your link</h5>
-                                <small style={{color:"#a8a8a8"}}>
-                                    Share your referral link via Telegram, Twitter, Emails, Whatsapp or anyway you want.
-                                </small>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='col-md-4 col-sm-12 mt-2'>
-                            <div className='nft_box_0001____ p-4'>
-                                <div className='text-center'>
-                                <img className='img-fluid' src={"https://images.uaxdlts.com/uax-dashboard/images/HODL.png"} style={{width:"80%"}}/>
-                                <div className='' style={{marginTop:"2rem"}}>
-                                <h5 style={{fontWeight:"700",marginBottom:"1rem"}}>HODL, Trade & Earn</h5>
-                                <small style={{color:"#a8a8a8"}}>
-                                    HODL UAX, Trade a minimum of $1000 in the last 30 days, and earn upto 50% of your referral
-                                    trading fee as a reward.
-                                </small>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                        </div>
-            
-            </div>
-        </div>
-        
-}
-</>
-{/* } */}
-  </>
-)};
+                }
+            </>
+            {/* } */}
+        </>
+    )
+};
 
 export default InviteAndEarn;

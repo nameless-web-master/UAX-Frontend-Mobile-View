@@ -5,12 +5,14 @@ import PowerSettingsNewIcon from '@mui/icons-material/Bolt';
 import ReactPaginate from 'react-paginate';
 import { Button } from 'react-bootstrap';
 
+import Icon from '../media/icon.png';
+
 const noDataStyle = {
   textAlign: 'center',
   height: '55vh',
   backgroundColor: '#000',
-  borderBottom:"none",
-  position:"relative"
+  borderBottom: "none",
+  position: "relative"
 };
 const tableStyle = {
   borderCollapse: 'collapse',
@@ -81,9 +83,9 @@ const Transactions = () => {
               config
             );
 
-            const getSummaryRequest = await axios.post("https://services.uaxwallet.com/api/getNFTsAndOffersSummary",{
-              email:email
-            },config)
+            const getSummaryRequest = await axios.post("https://services.uaxwallet.com/api/getNFTsAndOffersSummary", {
+              email: email
+            }, config)
 
             const [stakedAmt, balanceAndPower, walletTransactions, getSummary] = await Promise.all([
               stakedAmtRequest,
@@ -92,30 +94,30 @@ const Transactions = () => {
               getSummaryRequest
             ]);
             // console.log("stakedAmtRequest",stakedAmt.data)
-            if(walletTransactions.data.error){
-              if(stakedAmt.data==='Wallet address not found'){
-                setStakedAmtState({staked_amt:0,total_devices:0});
+            if (walletTransactions.data.error) {
+              if (stakedAmt.data === 'Wallet address not found') {
+                setStakedAmtState({ staked_amt: 0, total_devices: 0 });
               }
-              else{
+              else {
                 setStakedAmtState(isNaN(stakedAmt.data.staked_amt) ? 0 : stakedAmt.data);
               }
               setBalanceAndPower(balanceAndPower.data);
               const transactions = [];
               setWalletTransactions(transactions);
-  
-              setreserved_power((parseFloat(getSummary.data.totalAskAmounts)*212)+(parseFloat(getSummary.data.totalNFTsListedForSell)*212))
+
+              setreserved_power((parseFloat(getSummary.data.totalAskAmounts) * 212) + (parseFloat(getSummary.data.totalNFTsListedForSell) * 212))
               setreserved_balance((parseFloat(getSummary.data.totalBidAmount)))
-  
+
               const sentTxns = transactions.filter(txn => txn.sender === localStorage.getItem('wallet_address') && txn.recipient !== 'xjYL2vLJCFSZ.uax');
               setWalletTransactionsSent(sentTxns);
-  
+
               setLoader(false);
             }
-            else{
-              if(stakedAmt.data==='Wallet address not found'){
-                setStakedAmtState({staked_amt:0,total_devices:0});
+            else {
+              if (stakedAmt.data === 'Wallet address not found') {
+                setStakedAmtState({ staked_amt: 0, total_devices: 0 });
               }
-              else{
+              else {
                 setStakedAmtState(isNaN(stakedAmt.data.staked_amt) ? 0 : stakedAmt.data);
               }
               setBalanceAndPower(balanceAndPower.data);
@@ -123,16 +125,16 @@ const Transactions = () => {
               const transactions = walletTransactions.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
               setWalletTransactions(transactions);
-  
-              setreserved_power((parseFloat(getSummary.data.totalAskAmounts)*212)+(parseFloat(getSummary.data.totalNFTsListedForSell)*212))
+
+              setreserved_power((parseFloat(getSummary.data.totalAskAmounts) * 212) + (parseFloat(getSummary.data.totalNFTsListedForSell) * 212))
               setreserved_balance((parseFloat(getSummary.data.totalBidAmount)))
-  
+
               const sentTxns = transactions.filter(txn => txn.sender === localStorage.getItem('wallet_address') && txn.recipient !== 'xjYL2vLJCFSZ.uax');
               setWalletTransactionsSent(sentTxns);
-  
+
               setLoader(false);
             }
-         
+
           }
         } catch (error) {
           console.error("Error during API calls:", error);
@@ -151,7 +153,7 @@ const Transactions = () => {
   };
 
   const displayTransactions = walletTransactions.slice(currentPage * transactionsPerPage, (currentPage + 1) * transactionsPerPage);
-// console.log("stakedAmtState",stakedAmtState)
+  // console.log("stakedAmtState",stakedAmtState)
   return (
     <>
       {loader ? (
@@ -173,7 +175,7 @@ const Transactions = () => {
                         <br />
                         <img src={"https://images.uaxdlts.com/uax-landing/assets/images/logo/uax%20favicon.png"} style={{ width: '18px' }} />
                         <span style={{ color: '#0ce456', fontSize: '18px', marginLeft: '10px', fontWeight: '900' }}>
-                        {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${(parseFloat(balanceAndPower.balance)-parseFloat(reserved_balance)).toFixed(2)} UAXN`}
+                          {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${(parseFloat(balanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(2)} UAXN`}
                         </span>
                       </div>
                     </div>
@@ -184,8 +186,8 @@ const Transactions = () => {
                         <span style={{ color: "#f99f1b", fontSize: "18px", marginLeft: "10px", fontWeight: "900" }}>
                           {/* {stakedAmtState == 0 ? '0 / 0' :
                             <> */}
-                              {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${(stakedAmtState.staked_amt)} / ${stakedAmtState.total_devices}`}
-                            {/* </>
+                          {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${(stakedAmtState.staked_amt)} / ${stakedAmtState.total_devices}`}
+                          {/* </>
                           } */}
                         </span>
                       </div>
@@ -196,7 +198,7 @@ const Transactions = () => {
                         <br />
                         <PowerSettingsNewIcon style={{ padding: '', backgroundColor: '', color: '#fff' }} />
                         <span style={{ color: '#fff', fontSize: '18px', marginLeft: '5px', fontWeight: '900' }}>
-                        {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${(parseFloat(balanceAndPower.bandwidth)-parseFloat(reserved_power)).toFixed(2)}`}
+                          {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${(parseFloat(balanceAndPower.bandwidth) - parseFloat(reserved_power)).toFixed(2)}`}
                         </span>
                       </div>
                     </div>
@@ -206,7 +208,7 @@ const Transactions = () => {
                         <br />
                         <PowerSettingsNewIcon style={{ padding: '', backgroundColor: '', color: 'red' }} />
                         <span style={{ color: 'red', fontSize: '18px', marginLeft: '5px', fontWeight: '900' }}>
-                        {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${parseFloat(walletTransactionsSent.length * 100).toFixed(2)}`}
+                          {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${parseFloat(walletTransactionsSent.length * 100).toFixed(2)}`}
                         </span>
                       </div>
                     </div>
@@ -221,133 +223,226 @@ const Transactions = () => {
                   Transactions
                 </p>
                 <small>Last 100 Transactions</small>
-                <div className='mt-5'>
+                <div className='mt-3'>
                   <div className=''>
-                    <Table responsive style={tableStyle}>
+                    <Table responsive style={tableStyle} className='desk_view'>
                       <tbody>
                         <th className='table_header_class____'>Coin</th>
                         <th className='table_header_class____'>Date</th>
                         <th className='table_header_class____'>Sender/Recipient</th>
                         <th className='table_header_class____'>Amount</th>
                         <th className='table_header_class____'>Status</th>
-                        {displayTransactions.length>0?
+                        {displayTransactions.length > 0 ?
                           <>
                             {displayTransactions.map((index) => {
-                          if (walletAddress === index.recipient) {
-                            return (
-                              <tr className='customized_row____'>
-                                <td style={cellStyle}>UAXN</td>
-                                <td style={cellStyle}>{new Date(index.timestamp).toLocaleString()}</td>
-                                <td style={cellStyle}>{
-                                    index.sender === 'EfDz4LTNHAlh.uaxn' ? (
-                                      <>
-                                        <img
-                                          src="https://images.uaxdlts.com/explorer/mining%20.svg"
-                                          alt="Reward"
-                                          style={{ display: 'inline-block', marginRight: '5px' }}
-                                        />
-                                        Reward
-                                      </>
-                                    ) : index.sender === 'POFXyOvAjhF6.uaxn' ? (
-                                     <>
-                                        <img
-                                          src="https://images.uaxdlts.com/uax-dashboard/images/staking-menu.svg"
-                                          alt="Airdrop"
-                                          style={{ marginRight: '5px'}}
-                                        />
-                                        Airdrop
+                              if (walletAddress === index.recipient) {
+                                return (
+                                  <tr className='customized_row____'>
+                                    <td style={cellStyle}>UAXN</td>
+                                    <td style={cellStyle}>{new Date(index.timestamp).toLocaleString()}</td>
+                                    <td style={cellStyle}>{
+                                      index.sender === 'EfDz4LTNHAlh.uaxn' ? (
+                                        <>
+                                          <img
+                                            src="https://images.uaxdlts.com/explorer/mining%20.svg"
+                                            alt="Reward"
+                                            style={{ display: 'inline-block', marginRight: '5px' }}
+                                          />
+                                          Reward
                                         </>
-                                    ) : (
-                                      index.sender
-                                    )
-                                  }
-                                  </td>
-                                <td style={cellStyle}>
-                                  <span style={{ color: '#31bf24' }}>{parseFloat(index.amount).toFixed(5)} UAXN</span>
-                                </td>
-                                <td style={cellStyle}>
-                                  {index.recipient === 'xjYL2vLJCFSZ.uax' ? (
-                                    <Button style={{ padding: '10px', borderRadius: '5px', backgroundColor: '#403242', color: '#fff' }}>
-                                      <PowerSettingsNewIcon style={{ padding: '', backgroundColor: '', color: '#fff' }} />
-                                      Get Bandwidth
-                                    </Button>
-                                  ) : (
-                                    <>
-                                      {index.recipient === walletAddress ? (
-                                        <span style={{ color: '#31bf24' }}>Deposit</span>
+                                      ) : index.sender === 'POFXyOvAjhF6.uaxn' ? (
+                                        <>
+                                          <img
+                                            src="https://images.uaxdlts.com/uax-dashboard/images/staking-menu.svg"
+                                            alt="Airdrop"
+                                            style={{ marginRight: '5px' }}
+                                          />
+                                          Airdrop
+                                        </>
                                       ) : (
-                                        <span style={{ color: 'red' }}>Withdraw</span>
-                                      )}
-                                    </>
-                                  )}
-                                </td>
-                              </tr>
-                            );
-                          } else {
-                            return (
-                              <tr className='customized_row____'>
-                                <td style={cellStyle}>UAXN</td>
-                                <td style={cellStyle}>{new Date(index.timestamp).toLocaleString()}</td>
-                                <td style={cellStyle}>{index.recipient}</td>
-                                <td style={cellStyle}>
-                                  <span style={{ color: '#31bf24' }}>{parseFloat(index.amount).toFixed(2)} UAXN</span>
-                                </td>
-                                <td style={cellStyle}>
-                                  {index.recipient === 'xjYL2vLJCFSZ.uax' ? (
-                                    <Button style={{ border: 0, minHeight: "2vh", borderRadius: '5px', backgroundColor: '#403242', color: '#fff' }}>
-                                      <PowerSettingsNewIcon style={{ padding: '', backgroundColor: '', color: '#fff' }} />
-                                      Get Bandwidth
-                                    </Button>
-                                  ) : (
-                                    <>
-                                      {index.recipient === walletAddress ? (
-                                        <span style={{ color: '#31bf24' }}>Deposit</span>
+                                        index.sender
+                                      )
+                                    }
+                                    </td>
+                                    <td style={cellStyle}>
+                                      <span style={{ color: '#31bf24' }}>{parseFloat(index.amount).toFixed(5)} UAXN</span>
+                                    </td>
+                                    <td style={cellStyle}>
+                                      {index.recipient === 'xjYL2vLJCFSZ.uax' ? (
+                                        <Button style={{ padding: '10px', borderRadius: '5px', backgroundColor: '#403242', color: '#fff' }}>
+                                          <PowerSettingsNewIcon style={{ padding: '', backgroundColor: '', color: '#fff' }} />
+                                          Get Bandwidth
+                                        </Button>
                                       ) : (
-                                        <span style={{ color: 'red' }}>Withdraw</span>
+                                        <>
+                                          {index.recipient === walletAddress ? (
+                                            <span style={{ color: '#31bf24' }}>Deposit</span>
+                                          ) : (
+                                            <span style={{ color: 'red' }}>Withdraw</span>
+                                          )}
+                                        </>
                                       )}
-                                    </>
-                                  )}
-                                </td>
-                              </tr>
-                            );
-                          }
-                        })}
+                                    </td>
+                                  </tr>
+                                );
+                              } else {
+                                return (
+                                  <tr className='customized_row____'>
+                                    <td style={cellStyle}>UAXN</td>
+                                    <td style={cellStyle}>{new Date(index.timestamp).toLocaleString()}</td>
+                                    <td style={cellStyle}>{index.recipient}</td>
+                                    <td style={cellStyle}>
+                                      <span style={{ color: '#31bf24' }}>{parseFloat(index.amount).toFixed(2)} UAXN</span>
+                                    </td>
+                                    <td style={cellStyle}>
+                                      {index.recipient === 'xjYL2vLJCFSZ.uax' ? (
+                                        <Button style={{ border: 0, minHeight: "2vh", borderRadius: '5px', backgroundColor: '#403242', color: '#fff' }}>
+                                          <PowerSettingsNewIcon style={{ padding: '', backgroundColor: '', color: '#fff' }} />
+                                          Get Bandwidth
+                                        </Button>
+                                      ) : (
+                                        <>
+                                          {index.recipient === walletAddress ? (
+                                            <span style={{ color: '#31bf24' }}>Deposit</span>
+                                          ) : (
+                                            <span style={{ color: 'red' }}>Withdraw</span>
+                                          )}
+                                        </>
+                                      )}
+                                    </td>
+                                  </tr>
+                                );
+                              }
+                            })}
                           </>
                           :
                           <tr>
-                          <td colSpan="6" style={noDataStyle}>
-                              <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"} style={{ width: "6vw",position:"relative",top:"40%" }} />
-                          </td>
+                            <td colSpan="6" style={noDataStyle}>
+                              <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"} style={{ width: "6vw", position: "relative", top: "40%" }} />
+                            </td>
                           </tr>
                         }
-                      
+
                       </tbody>
                     </Table>
+                    <ul className='mobile_view'>
+                      {displayTransactions.length > 0 ?
+                        <>
+                          {displayTransactions.map((index) =>
+                            <li className='d-flex justify-content-between align-items-center border-bottom border-2 py-2 border-dark'>
+                              <div className='d-flex'>
+                                <div
+                                  className='d-flex justify-content-center align-items-center'
+                                  style={{
+                                    marginRight: 5
+                                  }}
+                                >
+                                  <img src={Icon} alt='No icons' />
+                                </div>
+                                <div>
+                                  <div className='d-flex align-items-center'>
+                                    <h1
+                                      className='m-0'
+                                      style={{
+                                        fontSize: 12,
+                                        fontWeight: '600',
+                                      }}
+                                    >
+                                      UAXN
+                                    </h1>
+                                    {index.recipient === 'xjYL2vLJCFSZ.uax' ? (
+                                      <Button style={{ padding: '10px', borderRadius: '5px', backgroundColor: '#403242', color: '#fff' }}>
+                                        <PowerSettingsNewIcon style={{ padding: '', backgroundColor: '', color: '#fff' }} />
+                                        Get Bandwidth
+                                      </Button>
+                                    ) : (
+                                      <>
+                                        {index.recipient === walletAddress ? (
+                                          <span style={{ color: '#31bf24', fontSize: 12 }}>(Deposit)</span>
+                                        ) : (
+                                          <span style={{ color: 'red', fontSize: 12 }}>(Withdraw)</span>
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                  <div style={{
+                                    fontSize: 12,
+                                    color: '#A8A8A8'
+                                  }}
+                                  >
+                                    {
+                                      walletAddress === index.recipient ? (
+                                        index.sender === 'EfDz4LTNHAlh.uaxn' ? (
+                                          <>
+                                            <img
+                                              src="https://images.uaxdlts.com/explorer/mining%20.svg"
+                                              alt="Reward"
+                                              style={{ display: 'inline-block', marginRight: 3, width: 16 }}
+                                            />
+                                            Reward
+                                          </>
+                                        ) : index.sender === 'POFXyOvAjhF6.uaxn' ? (
+                                          <>
+                                            <img
+                                              src="https://images.uaxdlts.com/uax-dashboard/images/staking-menu.svg"
+                                              alt="Airdrop"
+                                              style={{ marginRight: 3, width: 16 }}
+                                            />
+                                            Airdrop
+                                          </>
+                                        ) : (
+                                          index.sender
+                                        )) : index.recipient
+                                    }
+                                  </div>
+                                </div>
+                              </div>
+                              <div className='d-flex flex-column'>
+                                <span style={{ color: '#31bf24' }}>{parseFloat(index.amount).toFixed(2)} UAXN</span>
+                                <span style={{
+                                  fontSize: 12,
+                                  color: '#A8A8A8'
+                                }}>
+                                  {new Date(index.timestamp).toLocaleString()}
+                                </span>
+                              </div>
+                            </li>
+                          )}
+                        </>
+                        :
+                        <li className=' border-bottom border-2 py-2 border-dark'>
+                          <td colSpan="6" style={noDataStyle}>
+                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"}
+                              style={{ width: "6vw", position: "relative", top: "40%" }} />
+                          </td>
+                        </li>
+                      }
+                    </ul>
                   </div>
-                  {displayTransactions.length>0?
-                  <div className='pagination-container'>
-                    <ReactPaginate
-                      previousLabel={'Previous'}
-                      nextLabel={'Next'}
-                      breakLabel={'...'}
-                      pageCount={Math.ceil(walletTransactions.length / transactionsPerPage)}
-                      marginPagesDisplayed={2}
-                      pageRangeDisplayed={5}
-                      onPageChange={handlePageClick}
-                      containerClassName={'pagination'}
-                      subContainerClassName={'pages pagination'}
-                      activeClassName={'active'}
-                    />
-                  </div>
-                  :
-                  ''
+                  {displayTransactions.length > 0 ?
+                    <div className='pagination-container'>
+                      <ReactPaginate
+                        previousLabel={'Previous'}
+                        nextLabel={'Next'}
+                        breakLabel={'...'}
+                        pageCount={Math.ceil(walletTransactions.length / transactionsPerPage)}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageClick}
+                        containerClassName={'pagination'}
+                        subContainerClassName={'pages pagination'}
+                        activeClassName={'active'}
+                      />
+                    </div>
+                    :
+                    ''
                   }
                 </div>
               </div>
             </div>
           </div>
         </div>
-     )} 
+      )}
     </>
   );
 };

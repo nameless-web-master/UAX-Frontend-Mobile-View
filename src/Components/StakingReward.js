@@ -44,7 +44,7 @@ const StakingReward = () => {
     const [generatedPower, setGeneratedPower] = useState(0);
     const [combined_info, setcombined_info] = useState('');
     const [reserved_power, setreserved_power] = React.useState(0);
-  const [reserved_balance, setreserved_balance] = React.useState(0);
+    const [reserved_balance, setreserved_balance] = React.useState(0);
 
     const handleAmountChange = (e) => {
         const value = parseFloat(e.target.value);
@@ -57,18 +57,18 @@ const StakingReward = () => {
             try {
                 const config = { headers: { Authorization: `Bearer ${token}` } };
                 const purchasePowerResponse = await axios.post("https://services.uaxwallet.com/api/userPurchasePower", {
-                    power_amt: amount.toFixed(2) ,
+                    power_amt: amount.toFixed(2),
                     email
                 }, config);
                 // console.log("purchasePowerResponse",purchasePowerResponse)
                 if (purchasePowerResponse) {
-                    if(!purchasePowerResponse.data.note){
+                    if (!purchasePowerResponse.data.note) {
                         setMsg(purchasePowerResponse.data);
-                        setTimeout(()=>{
+                        setTimeout(() => {
                             fetchData();
-                        },3000)
+                        }, 3000)
                     }
-                    else{
+                    else {
                         setMsg("Bandwidth purchase completed");
                     }
                 } else {
@@ -90,7 +90,7 @@ const StakingReward = () => {
                 setEmail(email);
                 setToken(token);
                 const config = { headers: { Authorization: `Bearer ${token}` } };
-                
+
                 const [
                     verifyTokenResponse,
                     priceResponse,
@@ -107,10 +107,10 @@ const StakingReward = () => {
                     axios.post('https://services.uaxwallet.com/api/getUserWallet', { email }, config),
                     axios.get("https://cmw.uax.network/estimate_bandwidth"),
                     axios.post("https://webservices.uaxwallet.com/get_combined_wallet_info", { wallet_address: walletAddress }),
-                    axios.post("https://services.uaxwallet.com/api/getNFTsAndOffersSummary",{
+                    axios.post("https://services.uaxwallet.com/api/getNFTsAndOffersSummary", {
                         email
-                      },config),
-                      axios.get("https://cmw.uax.network/buy_bandwidth_thrugh_uaxn")
+                    }, config),
+                    axios.get("https://cmw.uax.network/buy_bandwidth_thrugh_uaxn")
                 ]);
 
                 if (verifyTokenResponse.data === "Token Expired") {
@@ -119,7 +119,7 @@ const StakingReward = () => {
                 } else {
                     setCoinPrice(priceResponse.data.current_price);
                     setBalanceAndPower(balanceAndPowerResponse.data);
-                    setreserved_power((parseFloat(getSummary.data.totalAskAmounts)*212)+(parseFloat(getSummary.data.totalNFTsListedForSell)*212))
+                    setreserved_power((parseFloat(getSummary.data.totalAskAmounts) * 212) + (parseFloat(getSummary.data.totalNFTsListedForSell) * 212))
                     setreserved_balance((parseFloat(getSummary.data.totalBidAmount)))
                     setWalletAddress(walletResponse.data);
                     setPowerPerTxn(powerConsumptionResponse.data);
@@ -128,7 +128,7 @@ const StakingReward = () => {
                     setGeneratedPower(isNaN(combined_wallet_response.data.generatedPower) ? 0 : combined_wallet_response.data.generatedPower);
                     setstakedDevices(isNaN(combined_wallet_response.data.totalDevices) ? 0 : combined_wallet_response.data.totalDevices);
                     setPowerEquivalentToOneCoin((parseFloat(power_rate.data)).toFixed(2))
-                    setAmount(215/parseFloat(power_rate.data))
+                    setAmount(215 / parseFloat(power_rate.data))
                     setLoader(false);
                 }
             } else {
@@ -156,7 +156,7 @@ const StakingReward = () => {
                                             <span style={{ fontWeight: "500" }}>Balance</span><br />
                                             <img src={"https://images.uaxdlts.com/uax-landing/assets/images/logo/uax%20favicon.png"} style={{ width: "18px" }} />
                                             <span style={{ color: "#0ce456", fontSize: "18px", marginLeft: "10px", fontWeight: "900" }}>
-                                                {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${(parseFloat(balanceAndPower.balance)-parseFloat(reserved_balance)).toFixed(3)} UAXN`}
+                                                {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${(parseFloat(balanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(3)} UAXN`}
                                             </span>
                                         </div>
                                     </div>
@@ -206,49 +206,80 @@ const StakingReward = () => {
                                             {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${powerEquivalentToOneCoin * (amount || 0).toFixed(2)}`}
                                         </span>
                                     </label>
-                                    <small style={{ marginLeft: "20px", color: "#fff",fontSize:"17px" }}>
+                                    <small style={{ marginLeft: "20px", color: "#fff", fontSize: "17px" }}>
                                         {powerPerTxn}
                                     </small>
                                     <br />
-                                    <br/>
-                                    <small style={{ marginLeft: "20px", color: "#fff",fontSize:"17px" }}>
+                                    <br />
+                                    <small style={{ marginLeft: "20px", color: "#fff", fontSize: "17px" }}>
                                         Available Bandwidth
-                                        <span style={{ float: "right", color: "#fff",fontSize:"17px" }}>{(parseFloat(balanceAndPower.bandwidth)-parseFloat(reserved_power)).toFixed(2)}</span>
+                                        <span style={{ float: "right", color: "#fff", fontSize: "17px" }}>{(parseFloat(balanceAndPower.bandwidth) - parseFloat(reserved_power)).toFixed(2)}</span>
                                     </small>
                                 </div>
                                 <div className='mt-5'>
                                     <p style={{ fontWeight: "600" }}>Get resources Bandwidth with UAXN</p>
-                                    <div className="d-flex responsive-container">
-                                        <div className="small-box m-2">
-                                            <div style={{ display: 'block', alignItems: 'center', backgroundColor: '#211f24', borderRadius: '5px', padding: '6px 16px' }}>
+                                    <div className="d-flex align-items-center flex-wrap responsive-container">
+                                        <div
+                                            className="p-2 width-full-1050"
+                                            style={{
+                                                minWidth: 156
+                                            }}
+                                        >
+                                            <div style={{
+                                                display: 'block',
+                                                alignItems: 'center',
+                                                backgroundColor: '#211f24',
+                                                borderRadius: '5px',
+                                                padding: '6px 16px',
+                                                minWidth: 140
+                                            }}>
                                                 <PowerSettingsNewIcon style={{ color: "#fff" }} />
                                                 <span style={{ color: "#a0a0a0" }}>Bandwidth</span>
                                             </div>
                                         </div>
-                                        <div className="large-box m-2">
-                                            <div style={amountInputStyle}>
-                                                <input
-                                                    type="number"
-                                                    value={amount}
-                                                    onChange={handleAmountChange}
-                                                    placeholder='Enter UAXN Amount'
-                                                    style={{ backgroundColor: 'transparent', border: 'none', color: 'white', flex: 1 }}
-                                                />
-                                                <div style={currencyStyle}>
-                                                    <span style={{ marginLeft: "8px" }}>UAXN</span>
+                                        <div
+                                            className='d-flex flex-row flex-wrap'
+                                            style={{
+                                                flex: 1
+                                            }}
+                                        >
+                                            <div
+                                                className="large-box p-2"
+                                            >
+                                                <div style={amountInputStyle}>
+                                                    <input
+                                                        type="number"
+                                                        value={amount}
+                                                        onChange={handleAmountChange}
+                                                        placeholder='Enter UAXN Amount'
+                                                        style={{ backgroundColor: 'transparent', border: 'none', color: 'white', flex: 1 }}
+                                                    />
+                                                    <div style={currencyStyle}>
+                                                        <span style={{ marginLeft: "8px" }}>UAXN</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                className="large-box p-2"
+                                            >
+                                                <div style={amountInputStyle}>
+                                                    <span style={{ color: "#a0a0a0" }}>
+                                                        {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : walletAddress}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="large-box m-2">
-                                            <div style={amountInputStyle}>
-                                                <span style={{ color: "#a0a0a0" }}>
-                                                    {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : walletAddress}
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div className="small-box m-2">
+                                        <div
+                                            className="p-2 width-full-1050"
+                                            style={{
+                                                minWidth: 156
+                                            }}
+                                        >
                                             <Button
-                                                style={{ width: "100%" }}
+                                                style={{
+                                                    width: "100%",
+                                                    minWidth: 140
+                                                }}
                                                 className="primary_btnn___"
                                                 variant="primary"
                                                 onClick={getPower}

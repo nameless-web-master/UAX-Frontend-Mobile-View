@@ -442,7 +442,7 @@ const Settings = () => {
             <div className='my-5 for_device_difference____mx_5____'>
               <div className='mt-4'>
                 <div className="row">
-                  <div className="col-lg-3 col-md-12 mt-3 nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" style={{ borderRight: "1px solid #2b272a" }}>
+                  <div className="col-lg-3 col-md-12 px-4 mt-3 nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" style={{ borderRight: "1px solid #2b272a" }}>
                     <button className="nav-link" id="v-pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-disabled" aria-selected="false" disabled style={{ color: "#bab8b8" }}>General</button>
                     <button className="nav-link active customized_nav_pills____" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Basic Information</button>
                     <button className="nav-link customized_nav_pills____" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Wallet Settings</button>

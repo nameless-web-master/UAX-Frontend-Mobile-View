@@ -4,6 +4,11 @@ body {
   min-height: 100vh;
 }
 
+* {
+  box-sizing: border-box;
+  position: relative;
+}
+
 /* @media only screen and (max-width:500px){
 .parent {
   position: relative;
@@ -19,6 +24,12 @@ body {
   width: 100%;
 }
 } */
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
 .card_design___ {
   background: #000;
@@ -258,6 +269,12 @@ input[type=number] {
   }
 }
 
+@media only screen and (max-width:600px) {
+  .table_header_class____ {
+    font-size: 12px;
+  }
+}
+
 .customized_row____ {
   height: 6vh;
   border-bottom: 0.1px solid #313131;
@@ -269,6 +286,9 @@ input[type=number] {
   padding-right: 20px;
   padding-top: 5px;
   padding-bottom: 5px;
+  /* text- overflow: ellipsis;
+  white-space: nowrap; */
+
 }
 
 .section_balance_and_stake____ {
@@ -364,9 +384,12 @@ input[type=number] {
 }
 
 .large-box {
-  flex: 2;
-  min-width: 200px;
+  width: 50%;
   /* Ensures the large boxes have a minimum width */
+}
+
+.width-full-1050 {
+  width: 15%;
 }
 
 
@@ -380,6 +403,21 @@ input[type=number] {
   .large-box {
     width: 100%;
   }
+}
+
+@media (max-width: 1350px) {
+
+  .large-box {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1050px) {
+
+  .width-full-1050 {
+    width: 100%;
+  }
+
 }
 
 
@@ -981,4 +1019,45 @@ fieldset:disabled .btn {
   z-index: 1000;
   background-color: white;
   /* box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);  */
+}
+
+.mobile_view {
+  display: none !important;
+}
+
+.desk_view {
+  display: block !important;
+}
+
+.desk_view_flex {
+  display: flex !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .mobile_view {
+    display: block !important;
+  }
+
+  .mobile_view_flex {
+    display: flex !important;
+  }
+
+  .desk_view {
+    display: none !important;
+  }
+
+  .css-1xtzbtj,
+  .css-ky9owd {
+    padding: 0 6px !important;
+  }
+
+  .dashboard_box_001____ {
+    padding: 12px !important;
+  }
+
+}
+
+th,
+td {
+  width: max-content;
 }
