@@ -13,6 +13,8 @@ import Modal from 'react-bootstrap/Modal';
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import Footer from './Footer'
 import { Html5Qrcode } from "html5-qrcode";
+import Txlist from "./Txlist";
+import { UserInfor } from './UserInfor';
 
 import Circle from '../media/circle.png';
 
@@ -379,7 +381,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="container" style={{ minHeight: "100vh" }}>
+      <UserInfor />
+      <div className="container">
         <div className="dashboard_box_001____ px-5 py-4 dashboard_box_001_____for_reducing_padding_in_mobile desk_view">
           <div className="row">
             <div className="col-md-6 mt-2">
@@ -516,7 +519,9 @@ const Dashboard = () => {
               >
                 {parseFloat(coin_price) > 0 ? (
                   <>
-                    <p className="text-center">
+                    <p className="text-center mb-2" style={{
+                      fontWeight: '600'
+                    }}>
                       ${" "}
                       {(() => {
                         const amount =
@@ -709,57 +714,66 @@ const Dashboard = () => {
                   </div>
                 </div>
               </div>
-              <div className="mt-3 mt-sm-5">
-                <h5>Staking Information</h5>
-              </div>
-              <div className='dashboard_box_001____ px-4 mb-4 '>
-                <div className='my-3 my-lg-5 for_device_difference____mx_5____'>
-                  <div>
-                    <div className='row'>
-                      <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                        <div className="section_balance_and_stake____ h-100">
-                          <span style={{ fontWeight: "500" }}>Balance</span><br />
-                          <img src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"} style={{ width: "18px" }} />
-                          <span style={{ color: "#0ce456", fontSize: "18px", marginLeft: "10px", fontWeight: "900" }}>
-                            {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> :
-                              <>
-                                {
-                                  (parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(3)} UAXN
-                              </>
-                            }
-                          </span>
+              <div className="desk_view">
+                <div className="mt-3 mt-sm-5">
+                  <h5>Staking Information</h5>
+                </div>
+                <div className='dashboard_box_001____ px-4 mb-4 '>
+                  <div className='my-3 my-lg-5 for_device_difference____mx_5____'>
+                    <div>
+                      <div className='row'>
+                        <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
+                          <div className="section_balance_and_stake____ h-100">
+                            <span style={{ fontWeight: "500" }}>Balance</span><br />
+                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"} style={{ width: "18px" }} />
+                            <span style={{ color: "#0ce456", fontSize: "18px", marginLeft: "10px", fontWeight: "900" }}>
+                              {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> :
+                                <>
+                                  {
+                                    (parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(3)} UAXN
+                                </>
+                              }
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                      <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                        <div className="section_balance_and_stake_brown____ h-100">
-                          <span style={{ fontWeight: "500" }}>Staked / Validators</span><br />
-                          <img src={"https://images.uaxdlts.com/uax-dashboard/images/mining .svg"} style={{ width: "18px" }} />
-                          <span style={{ color: "#f99f1b", fontSize: "18px", marginLeft: "10px", fontWeight: "900" }}>
-                            {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${stakedAmtState || 0} / ${stakedDevices || 0}`}
-                          </span>
+                        <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
+                          <div className="section_balance_and_stake_brown____ h-100">
+                            <span style={{ fontWeight: "500" }}>Staked / Validators</span><br />
+                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/mining .svg"} style={{ width: "18px" }} />
+                            <span style={{ color: "#f99f1b", fontSize: "18px", marginLeft: "10px", fontWeight: "900" }}>
+                              {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${stakedAmtState || 0} / ${stakedDevices || 0}`}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                      <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                        <div className="section_balance_and_stake_white____ h-100">
-                          <span style={{ fontWeight: "500" }}>Generated Bandwidth</span><br />
-                          <PowerSettingsNewIcon style={{ color: "#fff" }} />
-                          <span style={{ color: "#fff", fontSize: "18px", marginLeft: "5px", fontWeight: "900" }}>
-                            {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${parseFloat(generatedPower).toFixed(2)}`}
-                          </span>
+                        <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
+                          <div className="section_balance_and_stake_white____ h-100">
+                            <span style={{ fontWeight: "500" }}>Generated Bandwidth</span><br />
+                            <PowerSettingsNewIcon style={{ color: "#fff" }} />
+                            <span style={{ color: "#fff", fontSize: "18px", marginLeft: "5px", fontWeight: "900" }}>
+                              {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${parseFloat(generatedPower).toFixed(2)}`}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                      <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
-                        <div className="section_balance_and_stake_blue____ h-100">
-                          <span style={{ fontWeight: "500" }}>Stake Rewards</span><br />
-                          <Reward style={{ color: "#fff" }} />
-                          <span style={{ color: "#447be1", fontSize: "18px", marginLeft: "5px", fontWeight: "900" }}>
-                            {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${parseFloat(earnedAmtState).toFixed(2)} UAXN`}
-                          </span>
+                        <div className='col-lg-3 col-md-6 col-sm-6 mt-2'>
+                          <div className="section_balance_and_stake_blue____ h-100">
+                            <span style={{ fontWeight: "500" }}>Stake Rewards</span><br />
+                            <Reward style={{ color: "#fff" }} />
+                            <span style={{ color: "#447be1", fontSize: "18px", marginLeft: "5px", fontWeight: "900" }}>
+                              {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${parseFloat(earnedAmtState).toFixed(2)} UAXN`}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="mobile_view mt-4">
+                <p className='mb-1' style={{ fontWeight: '600', fontSize: 16 }}>
+                  Recently Transactions
+                </p>
+                <Txlist />
               </div>
 
             </div>
@@ -772,79 +786,26 @@ const Dashboard = () => {
             >
               <div className="row">
                 <div className="col-lg-6 col-md-12 mt-2">
+                  <center className="mb-4">
+                    <p
+                      className="mt-5"
+                      style={{ fontWeight: "600", fontSize: "20px" }}
+                    >
+                      Send UAXN
+                    </p>
+                    <span style={{ color: "#a8a8a8" }}>
+                      Enter the recipient's UAXN account address for
+                      transfer
+                    </span>
+                  </center>
                   <div
                     className="dashboard_box_001____ px-4 pb-5"
-                    style={{ backgroundColor: "#222024", height: "100%" }}
+                    style={{ backgroundColor: "#222024" }}
                   >
-                    <center>
-                      <p
-                        className="mt-5"
-                        style={{ fontWeight: "900", fontSize: "20px" }}
-                      >
-                        Send UAXN
-                      </p>
-                      <span style={{ color: "#a8a8a8" }}>
-                        Enter the recipient's UAXN account address for
-                        transfer
-                      </span>
-                    </center>
                     <div className="text-left px-2">
-
-                      <p
-                        className="mt-4"
-                        style={{ fontWeight: "900", fontSize: "" }}
-                      >
-                        To address
-                      </p>
-                      <div className="" style={{ position: "relative", width: "100%" }}>
-                        <input
-                          id="searchQueryInput"
-                          value={WalletToTransfer}
-                          onChange={(e) => setWalletToTransfer(e.target.value)}
-                          style={{ backgroundColor: "#403242" }}
-                          type="text"
-                          name="searchQueryInput"
-                          placeholder="Wallet Address"
-                        />
-                        {/* <button
-                            type="button"
-                            onClick={handleScan}
-                            className="text-white text-sm primary_btnn___"
-                            style={{
-                              position: "absolute",
-                              right: "2px",
-                              top: "50%",
-                              transform: "translateY(-50%)",
-                              backgroundColor: "",
-                              padding: "4px 10px",
-                              borderRadius: "5px",
-                              fontWeight: "bold",
-                              border: "none",
-                              cursor: "pointer",
-                            }}
-                          >
-                            Scan
-                          </button> */}
-                      </div>
-                      <small style={{ fontSize: "14px", color: "#fff", fontWeight: "800" }}>
-                        {power_per_txn}
-                        {" "}<span style={{ color: "#fff", fontWeight: "400" }}>
-                          <OverlayTrigger
-                            placement="right"
-                            overlay={
-                              <Tooltip id={`tooltip-right`} className="custom-tooltip">
-                                Cost per unit of gas for the transaction, in UAXN and BANDWIDTH.
-                              </Tooltip>
-                            }
-                          >
-                            <i className="fa fa-question-circle"></i>
-                          </OverlayTrigger>
-                        </span>
-                      </small>
-                      {/* <div id="reader" style={{ marginTop: "20px" }}></div> */}
                       <p
                         className="mt-5"
-                        style={{ fontWeight: "900", fontSize: "" }}
+                        style={{ fontWeight: "600", fontSize: "" }}
                       >
                         Amount to send
                       </p>
@@ -895,6 +856,58 @@ const Dashboard = () => {
                         Available Balance :{" "}
                         {(parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(3)} UAXN
                       </small>
+                      <p
+                        className="mt-4"
+                        style={{ fontWeight: "600", fontSize: "" }}
+                      >
+                        To address
+                      </p>
+                      <div className="" style={{ position: "relative", width: "100%" }}>
+                        <input
+                          id="searchQueryInput"
+                          value={WalletToTransfer}
+                          onChange={(e) => setWalletToTransfer(e.target.value)}
+                          style={{ backgroundColor: "#403242" }}
+                          type="text"
+                          name="searchQueryInput"
+                          placeholder="Wallet Address"
+                        />
+                        <button
+                          type="button"
+                          onClick={handleScan}
+                          className="text-white text-sm primary_btnn___"
+                          style={{
+                            position: "absolute",
+                            right: "2px",
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            backgroundColor: "",
+                            padding: "4px 10px",
+                            borderRadius: "5px",
+                            fontWeight: "bold",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Scan
+                        </button>
+                      </div>
+                      <small style={{ fontSize: "14px", color: "#fff", fontWeight: "800" }}>
+                        {power_per_txn}
+                        {" "}<span style={{ color: "#fff", fontWeight: "400" }}>
+                          <OverlayTrigger
+                            placement="right"
+                            overlay={
+                              <Tooltip id={`tooltip-right`} className="custom-tooltip">
+                                Cost per unit of gas for the transaction, in UAXN and BANDWIDTH.
+                              </Tooltip>
+                            }
+                          >
+                            <i className="fa fa-question-circle"></i>
+                          </OverlayTrigger>
+                        </span>
+                      </small>
+                      {/* <div id="reader" style={{ marginTop: "20px" }}></div> */}
                       <Button
                         style={{
                           fontWeight: "900",
@@ -919,169 +932,11 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-12 mt-2">
-                  <div
-                    className="dashboard_box_001____ px-4"
-                    style={{ backgroundColor: "#222024" }}
-                  >
-                    <p
-                      className="mt-5"
-                      style={{ fontWeight: "900", fontSize: "20px" }}
-                    >
-                      Latest Transactions
-                    </p>
-                    <br />
-                    <Table responsive style={tableStyle}>
-                      <tbody>
-                        {Wallet_transactions.map((index) => {
-                          if (index.recipient === wallet_address) {
-                            return (
-                              <tr key={index.timestamp}>
-                                <td style={cellStyle}>
-                                  <div className="d-flex">
-                                    <img
-                                      src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
-                                      style={{
-                                        width: 42,
-                                        borderRadius: "50%",
-                                        height: 42,
-                                      }}
-                                    />
-                                    <i
-                                      className="fa fa-arrow-down"
-                                      style={{ color: "green" }}
-                                      aria-hidden="true"
-                                    ></i>
-                                    {/* </i> */}
-                                    <span
-                                      style={{
-                                        fontWeight: "900",
-                                        marginLeft: "8px",
-                                      }}
-                                    >
-                                      UAXN{" "}
-                                      <span
-                                        style={{
-                                          fontSize: "12px",
-                                          color: "green",
-                                        }}
-                                      >
-                                        (Deposit)
-                                      </span>
-                                      <br />
-                                      <a
-                                        style={{ textDecoration: "none" }}
-                                        href={`http://157.230.194.100:3001/transactiondetails?${index.transactionId}`}
-                                        target="_blank"
-                                      >
-                                        <small
-                                          style={{
-                                            fontWeight: "100",
-                                            color: "#A8A8A8",
-                                            fontSize: 12
-                                          }}
-                                        >
-                                          Txid:{" "}
-                                          {index.transactionId.slice(0, 8)}...
-                                          {index.transactionId.slice(-8)}
-                                        </small>
-                                      </a>
-                                    </span>
-                                    {/* <br/> */}
-                                  </div>
-                                </td>
-                                <td style={rightAlignCellStyle}>
-                                  {parseFloat(index.amount).toFixed(2)} <br />
-                                  <small
-                                    style={{
-                                      fontWeight: "100",
-                                      color: "#A8A8A8",
-                                      fontSize: 12
-                                    }}
-                                  >
-                                    {new Date(
-                                      index.timestamp
-                                    ).toLocaleString()}
-                                  </small>
-                                </td>
-                              </tr>
-                            );
-                          } else {
-                            return (
-                              <tr key={index.timestamp}>
-                                <td style={cellStyle}>
-                                  <div className="d-flex">
-                                    <img
-                                      src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
-                                      style={{
-                                        width: 42,
-                                        borderRadius: "50%",
-                                        height: 42,
-                                      }}
-                                    />
-                                    <i
-                                      className="fa fa-arrow-up"
-                                      style={{ color: "red" }}
-                                      aria-hidden="true"
-                                    ></i>
-                                    {/* </i> */}
-                                    <span
-                                      style={{
-                                        fontWeight: "900",
-                                        marginLeft: "8px",
-                                      }}
-                                    >
-                                      UAXN{" "}
-                                      <span
-                                        style={{
-                                          fontSize: "12px",
-                                          color: "red",
-                                        }}
-                                      >
-                                        (Withdraw)
-                                      </span>
-                                      <br />
-                                      <a
-                                        style={{ textDecoration: "none" }}
-                                        href={`http://157.230.194.100:3001/transactiondetails?${index.transactionId}`}
-                                        target="_blank"
-                                      >
-                                        <small
-                                          style={{
-                                            fontWeight: "100",
-                                            color: "#A8A8A8",
-                                            fontSize: 12
-                                          }}
-                                        >
-                                          Txid:{" "}
-                                          {index.transactionId.slice(0, 8)}...
-                                          {index.transactionId.slice(-8)}
-                                        </small>
-                                      </a>
-                                    </span>
-                                  </div>
-                                </td>
-                                <td style={rightAlignCellStyle}>
-                                  {parseFloat(index.amount).toFixed(2)} <br />
-                                  <small
-                                    style={{
-                                      fontWeight: "100",
-                                      color: "#A8A8A8",
-                                      fontSize: 12
-                                    }}
-                                  >
-                                    {new Date(
-                                      index.timestamp
-                                    ).toLocaleString()}
-                                  </small>
-                                </td>
-                              </tr>
-                            );
-                          }
-                        })}
-                      </tbody>
-                    </Table>
-                  </div>
+                <div className="col-lg-6 col-md-12 mt-2 p-4">
+                  <p className='mb-1' style={{ fontWeight: '600', fontSize: 16 }}>
+                    Latest Transactions
+                  </p>
+                  <Txlist />
                 </div>
               </div>
             </div>
@@ -1212,202 +1067,11 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="col-lg-6 col-md-12 mt-2">
-                  <div
-                    className="dashboard_box_001____ px-4"
-                    style={{ backgroundColor: "#222024", }}
-                  >
-                    <p
-                      className="mt-5"
-                      style={{ fontWeight: "900", fontSize: "20px" }}
-                    >
+                  <div className="col-lg-6 col-md-12 mt-2 p-4">
+                    <p className='mb-1' style={{ fontWeight: '600', fontSize: 16 }}>
                       Latest Transactions
-                      {/* <Link to="#">
-                          <span
-                            style={{
-                              float: "right",
-                              fontSize: "15px",
-                              color: "#c006df",
-                            }}
-                          >
-                            See all
-                          </span>
-                        </Link> */}
                     </p>
-                    <br />
-                    <Table responsive style={tableStyle}>
-                      <tbody>
-                        {Wallet_transactions.map((index) => {
-                          // function formatDate(timestamp) {
-                          //   const date = new Date(parseInt(timestamp, 10))
-                          //   const options = {
-                          //     day: '2-digit',
-                          //     month: 'short',
-                          //     year: 'numeric'
-                          //   };
-                          //   return date.toLocaleDateString('en-GB', options);
-                          // }
-                          if (index.recipient === wallet_address) {
-                            return (
-                              <tr key={index.timestamp}>
-                                <td style={cellStyle}>
-                                  <div className="d-flex">
-                                    {/* <i className="fa fa-arrow-down p-3" style={{ backgroundColor: "#24b4c1", borderRadius: "50%" }} aria-hidden="true"> */}
-                                    {/* <img src={UAXPNG}/> */}
-                                    <img
-                                      src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
-                                      style={{
-                                        width: 42,
-                                        borderRadius: "50%",
-                                        height: 42,
-                                      }}
-                                    />
-                                    <i
-                                      className="fa fa-arrow-down"
-                                      style={{ color: "green" }}
-                                      aria-hidden="true"
-                                    ></i>
-                                    {/* </i> */}
-                                    <span
-                                      style={{
-                                        fontWeight: "900",
-                                        marginLeft: "8px",
-                                      }}
-                                    >
-                                      UAXN{" "}
-                                      <span
-                                        style={{
-                                          fontSize: "12px",
-                                          color: "green",
-                                        }}
-                                      >
-                                        (Deposit)
-                                      </span>
-                                      <br />
-                                      <a
-                                        style={{ textDecoration: "none" }}
-                                        href={`http://157.230.194.100:3001/transactiondetails?${index.transactionId}`}
-                                        target="_blank"
-                                      >
-                                        <small
-                                          style={{
-                                            fontWeight: "100",
-                                            color: "#A8A8A8",
-                                            fontSize: 12
-                                          }}
-                                        >
-                                          Txid:{" "}
-                                          {index.transactionId.slice(0, 8)}...
-                                          {index.transactionId.slice(-8)}
-                                        </small>
-                                      </a>
-                                    </span>
-                                    {/* <br/> */}
-                                  </div>
-                                </td>
-                                <td style={rightAlignCellStyle}>
-                                  {parseFloat(index.amount).toFixed(2)} <br />
-                                  <small
-                                    style={{
-                                      fontWeight: "100",
-                                      color: "#A8A8A8",
-                                      fontSize: 12
-                                    }}
-                                  >
-                                    {new Date(
-                                      index.timestamp
-                                    ).toLocaleString()}
-                                  </small>
-                                </td>
-                              </tr>
-                            );
-                          } else {
-                            return (
-                              <tr key={index.timestamp}>
-                                <td style={cellStyle}>
-                                  <div className="d-flex">
-                                    <img
-                                      src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
-                                      style={{
-                                        width: 42,
-                                        borderRadius: "50%",
-                                        height: 42,
-                                      }}
-                                    />
-                                    <i
-                                      className="fa fa-arrow-up"
-                                      style={{ color: "red" }}
-                                      aria-hidden="true"
-                                    ></i>
-                                    {/* </i> */}
-                                    <span
-                                      style={{
-                                        fontWeight: "900",
-                                        marginLeft: "8px",
-                                      }}
-                                    >
-                                      UAXN{" "}
-                                      <span
-                                        style={{
-                                          fontSize: "12px",
-                                          color: "red",
-                                        }}
-                                      >
-                                        (Withdraw)
-                                      </span>
-                                      <br />
-                                      <a
-                                        style={{ textDecoration: "none" }}
-                                        href={`http://157.230.194.100:3001/transactiondetails?${index.transactionId}`}
-                                        target="_blank"
-                                      >
-                                        <small
-                                          style={{
-                                            fontWeight: "100",
-                                            color: "#A8A8A8",
-                                            fontSize: 12
-                                          }}
-                                        >
-                                          Txid:{" "}
-                                          {index.transactionId.slice(0, 8)}...
-                                          {index.transactionId.slice(-8)}
-                                        </small>
-                                      </a>
-                                    </span>
-                                  </div>
-                                </td>
-                                <td style={rightAlignCellStyle}>
-                                  {parseFloat(index.amount).toFixed(2)} <br />
-                                  <small
-                                    style={{
-                                      fontWeight: "100",
-                                      color: "#A8A8A8",
-                                      fontSize: 12
-                                    }}
-                                  >
-                                    {new Date(
-                                      index.timestamp
-                                    ).toLocaleString()}
-                                  </small>
-                                </td>
-                              </tr>
-                            );
-                          }
-                        })}
-                      </tbody>
-                    </Table>
-                    {/* <ReactPaginate
-                            previousLabel={<i class="fa fa-chevron-left" aria-hidden="true" style={{marginRight:"10px",color:"#c006df"}}></i>}
-                            nextLabel={<i class="fa fa-chevron-right" aria-hidden="true" style={{marginLeft:"10px",color:"#c006df"}}></i>}
-                            breakLabel={'...'}
-                            breakClassName={'break-me'}
-                            pageCount={pageCount}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={5}
-                            onPageChange={handlePageClick}
-                            containerClassName={'pagination'}
-                            subContainerClassName={'pages pagination'}
-                            activeClassName={'active'}
-                        /> */}
+                    <Txlist />
                   </div>
                 </div>
               </div>

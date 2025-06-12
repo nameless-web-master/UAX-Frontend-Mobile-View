@@ -649,7 +649,7 @@ input[type=number] {
 }
 
 input:focus-visible {
-  border: none !important;
+  border-color: transparent !important;
   outline: none !important;
   /* This also removes the outline that may appear */
 }
@@ -1060,4 +1060,33 @@ fieldset:disabled .btn {
 th,
 td {
   width: max-content;
+}
+
+
+
+.small_view {
+  display: none !important;
+}
+
+.large_view {
+  display: block !important;
+}
+
+.large_view_flex {
+  display: flex !important;
+}
+
+@media only screen and (max-width: 900px) {
+  .small_view {
+    display: block !important;
+  }
+
+  .small_view_flex {
+    display: flex !important;
+  }
+
+  .large_view {
+    display: none !important;
+  }
+
 }
