@@ -215,7 +215,7 @@ const Transactions = () => {
               </div>
             </div>
 
-            <div className='dashboard_box_001____ px-4' style={{ minHeight: "80vh", position: "relative", maxWidth: "80vw" }}>
+            <div className='dashboard_box_001____ px-4' style={{ minHeight: "80vh", position: "relative", maxWidth: "100vw" }}>
               <div className='my-4'>
                 <p className='' style={{ fontWeight: '900', fontSize: '20px' }}>
                   Transactions

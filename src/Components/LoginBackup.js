@@ -196,7 +196,7 @@ const Login = () => {
           <div className="col-lg-6 col-md-12 gap_for_mobile_____">
             <div className="parent">
               <div className="child">
-                <div className="card_design___ p-5">
+                <div className="card_design___ p-3 p-sm-5">
                   <center className="my-4">
                     <img src={Logo} alt="logo" />
                   </center>

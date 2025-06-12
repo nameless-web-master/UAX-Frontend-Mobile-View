@@ -23,9 +23,9 @@ const NFTs = () => {
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
     localStorage.setItem("activeTab_nft", tabId);
-    
+
     // Update keys based on the tab selected
-    switch(tabId) {
+    switch (tabId) {
       case "pills-home":
         setMyCollectionsKey(prevKey => prevKey + 1);
         break;
@@ -51,10 +51,10 @@ const NFTs = () => {
       <div className="container" style={{ minHeight: "100vh" }}>
         <div className='mt-3'>
           <div className='dashboard_box_001____ mb-3'>
-            <ul className="nav nav-pills my-2" id="pills-tab" role="tablist">
-            <li className="nav-item" role="presentation">
+            <ul className="nav nav-pills my-2 flex-row justify-content-center" id="pills-tab" role="tablist">
+              <li className="nav-item" role="presentation">
                 <button
-                  className={`nav-link tabs_button____ my-1 ${activeTab === "pills-profile" ? "active" : ""}`}
+                  className={`nav-link tabs_button____ ${activeTab === "pills-profile" ? "active" : ""}`}
                   id="pills-profile-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#pills-profile"
@@ -70,7 +70,7 @@ const NFTs = () => {
               </li>
               <li className="nav-item" role="presentation">
                 <button
-                  className={`nav-link tabs_button____ my-1 ${activeTab === "pills-home" ? "active" : ""}`}
+                  className={`nav-link tabs_button____ ${activeTab === "pills-home" ? "active" : ""}`}
                   id="pills-home-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#pills-home"
@@ -86,7 +86,7 @@ const NFTs = () => {
               </li>
               <li className="nav-item" role="presentation">
                 <button
-                  className={`nav-link tabs_button____ my-1 ${activeTab === "pills-contact" ? "active" : ""}`}
+                  className={`nav-link tabs_button____ ${activeTab === "pills-contact" ? "active" : ""}`}
                   id="pills-contact-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#pills-contact"
@@ -102,7 +102,7 @@ const NFTs = () => {
               </li>
               <li className="nav-item" role="presentation">
                 <button
-                  className={`nav-link tabs_button____ my-1 ${activeTab === "pills-view_offer" ? "active" : ""}`}
+                  className={`nav-link tabs_button____ ${activeTab === "pills-view_offer" ? "active" : ""}`}
                   id="pills-view_offer-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#pills-view_offer"
@@ -118,7 +118,7 @@ const NFTs = () => {
               </li>
               <li className="nav-item" role="presentation">
                 <button
-                  className={`nav-link tabs_button____ my-1 ${activeTab === "pills-Reserve" ? "active" : ""}`}
+                  className={`nav-link tabs_button____ ${activeTab === "pills-Reserve" ? "active" : ""}`}
                   id="pills-Reserve-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#pills-Reserve"

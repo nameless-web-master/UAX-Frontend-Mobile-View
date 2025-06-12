@@ -27,7 +27,7 @@ import PowerSettingsNewIcon from '@mui/icons-material/Bolt';
 import axios from 'axios';
 import Stake from './Stake'
 
-const drawerWidth = 240;
+const drawerWidth = 288;
 
 export default function ResponsiveDrawer() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -44,27 +44,27 @@ export default function ResponsiveDrawer() {
   const navigate = useNavigate();
 
   var menuItems = []
-  if(window.innerWidth>892){
-     menuItems = [
+  if (window.innerWidth > 892) {
+    menuItems = [
       { text: 'Dashboard', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/dashboard.svg"} /> },
       { text: 'NFTs', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/nft.svg"} /> },
       { text: 'Get Bandwidth', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/power.svg"} /> },
       { text: 'Staking Reward', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/staking-menu.svg"} /> },
       { text: 'Settings', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/settings.svg"} /> },
-      { text: 'Invite & Earn', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/INVITE.svg"}/> },
+      { text: 'Invite & Earn', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/INVITE.svg"} /> },
       { text: 'Multichain Bridge', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/multichain.svg"} /> },
       { text: 'Logout', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/logout.svg"} /> }
     ];
   }
-  else{
-     menuItems = [
+  else {
+    menuItems = [
       { text: 'Dashboard', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/dashboard.svg"} /> },
       { text: 'Transactions', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/swap.svg"} /> },
       { text: 'NFTs', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/nft.svg"} /> },
       { text: 'Get Bandwidth', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/power.svg"} /> },
       { text: 'Staking Reward', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/staking-menu.svg"} /> },
       { text: 'Settings', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/settings.svg"} /> },
-      { text: 'Invite & Earn', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/INVITE.svg"}/> },
+      { text: 'Invite & Earn', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/INVITE.svg"} /> },
       { text: 'Multichain Bridge', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/multichain.svg"} /> },
       { text: 'Logout', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/logout.svg"} /> }
     ];
@@ -95,7 +95,7 @@ export default function ResponsiveDrawer() {
           });
           if (responseToken.data === "Token Expired") {
             localStorage.clear();
-            window.location.href='/login'; 
+            window.location.href = '/login';
           } else {
             setloader(false);
             const config = {
@@ -109,11 +109,11 @@ export default function ResponsiveDrawer() {
               email: email
             }, config);
             if (balanceAndPower) {
-              const getSummary = await axios.post("https://services.uaxwallet.com/api/getNFTsAndOffersSummary",{
-                email:email
-              },config)
-              if(getSummary.data){
-                setreserved_power((parseFloat(getSummary.data.totalAskAmounts)*212)+(parseFloat(getSummary.data.totalNFTsListedForSell)*212))
+              const getSummary = await axios.post("https://services.uaxwallet.com/api/getNFTsAndOffersSummary", {
+                email: email
+              }, config)
+              if (getSummary.data) {
+                setreserved_power((parseFloat(getSummary.data.totalAskAmounts) * 212) + (parseFloat(getSummary.data.totalNFTsListedForSell) * 212))
                 setreserved_balance((parseFloat(getSummary.data.totalBidAmount)))
               }
               setBalanceAndPower(balanceAndPower.data);
@@ -125,15 +125,15 @@ export default function ResponsiveDrawer() {
               const lastPrice = priceHistory[priceHistory.length - 1].current_price;
               const secondLastPrice = priceHistory[priceHistory.length - 2].current_price;
               const priceDifferencePercent = ((lastPrice - secondLastPrice) / secondLastPrice) * 100;
-              setcoin_price_diff_percent(priceDifferencePercent.toFixed(2)); 
-          }
+              setcoin_price_diff_percent(priceDifferencePercent.toFixed(2));
+            }
           }
         } catch (error) {
           console.error("Error during token validation:", error);
-          window.location.href='/login';  // Navigate to login page on error
+          window.location.href = '/login';  // Navigate to login page on error
         }
       } else {
-        window.location.href='/login'; 
+        window.location.href = '/login';
       }
     };
     initialFunction();
@@ -160,17 +160,17 @@ export default function ResponsiveDrawer() {
     } else if (window.innerWidth < 892 && index === 8) {
       // window.open('https://bridge.uax.network', '_blank');
     }
-    if (window.innerWidth>892 && index === 8) {
+    if (window.innerWidth > 892 && index === 8) {
       localStorage.clear();
       // navigate('/login');
       window.location.reload();
     }
-    else if (window.innerWidth<892 && index === 9) {
+    else if (window.innerWidth < 892 && index === 9) {
       localStorage.clear();
       // navigate('/login');
       window.location.reload();
     }
-     else {
+    else {
       // if(window.innerWidth>892 && index === 6){
 
       // }
@@ -178,20 +178,20 @@ export default function ResponsiveDrawer() {
       //   // window.location.href = 'https://bridge.uax.network';
       // }
       // else{
-        if(selectedIndex==index){
-          localStorage.removeItem("activeTab")
-          localStorage.removeItem("activeTab_nft")
-          window.location.reload()
-        }
-        if (selectedIndex !== null && selectedIndex !== index) {
-          // Push current index to history stack if it's not the same as the selected index
-          historyStackRef.current.push(selectedIndex);
-          // window.location.reload();
-        }
-        setSelectedIndex(index);
-        setTitle(index === 0 ? 'Wallet Address' : menuItems[index - 1].text);
-        localStorage.setItem('selectedIndex', index);
-        setMobileOpen(false);
+      if (selectedIndex == index) {
+        localStorage.removeItem("activeTab")
+        localStorage.removeItem("activeTab_nft")
+        window.location.reload()
+      }
+      if (selectedIndex !== null && selectedIndex !== index) {
+        // Push current index to history stack if it's not the same as the selected index
+        historyStackRef.current.push(selectedIndex);
+        // window.location.reload();
+      }
+      setSelectedIndex(index);
+      setTitle(index === 0 ? 'Wallet Address' : menuItems[index - 1].text);
+      localStorage.setItem('selectedIndex', index);
+      setMobileOpen(false);
       // }
     }
   };
@@ -218,8 +218,8 @@ export default function ResponsiveDrawer() {
             <AppBar
               position="fixed"
               sx={{
-                width: { sm: `calc(100% - ${drawerWidth}px)` },
-                ml: { sm: `${drawerWidth}px` },
+                width: { md: `calc(100% - ${drawerWidth}px)` },
+                ml: { md: `${drawerWidth}px` },
                 bgcolor: 'transparent',
                 boxShadow: 'none'
               }}
@@ -231,17 +231,17 @@ export default function ResponsiveDrawer() {
                     aria-label="open drawer"
                     edge="start"
                     onClick={handleDrawerToggle}
-                    sx={{ mr: 2, display: { sm: 'none' } }}
+                    sx={{ mr: 2, display: { md: 'none' } }}
                   >
                     <MenuIcon />
                   </IconButton>
                   <Typography variant="h6" noWrap component="div">
                     {/* <img src={BackButton} style={{ marginRight: "5px", cursor: "pointer" }} onClick={handleBackButtonClick} /> */}
                     <span className='for__desk__view'>
-                    {title}
+                      {title}
                     </span>
                     <span className='for__mobile__view'>
-                    <img onClick={refreshThePage} src={"https://images.uaxdlts.com/uax-landing/assets/images/logo/uax_white_logo.png?quality=lossless"} alt="Logo" style={{ width: '20vw', margin: '0 auto', display: 'block', cursor: "pointer" }} />
+                      <img onClick={refreshThePage} src={"https://images.uaxdlts.com/uax-landing/assets/images/logo/uax_white_logo.png?quality=lossless"} alt="Logo" style={{ width: '20vw', margin: '0 auto', display: 'block', cursor: "pointer" }} />
                     </span>
                   </Typography>
                 </Box>
@@ -261,23 +261,23 @@ export default function ResponsiveDrawer() {
                     </Typography>
                   </IconButton>
                   <div className='sidebar_class_001____'>
-                  <IconButton color="inherit">
-                    <Typography variant="button" sx={{ mr: 1 }}>
-                      <img src={"https://images.uaxdlts.com/uax-landing/assets/images/logo/uax%20favicon.png"} style={{ width: "15px", marginRight: "8px", marginTop: "-5px" }} />
-                      <span style={{ fontSize: "16px", fontWeight: "700", color: "#c006df" }}>{BalanceAndPower ? ((parseFloat(BalanceAndPower.balance)-parseFloat(reserved_balance)).toFixed(3)) : 0.000} UAXN</span>
-                    </Typography>
-                  </IconButton>
+                    <IconButton color="inherit">
+                      <Typography variant="button" sx={{ mr: 1 }}>
+                        <img src={"https://images.uaxdlts.com/uax-landing/assets/images/logo/uax%20favicon.png"} style={{ width: "15px", marginRight: "8px", marginTop: "-5px" }} />
+                        <span style={{ fontSize: "16px", fontWeight: "700", color: "#c006df" }}>{BalanceAndPower ? ((parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(3)) : 0.000} UAXN</span>
+                      </Typography>
+                    </IconButton>
                   </div>
                   {/* Power Icon */}
                   <div className=''>
                     <IconButton color="inherit">
                       <PowerSettingsNewIcon style={{ padding: "", backgroundColor: "", color: "#fff" }} />
-                      <span style={{ color: "#c006df", fontSize: "16px", fontWeight: "700" }}>{BalanceAndPower ? (parseFloat((BalanceAndPower.bandwidth)-parseFloat(reserved_power)).toFixed(2)) : 0.00}</span>
+                      <span style={{ color: "#c006df", fontSize: "16px", fontWeight: "700" }}>{BalanceAndPower ? (parseFloat((BalanceAndPower.bandwidth) - parseFloat(reserved_power)).toFixed(2)) : 0.00}</span>
                     </IconButton>
                   </div>
                   <div className='sidebar_class_001____'>
                     <IconButton color="inherit">
-                      <span style={{ color: "#c006df", fontSize: "16px", fontWeight: "700" }}>Price : ${parseFloat(coin_price).toFixed(3)} <small style={{ color: parseFloat(coin_price_diff_percent)>0?"green":"red" }}><i className={parseFloat(coin_price_diff_percent)>0?"fa fa-arrow-up":"fa fa-arrow-down"} aria-hidden="true"></i> {coin_price_diff_percent}%</small></span>
+                      <span style={{ color: "#c006df", fontSize: "16px", fontWeight: "700" }}>Price : ${parseFloat(coin_price).toFixed(3)} <small style={{ color: parseFloat(coin_price_diff_percent) > 0 ? "green" : "red" }}><i className={parseFloat(coin_price_diff_percent) > 0 ? "fa fa-arrow-up" : "fa fa-arrow-down"} aria-hidden="true"></i> {coin_price_diff_percent}%</small></span>
                     </IconButton>
                   </div>
                 </Box>
@@ -301,13 +301,13 @@ export default function ResponsiveDrawer() {
             </AppBar>
             <Box
               component="nav"
-              sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+              sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
               aria-label="mailbox folders"
             >
               <Drawer
                 variant="permanent"
                 sx={{
-                  display: { xs: 'none', sm: 'block' },
+                  display: { xs: 'none', sm: 'none', md: 'block', },
                   '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, paddingTop: '20px', backgroundColor: '#1c1c1c', color: 'white' },
                 }}
                 open
@@ -374,7 +374,7 @@ export default function ResponsiveDrawer() {
                   keepMounted: true,
                 }}
                 sx={{
-                  display: { xs: 'block', sm: 'none' },
+                  display: { xs: 'block', sm: 'block', md: 'none', },
                   '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, backgroundColor: 'black', color: 'white' },
                 }}
               >
@@ -434,8 +434,8 @@ export default function ResponsiveDrawer() {
                       {menuItems[selectedIndex - 1].text === 'NFTs' ? <NFTs /> : ''}
                       {menuItems[selectedIndex - 1].text === 'Settings' ? <Settings /> : ''}
                       {menuItems[selectedIndex - 1].text === 'Invite & Earn' ? <InviteAndEarn /> : ''}
-                      {menuItems[selectedIndex - 1].text === 'Transactions' ?  <Transaction /> : ''}
-                      {menuItems[selectedIndex - 1].text === 'Staking Reward' ?  <Stake /> : ''}
+                      {menuItems[selectedIndex - 1].text === 'Transactions' ? <Transaction /> : ''}
+                      {menuItems[selectedIndex - 1].text === 'Staking Reward' ? <Stake /> : ''}
                       {/* {menuItems[selectedIndex - 1].text} Content */}
                     </Typography>
                   )}

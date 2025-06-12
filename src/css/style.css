@@ -26,6 +26,7 @@ body {
   border-radius: 11px;
   color: #fff;
   box-shadow: -1px 1px 9px 2px #410a48;
+  table-layout: initial;
 }
 
 .form-control {
@@ -86,13 +87,21 @@ input[type=number] {
 
 .tabs_button____ {
   background-color: #c006df;
-  margin-left: 10px !important;
+  margin: 4px;
   color: #fff
+}
+
+
+@media only screen and (max-width:600px) {
+  .tabs_button____ {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+
 }
 
 .tabs_button____:hover {
   background-color: #c006df;
-  margin-left: 10px !important;
   color: #fff
 }
 
@@ -331,13 +340,6 @@ input[type=number] {
   height: 1px;
   background-color: #38363a;
   margin: 0 8px;
-}
-
-@media only screen and (min-width:501px) {
-  .for_device_difference____mx_5____ {
-    margin-left: 2rem;
-    margin-right: 2rem;
-  }
 }
 
 .form-select:focus {
@@ -590,7 +592,7 @@ input[type=number] {
   }
 }
 
-@media only screen and (max-width:891px) {
+@media only screen and (max-width:992px) {
   .hide_in_mobile__ {
     display: none;
   }
@@ -865,10 +867,17 @@ fieldset:disabled .btn {
 }
 
 
+@media (min-width: 900px) {
+  .css-1k0pvs9-MuiPaper-root-MuiAppBar-root {
+    width: calc(100% - 288px);
+    margin-left: 288px;
+  }
+}
+
 @media (min-width: 600px) {
   .css-1k0pvs9-MuiPaper-root-MuiAppBar-root {
-    width: calc(100% - 288px) !important;
-    margin-left: 288px !important;
+    width: calc(100% - 288px);
+    margin-left: 0;
   }
 }
 
