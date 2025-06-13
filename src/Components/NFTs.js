@@ -53,7 +53,7 @@ const NFTs = () => {
       <div className="container">
         <div className='mt-3'>
           <div className='dashboard_box_001____ mb-3'>
-            <ul className="nav nav-pills my-2 flex-row justify-content-center" id="pills-tab" role="tablist">
+            <ul className="nav nav-pills my-2 flex-row justify-content-md-start justify-content-center " id="pills-tab" role="tablist">
               <li className="nav-item" role="presentation">
                 <button
                   className={`nav-link tabs_button____ ${activeTab === "pills-profile" ? "active" : ""}`}

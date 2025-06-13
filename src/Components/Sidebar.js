@@ -27,7 +27,7 @@ import PowerSettingsNewIcon from '@mui/icons-material/Bolt';
 import axios from 'axios';
 import Stake from './Stake'
 
-const drawerWidth = 288;
+const drawerWidth = 240;
 
 export default function ResponsiveDrawer() {
   const [mobileOpen, setMobileOpen] = React.useState(false);

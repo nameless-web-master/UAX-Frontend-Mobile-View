@@ -12,7 +12,7 @@ import { UserInfor } from './UserInfor';
 
 const noDataStyle = {
   textAlign: 'center',
-  height: '30vh',
+  height: '50vh',
   borderBottom: "none",
   position: "relative",
   backgroundColor: '#000'

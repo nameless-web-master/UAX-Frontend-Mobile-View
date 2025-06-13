@@ -942,14 +942,14 @@ fieldset:disabled .btn {
 
 @media (min-width: 900px) {
   .css-1k0pvs9-MuiPaper-root-MuiAppBar-root {
-    width: calc(100% - 288px);
-    margin-left: 288px;
+    width: calc(100% - 240px);
+    margin-left: 240px;
   }
 }
 
 @media (min-width: 600px) {
   .css-1k0pvs9-MuiPaper-root-MuiAppBar-root {
-    width: calc(100% - 288px);
+    width: calc(100% - 240px);
     margin-left: 0;
   }
 }

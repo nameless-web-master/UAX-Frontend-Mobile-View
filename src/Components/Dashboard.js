@@ -733,13 +733,13 @@ const Dashboard = () => {
 
             </div>
             <div
-              className={`tab-pane fade ${activeTab === "pills-send" ? "show active" : ""
+              className={`tab-pane w-100 fade ${activeTab === "pills-send" ? "show active" : ""
                 }`}
               id="pills-send"
               role="tabpanel"
               aria-labelledby="pills-send-tab"
             >
-              <div className="row">
+              <div className="row mobile_view w-100 m-auto">
                 <div className="col-lg-6 col-md-12 mt-2">
                   <center className="mb-4">
                     <p
@@ -894,6 +894,316 @@ const Dashboard = () => {
                   <Txlist />
                 </div>
               </div>
+              <div className="row d-flex flex-row desk_view desk_view_flex w-100 mx-auto">
+                <div className="col-lg-6 col-12 mt-2">
+                  <div
+                    className="dashboard_box_001____ px-4 pb-5"
+                    style={{ backgroundColor: "#222024", height: "100%" }}
+                  >
+                    <center>
+                      <p
+                        className="mt-5"
+                        style={{ fontWeight: "900", fontSize: "20px" }}
+                      >
+                        Send UAXN
+                      </p>
+                      <span style={{ color: "#a8a8a8" }}>
+                        Enter the recipient's UAXN account address for
+                        transfer
+                      </span>
+                    </center>
+                    <div className="text-left px-2">
+
+                      <p
+                        className="mt-4"
+                        style={{ fontWeight: "900", fontSize: "" }}
+                      >
+                        To address
+                      </p>
+                      <div className="" style={{ position: "relative", width: "100%" }}>
+                        <input
+                          id="searchQueryInput"
+                          value={WalletToTransfer}
+                          onChange={(e) => setWalletToTransfer(e.target.value)}
+                          style={{ backgroundColor: "#403242" }}
+                          type="text"
+                          name="searchQueryInput"
+                          placeholder="Wallet Address"
+                        />
+                        {/* <button
+                            type="button"
+                            onClick={handleScan}
+                            className="text-white text-sm primary_btnn___"
+                            style={{
+                              position: "absolute",
+                              right: "2px",
+                              top: "50%",
+                              transform: "translateY(-50%)",
+                              backgroundColor: "",
+                              padding: "4px 10px",
+                              borderRadius: "5px",
+                              fontWeight: "bold",
+                              border: "none",
+                              cursor: "pointer",
+                            }}
+                          >
+                            Scan
+                          </button> */}
+                      </div>
+                      <small style={{ fontSize: "14px", color: "#fff", fontWeight: "800" }}>
+                        {power_per_txn}
+                        {" "}<span style={{ color: "#fff", fontWeight: "400" }}>
+                          <OverlayTrigger
+                            placement="right"
+                            overlay={
+                              <Tooltip id={`tooltip-right`} className="custom-tooltip">
+                                Cost per unit of gas for the transaction, in UAXN and BANDWIDTH.
+                              </Tooltip>
+                            }
+                          >
+                            <i className="fa fa-question-circle"></i>
+                          </OverlayTrigger>
+                        </span>
+                      </small>
+                      {/* <div id="reader" style={{ marginTop: "20px" }}></div> */}
+                      <p
+                        className="mt-5"
+                        style={{ fontWeight: "900", fontSize: "" }}
+                      >
+                        Amount to send
+                      </p>
+                      <div style={{ position: 'relative', width: '100%' }}>
+                        <input
+                          id="searchQueryInput"
+                          value={AmountToTransfer}
+                          onChange={(e) =>
+                            setAmountToTransfer(
+                              parseFloat(e.target.value) > 0
+                                ? e.target.value
+                                : ''
+                            )
+                          }
+                          style={{ backgroundColor: "#403242" }}
+                          type="number"
+                          name="searchQueryInput"
+                          placeholder="Enter Amount"
+                        />
+                        <button
+                          type="button"
+                          onClick={() =>
+                            setAmountToTransfer(
+                              (
+                                parseFloat(BalanceAndPower.balance) -
+                                parseFloat(reserved_balance)
+                              ).toFixed(3)
+                            )
+                          }
+                          className="text-white text-sm primary_btnn___"
+                          style={{
+                            position: "absolute",
+                            right: "2px",
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            backgroundColor: "",
+                            padding: "4px 10px",
+                            borderRadius: "5px",
+                            fontWeight: "bold",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Max
+                        </button>
+                      </div>
+                      <small style={{ fontSize: "14px", color: "#a8a8a8" }}>
+                        Available Balance :{" "}
+                        {(parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(3)} UAXN
+                      </small>
+                      <Button
+                        style={{
+                          fontWeight: "900",
+                          width: "100%",
+                          minHeight: "6.1vh",
+                        }}
+                        className="primary_btnn___ mt-5"
+                        variant="primary"
+                        onClick={transfer}
+                        disabled={clickedSend}
+                      >
+                        Send
+                      </Button>
+                      {MsgForSend && (
+                        <div
+                          className="alert alert-success mt-3 text-center"
+                          role="alert"
+                        >
+                          {MsgForSend}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-12 mt-2">
+                  <div
+                    className="dashboard_box_001____ px-4"
+                    style={{ backgroundColor: "#222024", height: "100%" }}
+                  >
+                    <p
+                      className="mt-5"
+                      style={{ fontWeight: "900", fontSize: "20px" }}
+                    >
+                      Latest Transactions
+                    </p>
+                    <br />
+                    <Table responsive style={tableStyle}>
+                      <tbody>
+                        {Wallet_transactions.map((index) => {
+                          if (index.recipient === wallet_address) {
+                            return (
+                              <tr key={index.timestamp}>
+                                <td style={cellStyle}>
+                                  <div className="d-flex">
+                                    <img
+                                      src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
+                                      style={{
+                                        width: "3.3vw",
+                                        borderRadius: "50%",
+                                        height: "100%",
+                                      }}
+                                    />
+                                    <i
+                                      className="fa fa-arrow-down"
+                                      style={{ color: "green" }}
+                                      aria-hidden="true"
+                                    ></i>
+                                    {/* </i> */}
+                                    <span
+                                      style={{
+                                        fontWeight: "900",
+                                        marginLeft: "8px",
+                                      }}
+                                    >
+                                      UAXN{" "}
+                                      <span
+                                        style={{
+                                          fontSize: "12px",
+                                          color: "green",
+                                        }}
+                                      >
+                                        (Deposit)
+                                      </span>
+                                      <br />
+                                      <a
+                                        style={{ textDecoration: "none" }}
+                                        href={`http://157.230.194.100:3001/transactiondetails?${index.transactionId}`}
+                                        target="_blank"
+                                      >
+                                        <small
+                                          style={{
+                                            fontWeight: "100",
+                                            color: "#f7f7f7",
+                                          }}
+                                        >
+                                          Txid:{" "}
+                                          {index.transactionId.slice(0, 8)}...
+                                          {index.transactionId.slice(-8)}
+                                        </small>
+                                      </a>
+                                    </span>
+                                    {/* <br/> */}
+                                  </div>
+                                </td>
+                                <td style={rightAlignCellStyle}>
+                                  {parseFloat(index.amount).toFixed(2)} <br />
+                                  <small
+                                    style={{
+                                      fontWeight: "100",
+                                      color: "#f7f7f7",
+                                    }}
+                                  >
+                                    {new Date(
+                                      index.timestamp
+                                    ).toLocaleString()}
+                                  </small>
+                                </td>
+                              </tr>
+                            );
+                          } else {
+                            return (
+                              <tr key={index.timestamp}>
+                                <td style={cellStyle}>
+                                  <div className="d-flex">
+                                    <img
+                                      src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
+                                      style={{
+                                        width: "3.3vw",
+                                        borderRadius: "50%",
+                                        height: "100%",
+                                      }}
+                                    />
+                                    <i
+                                      className="fa fa-arrow-up"
+                                      style={{ color: "red" }}
+                                      aria-hidden="true"
+                                    ></i>
+                                    {/* </i> */}
+                                    <span
+                                      style={{
+                                        fontWeight: "900",
+                                        marginLeft: "8px",
+                                      }}
+                                    >
+                                      UAXN{" "}
+                                      <span
+                                        style={{
+                                          fontSize: "12px",
+                                          color: "red",
+                                        }}
+                                      >
+                                        (Withdraw)
+                                      </span>
+                                      <br />
+                                      <a
+                                        style={{ textDecoration: "none" }}
+                                        href={`http://157.230.194.100:3001/transactiondetails?${index.transactionId}`}
+                                        target="_blank"
+                                      >
+                                        <small
+                                          style={{
+                                            fontWeight: "100",
+                                            color: "#f7f7f7",
+                                          }}
+                                        >
+                                          Txid:{" "}
+                                          {index.transactionId.slice(0, 8)}...
+                                          {index.transactionId.slice(-8)}
+                                        </small>
+                                      </a>
+                                    </span>
+                                  </div>
+                                </td>
+                                <td style={rightAlignCellStyle}>
+                                  {parseFloat(index.amount).toFixed(2)} <br />
+                                  <small
+                                    style={{
+                                      fontWeight: "100",
+                                      color: "#f7f7f7",
+                                    }}
+                                  >
+                                    {new Date(
+                                      index.timestamp
+                                    ).toLocaleString()}
+                                  </small>
+                                </td>
+                              </tr>
+                            );
+                          }
+                        })}
+                      </tbody>
+                    </Table>
+                  </div>
+                </div>
+              </div>
             </div>
             <div
               className={`tab-pane fade ${activeTab === "pills-profile" ? "show active" : ""
@@ -902,7 +1212,7 @@ const Dashboard = () => {
               role="tabpanel"
               aria-labelledby="pills-profile-tab"
             >
-              <div className="row">
+              <div className="row mobile_view">
                 <div className="col-lg-6 col-md-12 mt-2">
                   <div
                     className="p-3 dashboard_box_001____ text-center"
@@ -963,7 +1273,7 @@ const Dashboard = () => {
                       <br />
                       <br />
                       <div
-                      className="d-flex flex-column align-items-center"
+                        className="d-flex flex-column align-items-center"
                         style={{
                           height: "auto",
                           margin: "0 auto",
@@ -1129,6 +1439,321 @@ const Dashboard = () => {
                     Latest Transactions
                   </p>
                   <Txlist />
+                </div>
+              </div>
+              <div className="row desk_view">
+                <div className="col-lg-6 col-md-12 mt-2">
+                  <div
+                    className="dashboard_box_001____ text-center"
+                    style={{ backgroundColor: "#222024" }}
+                  >
+                    <p
+                      className="mt-5"
+                      style={{ fontWeight: "900", fontSize: "20px" }}
+                    >
+                      Receive UAXN
+                    </p>
+                    <span style={{ color: "#a8a8a8" }}>
+                      Share your UAXN Account Address or QR Code to receive
+                      UAXN Coin
+                    </span>
+                    <br />
+                    <br />
+                    <br />
+                    <div
+                      style={{
+                        height: "auto",
+                        margin: "0 auto",
+                        maxWidth: 150,
+                        width: "100%",
+                        padding: 10,
+                        // backgroundColor: "#fff",
+                      }}
+                    >
+                      <QRCode
+                        size={120}
+                        value={wallet_address}
+                        logoImage="https://cloud.uax.network/static/media/uaxdlts.54db363e73bc62fa10bfa51a1cca4350.svg"
+                        removeQrCodeBehindLogo={true}
+                        qrStyle="dots"
+                        logoOpacity="1"
+                        logoWidth={40}
+                        logoHeight={20}
+                        logoPadding={10}
+                        ecLevel="H"
+                        eyeRadius={5}
+                        eyeColor='#c006df'
+                        viewBox="0 0 256 256"
+                        bgColor="#000"
+                        fgColor="#fff"
+                      />
+                      {/* <QRCode
+                          size={256}
+                          style={{
+                            height: "auto",
+                            maxWidth: "100%",
+                            width: "100%",
+                          }}
+                          value={wallet_address}
+                          viewBox={`0 0 256 256`}
+                          bgColor={"#fff"}
+                          fgColor={"#000"}
+                        /> */}
+                    </div>
+                    <div className="my-4 mx-5">
+                      <div
+                        className="dashboard_box_001____ py-3"
+                        style={{ height: "100%" }}
+                      >
+                        <p>Balance</p>
+                        <span
+                          style={{
+                            color: "#39d62c",
+                            fontSize: "20px",
+                            fontWeight: "800",
+                          }}
+                        >
+                          {BalanceAndPower
+                            ? (parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(3)
+                            : 0.0}{" "}
+                          UAXN
+                        </span>
+                        <br />
+                        <hr style={{ borderTop: "0.1px solid grey" }} />
+                        <p>Address</p>
+                        <div className="mb-3">
+                          <span
+                            className="px-4 py-2"
+                            style={{
+                              backgroundColor: "#403242",
+                              wordBreak: "break-word",
+                              borderRadius: "5px",
+                            }}
+                          >
+                            {wallet_address}{" "}
+                            <i
+                              style={{ cursor: "pointer" }}
+                              onClick={copyAddress}
+                              className="fa fa-clipboard"
+                              aria-hidden="true"
+                            ></i>
+                          </span>
+                          <br />
+                          <br />
+                          {copied ? (
+                            <span style={{ color: "green" }}>
+                              Copied to clipboard!
+                            </span>
+                          ) : (
+                            ""
+                          )}
+                        </div>
+                      </div>
+                      {/* <Button
+                                        style={{fontWeight:"900",width:"100%"}}
+                                        className="primary_btnn___ mt-3"
+                                        variant="primary"
+                                        type="submit"
+                                        >
+                                         Receive
+                                    </Button> */}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-6 col-md-12 mt-2">
+                  <div
+                    className="dashboard_box_001____ px-4"
+                    style={{ backgroundColor: "#222024", height: "100%" }}
+                  >
+                    <p
+                      className="mt-5"
+                      style={{ fontWeight: "900", fontSize: "20px" }}
+                    >
+                      Latest Transactions
+                      {/* <Link to="#">
+                          <span
+                            style={{
+                              float: "right",
+                              fontSize: "15px",
+                              color: "#c006df",
+                            }}
+                          >
+                            See all
+                          </span>
+                        </Link> */}
+                    </p>
+                    <br />
+                    <Table responsive style={tableStyle}>
+                      <tbody>
+                        {Wallet_transactions.map((index) => {
+                          // function formatDate(timestamp) {
+                          //   const date = new Date(parseInt(timestamp, 10))
+                          //   const options = {
+                          //     day: '2-digit',
+                          //     month: 'short',
+                          //     year: 'numeric'
+                          //   };
+                          //   return date.toLocaleDateString('en-GB', options);
+                          // }
+                          if (index.recipient === wallet_address) {
+                            return (
+                              <tr key={index.timestamp}>
+                                <td style={cellStyle}>
+                                  <div className="d-flex">
+                                    {/* <i className="fa fa-arrow-down p-3" style={{ backgroundColor: "#24b4c1", borderRadius: "50%" }} aria-hidden="true"> */}
+                                    {/* <img src={UAXPNG}/> */}
+                                    <img
+                                      src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
+                                      style={{
+                                        width: "3.3vw",
+                                        borderRadius: "50%",
+                                        height: "100%",
+                                      }}
+                                    />
+                                    <i
+                                      className="fa fa-arrow-down"
+                                      style={{ color: "green" }}
+                                      aria-hidden="true"
+                                    ></i>
+                                    {/* </i> */}
+                                    <span
+                                      style={{
+                                        fontWeight: "900",
+                                        marginLeft: "8px",
+                                      }}
+                                    >
+                                      UAXN{" "}
+                                      <span
+                                        style={{
+                                          fontSize: "12px",
+                                          color: "green",
+                                        }}
+                                      >
+                                        (Deposit)
+                                      </span>
+                                      <br />
+                                      <a
+                                        style={{ textDecoration: "none" }}
+                                        href={`http://157.230.194.100:3001/transactiondetails?${index.transactionId}`}
+                                        target="_blank"
+                                      >
+                                        <small
+                                          style={{
+                                            fontWeight: "100",
+                                            color: "#f7f7f7",
+                                          }}
+                                        >
+                                          Txid:{" "}
+                                          {index.transactionId.slice(0, 8)}...
+                                          {index.transactionId.slice(-8)}
+                                        </small>
+                                      </a>
+                                    </span>
+                                    {/* <br/> */}
+                                  </div>
+                                </td>
+                                <td style={rightAlignCellStyle}>
+                                  {parseFloat(index.amount).toFixed(2)} <br />
+                                  <small
+                                    style={{
+                                      fontWeight: "100",
+                                      color: "#f7f7f7",
+                                    }}
+                                  >
+                                    {new Date(
+                                      index.timestamp
+                                    ).toLocaleString()}
+                                  </small>
+                                </td>
+                              </tr>
+                            );
+                          } else {
+                            return (
+                              <tr key={index.timestamp}>
+                                <td style={cellStyle}>
+                                  <div className="d-flex">
+                                    <img
+                                      src={"https://images.uaxdlts.com/uax-dashboard/images/uaxcoin.png"}
+                                      style={{
+                                        width: "3.3vw",
+                                        borderRadius: "50%",
+                                        height: "100%",
+                                      }}
+                                    />
+                                    <i
+                                      className="fa fa-arrow-up"
+                                      style={{ color: "red" }}
+                                      aria-hidden="true"
+                                    ></i>
+                                    {/* </i> */}
+                                    <span
+                                      style={{
+                                        fontWeight: "900",
+                                        marginLeft: "8px",
+                                      }}
+                                    >
+                                      UAXN{" "}
+                                      <span
+                                        style={{
+                                          fontSize: "12px",
+                                          color: "red",
+                                        }}
+                                      >
+                                        (Withdraw)
+                                      </span>
+                                      <br />
+                                      <a
+                                        style={{ textDecoration: "none" }}
+                                        href={`http://157.230.194.100:3001/transactiondetails?${index.transactionId}`}
+                                        target="_blank"
+                                      >
+                                        <small
+                                          style={{
+                                            fontWeight: "100",
+                                            color: "#f7f7f7",
+                                          }}
+                                        >
+                                          Txid:{" "}
+                                          {index.transactionId.slice(0, 8)}...
+                                          {index.transactionId.slice(-8)}
+                                        </small>
+                                      </a>
+                                    </span>
+                                  </div>
+                                </td>
+                                <td style={rightAlignCellStyle}>
+                                  {parseFloat(index.amount).toFixed(2)} <br />
+                                  <small
+                                    style={{
+                                      fontWeight: "100",
+                                      color: "#f7f7f7",
+                                    }}
+                                  >
+                                    {new Date(
+                                      index.timestamp
+                                    ).toLocaleString()}
+                                  </small>
+                                </td>
+                              </tr>
+                            );
+                          }
+                        })}
+                      </tbody>
+                    </Table>
+                    {/* <ReactPaginate
+                            previousLabel={<i class="fa fa-chevron-left" aria-hidden="true" style={{marginRight:"10px",color:"#c006df"}}></i>}
+                            nextLabel={<i class="fa fa-chevron-right" aria-hidden="true" style={{marginLeft:"10px",color:"#c006df"}}></i>}
+                            breakLabel={'...'}
+                            breakClassName={'break-me'}
+                            pageCount={pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={handlePageClick}
+                            containerClassName={'pagination'}
+                            subContainerClassName={'pages pagination'}
+                            activeClassName={'active'}
+                        /> */}
+                  </div>
                 </div>
               </div>
             </div>
