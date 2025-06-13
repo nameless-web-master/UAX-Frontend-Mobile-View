@@ -139,7 +139,7 @@ const Marketplace = () => {
     return (
         <>
             {loader ?
-                <div className='' style={{ height: "80vh", position: "relative", backgroundImage: 'linear-gradient(#2B2330, #2218260F)', borderRadius: 6 }}>
+                <div className='' style={{ height: "40vh", position: "relative", backgroundImage: 'linear-gradient(#2B2330, #2218260F)', borderRadius: 6 }}>
                     <center style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)" }}>
                         <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "3vw" }} />
                     </center>
@@ -251,7 +251,7 @@ const Marketplace = () => {
                     </div>
 
                     <Modal centered show={show} onHide={handleClose} size="lg">
-                        <Modal.Body className='mobile_responsiveness' style={{ padding: '5%', backgroundColor: '#1a181b', border: 'none', color: "#fff", borderRadius: "12px", minHeight: "90vh" }}>
+                        <Modal.Body className='mobile_responsiveness' style={{ padding: '5%', backgroundColor: '#1a181b', border: 'none', color: "#fff", borderRadius: "12px"}}>
                             <div className='' style={{ position: "relative", height: "100%", width: "100%" }}>
                                 <div >
                                     <div className='row'>

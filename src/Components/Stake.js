@@ -6,13 +6,16 @@ import Reward from '@mui/icons-material/EmojiEvents';
 import { Modal, Form } from "react-bootstrap"; // Add Modal, Form import if not already
 import Table from 'react-bootstrap/Table';
 import ReactPaginate from 'react-paginate';
+import { Tooltip } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
+import { UserInfor } from './UserInfor';
 
 const noDataStyle = {
   textAlign: 'center',
-  height: '55vh',
-  backgroundColor: '#000',
+  height: '30vh',
   borderBottom: "none",
-  position: "relative"
+  position: "relative",
+  backgroundColor: '#000'
 };
 const tableStyle = {
   borderCollapse: 'collapse',
@@ -252,6 +255,7 @@ const Stake = () => {
 
   return (
     <>
+      <UserInfor />
       <div className="container" style={{ minHeight: "100vh" }}>
         <div className='mt-3'>
           <div className='dashboard_box_001____ px-4 mb-4'>
@@ -299,24 +303,26 @@ const Stake = () => {
               </div>
             </div>
           </div>
-          <div className='dashboard_box_001____ px-4 mb-4'>
+          <div className='dashboard_box_001____ px-4 mb-4 desk_view'>
             <div className='my-5 for_device_difference____mx_5____'>
               <span style={{ fontWeight: "900", fontSize: "20px" }}>Need reward? Stake Now!</span>
               <div className='mt-5'>
                 <div className="section_resources_____">
                   {/* <label className="label">
-                                        <Tooltip title="Power is essential in UAX blockchain for processing transactions and ensuring network security.">
-                                            <InfoIcon style={{ color: "#863593", marginRight: "5px" }} />
-                                        </Tooltip>
-                                        Power
-                                        <span className="horizontal-line"></span>
-                                        <span style={{ float: "right" }}>
-                                            {loader ? <img src={WhiteLoader} style={{ width: "2vw" }} /> : `${powerEquivalentToOneCoin * (amount || 0).toFixed(2)}`}
-                                        </span>
-                                    </label> */}
+                      <Tooltip title="Power is essential in UAX blockchain for processing transactions and ensuring network security.">
+                          <InfoIcon style={{ color: "#863593", marginRight: "5px" }} />
+                      </Tooltip>
+                      Power
+                      <span className="horizontal-line"></span>
+                      <span style={{ float: "right" }}>
+                          {loader ? <img src={WhiteLoader} style={{ width: "2vw" }} /> : `${powerEquivalentToOneCoin * (amount || 0).toFixed(2)}`}
+                      </span>
+                  </label> */}
                   <small style={{ marginLeft: "20px", color: "#fff", fontSize: "17px" }}>
-                    {/* {powerPerTxn} */}
-                    Estimated Fees : 424 BANDWIDTH
+                    {powerPerTxn.split(':')[0] + ':'}
+                    <span style={{ float: "right", color: "#fff", fontSize: "17px" }}>
+                      {powerPerTxn.split(':')[1]}
+                    </span>
                   </small>
                   <br />
                   <br />
@@ -411,10 +417,105 @@ const Stake = () => {
               </div>
             </div>
           </div>
+          <div className='mobile_view'>
+            <span style={{ fontWeight: "500", fontSize: 18 }}>
+              Need reward? Stake Now!</span>
+            <div className='my-3 for_device_difference____mx_5____'>
+              <div className="section_resources_____ d-flex flex-column">
+                <label className="label">
+                  <Tooltip title="Bandwidth is essential in UAX blockchain for processing transactions and ensuring network security.">
+                    <InfoIcon style={{ color: "#863593", marginRight: "5px" }} />
+                  </Tooltip>
+                  <small className='my-2 flex-fill' style={{ color: "#fff", fontSize: 14, color: '#B4B4B4' }}>
+                    {powerPerTxn.split(':')[0] + ':'}
+                    <span style={{ float: "right", color: "#fff", fontSize: 14, color: '#DF16FF' }}>
+                      {powerPerTxn.split(':')[1]}
+                    </span>
+                  </small>
+                </label>
+                <small style={{ marginLeft: 20, color: "#fff", fontSize: 14, color: '#B4B4B4' }}>
+                  Available Bandwidth
+                  <span style={{ float: "right", color: "#fff", fontSize: 14, color: '#DF16FF' }}>
+                    {(parseFloat(balanceAndPower.bandwidth) - parseFloat(reserved_power)).toFixed(2)}</span>
+                </small>
+              </div>
+            </div>
+            <span style={{ fontWeight: "500", fontSize: 18 }}>
+              Get resources Bandwidth with UAXN
+            </span>
+            <div className="row mt-3">
+              <div className="col-xl-4 col-12 mt-xl-2 mt-2">
+                <div style={{ display: 'block', alignItems: 'center', backgroundColor: '#211f24', borderRadius: '5px', padding: '6px 16px' }}>
+                  <select
+                    className="w-100 no-arrow"
+                    style={{ color: "#fff", backgroundColor: "transparent", border: "none" }}
+                    onChange={(e) => {
+                      const selectedKey = e.target.value;
+                      setsoftware_unique_key(selectedKey);
+                      setMsg('')
+                    }}
+                  >
+                    {/* <option value="" disabled selected>
+                                                        Select Validator Key
+                                                    </option> */}
+                    <option key={showValidatorKey} value={showValidatorKey === "Key not found" || 'Error' ? showValidatorKey : ''}>
+                      {showValidatorKey === "Key not found" || 'Error' ? showValidatorKey : ''}
+                    </option>
+                    {/* {showValidatorKey} */}
+                  </select>
+                </div>
+              </div>
+              <div className="col-xl-4 col-12 mt-xl-2 mt-2">
+                <div style={{ display: 'block', alignItems: 'center', backgroundColor: '#211f24', borderRadius: '5px', padding: '6px 16px' }}>
+                  <input
+                    type="text"
+                    onChange={(e) => {
+                      setregistered_uuid(e.target.value);
+                      setMsg('')
+                    }}
+                    placeholder='Enter Machine ID'
+                    style={{ backgroundColor: 'transparent', border: 'none', color: 'white', flex: 1 }}
+                  />
+                </div>
+              </div>
+              <div className="col-xl-4 col-12 mt-xl-2 mt-2">
+                <div style={{ display: 'block', alignItems: 'center', backgroundColor: '#211f24', borderRadius: '5px', padding: '6px 16px' }}>
+                  <input
+                    type="number"
+                    onChange={(e) => {
+                      setstake_amount(e.target.value);
+                      setMsg('')
+                    }}
+                    placeholder='Enter UAXN Amount to Stake'
+                    style={{ backgroundColor: 'transparent', border: 'none', color: 'white', flex: 1 }}
+                  />
+                </div>
+                <small>Minimum : {(10 / parseFloat(coinPrice)).toFixed(2)} UAXN ~ $10</small>
+              </div>
+              <div className="small-box mt-4 text-center d-flex flex-row">
+                <Button
+                  className="primary_btnn___ w-50"
+                  variant="primary"
+                  onClick={(e) => setotpmodal(true)}
+                  style={{ marginRight: "10px" }}
+                >
+                  Stake Now!
+                </Button>
+                <a href="https://uaxscan.com/stake" className='w-50' target='_blank'>
+                  <Button
+                    className="primary_btnn___ w-100 "
+                    variant="primary"
+                  // onClick={StakeNow}
+                  >
+                    Calculate Reward
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
 
 
-
-          <div className='dashboard_box_001____ px-4' style={{ minHeight: "", position: "relative",  }}>
+          <div className='dashboard_box_001____ px-4 desk_view' style={{ minHeight: "", position: "relative", }}>
             <div className='my-4'>
               <p className='' style={{ fontWeight: '900', fontSize: '20px' }}>
                 Stake History
@@ -450,7 +551,7 @@ const Stake = () => {
                         :
                         <tr>
                           <td colSpan="6" style={noDataStyle}>
-                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"} style={{ width: "6vw", position: "relative", top: "40%" }} />
+                            <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"} style={{ position: "relative", top: "40%" }} />
                           </td>
                         </tr>
                       }
@@ -479,10 +580,64 @@ const Stake = () => {
               </div>
             </div>
           </div>
-
-
-
-
+          <div className='mt-4 mobile_view'>
+            <span style={{ fontWeight: "500", fontSize: 18 }}>
+              Stake History</span>
+            <div
+              className='mt-3 mb-5'
+              style={{
+                backgroundImage: 'linear-gradient(#2C2430, #2218260F)',
+                padding: '22px 16px',
+                borderRadius: 8
+              }}
+            >
+              <div className='overflow-auto '>
+                <table
+                  className='w-100'
+                  style={{
+                    minWidth: 600,
+                  }}
+                >
+                  <thead>
+                    <tr>
+                      <th className='px-3 py-2'>Validator Key</th>
+                      <th className='px-3 py-2'>Machine ID</th>
+                      <th className='px-3 py-2'>Date</th>
+                      <th className='px-3 py-2'>Amount</th>
+                      <th className='px-3 py-2'>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {displayTransactions.length > 0 ?
+                      <>
+                        {displayTransactions.map((index) => {
+                          return (
+                            <tr className=''>
+                              <td style={cellStyle}>{index.software_unique_key}</td>
+                              <td style={cellStyle}>{index.registered_uuid}</td>
+                              <td style={cellStyle}>{new Date(parseFloat(index.timestamp)).toLocaleDateString()}</td>
+                              <td style={cellStyle}>
+                                <span style={{ color: '#31bf24' }}>{parseFloat(index.stake_amount)} UAXN</span>
+                              </td>
+                              <td style={cellStyle}>
+                                {index.stake_payment_status === "Done" && index.max_stake_bal === "Within Limit" ? "Active" : "Unstaked"}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </>
+                      :
+                      <tr>
+                        <td colSpan="6" style={noDataStyle} className='bg-transparent'>
+                          <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"} style={{ position: "relative" }} />
+                        </td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
         </div>
       </div>

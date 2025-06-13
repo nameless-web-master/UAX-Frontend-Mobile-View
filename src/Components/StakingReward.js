@@ -5,6 +5,7 @@ import PowerSettingsNewIcon from '@mui/icons-material/Bolt';
 import Reward from '@mui/icons-material/EmojiEvents';
 import Tooltip from '@mui/material/Tooltip';
 import InfoIcon from '@mui/icons-material/Info';
+import { UserInfor } from './UserInfor';
 
 const inputContainerStyle = {
     display: 'flex',
@@ -144,6 +145,7 @@ const StakingReward = () => {
     }, [fetchData]);
     return (
         <>
+            <UserInfor />
             <div className="container" style={{ minHeight: "100vh" }}>
                 <div className='mt-3'>
                     <div className='dashboard_box_001____ px-4 mb-4'>
@@ -191,7 +193,7 @@ const StakingReward = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='dashboard_box_001____ px-4'>
+                    <div className='dashboard_box_001____ px-4 desk_view'>
                         <div className='my-5 for_device_difference____mx_5____'>
                             <span style={{ fontWeight: "900", fontSize: "20px" }}>Need resources? Get Bandwidth</span>
                             <div className='mt-5'>
@@ -207,7 +209,10 @@ const StakingReward = () => {
                                         </span>
                                     </label>
                                     <small style={{ marginLeft: "20px", color: "#fff", fontSize: "17px" }}>
-                                        {powerPerTxn}
+                                        {powerPerTxn.split(':')[0] + ':'}
+                                        <span style={{ float: "right", color: "#fff", fontSize: "17px" }}>
+                                            {powerPerTxn.split(':')[1]}
+                                        </span>
                                     </small>
                                     <br />
                                     <br />
@@ -295,8 +300,112 @@ const StakingReward = () => {
                             </div>
                         </div>
                     </div>
+                    <div
+                        className='mobile_view'
+                    >
+                        <span style={{ fontWeight: "500", fontSize: 18 }}>
+                            Need resources? Get Bandwidth</span>
+                        <div className='my-5 for_device_difference____mx_5____'>
+                            <div className="section_resources_____ d-flex flex-column">
+                                <label className="label">
+                                    <Tooltip title="Bandwidth is essential in UAX blockchain for processing transactions and ensuring network security.">
+                                        <InfoIcon style={{ color: "#863593", marginRight: "5px" }} />
+                                    </Tooltip>
+                                    Bandwidth
+                                    <span className="horizontal-line"></span>
+                                    <span style={{ float: "right" }}>
+                                        {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : `${powerEquivalentToOneCoin * (amount || 0).toFixed(2)}`}
+                                    </span>
+                                </label>
+                                <small className='my-2' style={{ marginLeft: "20px", color: "#fff", fontSize: 14, color: '#B4B4B4' }}>
+                                    {powerPerTxn.split(':')[0] + ':'}
+                                    <span style={{ float: "right", color: "#fff", fontSize: 14, color: '#DF16FF' }}>
+                                        {powerPerTxn.split(':')[1]}
+                                    </span>
+                                </small>
+                                <small style={{ marginLeft: "20px", color: "#fff", fontSize: 14, color: '#B4B4B4' }}>
+                                    Available Bandwidth
+                                    <span style={{ float: "right", color: "#fff", fontSize: 14, color: '#DF16FF' }}>{(parseFloat(balanceAndPower.bandwidth) - parseFloat(reserved_power)).toFixed(2)}</span>
+                                </small>
+                            </div>
+                        </div>
+                        <div>
+                            <p style={{ fontWeight: "600" }}>Get resources Bandwidth with UAXN</p>
+                            <div
+                                className="py-2 width-full-1050"
+                                style={{
+                                    minWidth: 156
+                                }}
+                            >
+                                <div style={{
+                                    display: 'block',
+                                    alignItems: 'center',
+                                    backgroundColor: '#211f24',
+                                    borderRadius: '5px',
+                                    padding: '6px 16px',
+                                    minWidth: 140
+                                }}>
+                                    <PowerSettingsNewIcon style={{ color: "#fff" }} />
+                                    <span style={{ color: "#a0a0a0" }}>Bandwidth</span>
+                                </div>
+                            </div>
+                            <div
+                                className='d-flex flex-row flex-wrap'
+                                style={{
+                                    flex: 1
+                                }}
+                            >
+                                <div
+                                    className="large-box py-2"
+                                >
+                                    <div style={amountInputStyle}>
+                                        <input
+                                            type="number"
+                                            value={amount}
+                                            onChange={handleAmountChange}
+                                            placeholder='Enter UAXN Amount'
+                                            style={{ backgroundColor: 'transparent', border: 'none', color: 'white', flex: 1 }}
+                                        />
+                                        <div style={currencyStyle}>
+                                            <span style={{ marginLeft: "8px", color: '#DF16FF' }}>UAXN</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    className="large-box py-2"
+                                >
+                                    <div style={amountInputStyle}>
+                                        <span style={{ color: "#a0a0a0" }}>
+                                            {loader ? <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "2vw" }} /> : walletAddress}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                className="py-2 width-full-1050"
+                                style={{
+                                    minWidth: 156
+                                }}
+                            >
+                                <Button
+                                    style={{
+                                        width: "100%",
+                                        minWidth: 140
+                                    }}
+                                    className="primary_btnn___"
+                                    variant="primary"
+                                    onClick={getPower}
+                                >
+                                    Get Bandwidth
+                                </Button>
+                            </div>
+                            <center>
+                                {msg && <div className="alert alert-success mt-3" role="alert">{msg}</div>}
+                            </center>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </div >
         </>
     );
 };

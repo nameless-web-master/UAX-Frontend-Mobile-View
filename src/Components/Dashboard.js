@@ -908,47 +908,89 @@ const Dashboard = () => {
                     className="p-3 dashboard_box_001____ text-center"
                     style={{ backgroundColor: "#222024" }}
                   >
-                    <p
-                      className="mt-5"
-                      style={{ fontWeight: "900", fontSize: "20px" }}
-                    >
-                      Receive UAXN
-                    </p>
-                    <span style={{ color: "#a8a8a8" }}>
-                      Share your UAXN Account Address or QR Code to receive
-                      UAXN Coin
-                    </span>
-                    <br />
-                    <br />
-                    <br />
                     <div
+                      className="mt-5 mx-3 small_view"
                       style={{
-                        height: "auto",
-                        margin: "0 auto",
-                        maxWidth: 150,
-                        width: "100%",
-                        padding: 10,
-                        // backgroundColor: "#fff",
+                        backgroundColor: '#19101C',
+                        border: '1px solid #383A46',
+                        borderRadius: 80,
+                        padding: 4
                       }}
                     >
-                      <QRCode
-                        size={120}
-                        value={wallet_address}
-                        logoImage="https://cloud.uax.network/static/media/uaxdlts.54db363e73bc62fa10bfa51a1cca4350.svg"
-                        removeQrCodeBehindLogo={true}
-                        qrStyle="dots"
-                        logoOpacity="1"
-                        logoWidth={40}
-                        logoHeight={20}
-                        logoPadding={10}
-                        ecLevel="H"
-                        eyeRadius={5}
-                        eyeColor='#c006df'
-                        viewBox="0 0 256 256"
-                        bgColor="#000"
-                        fgColor="#fff"
-                      />
-                      {/* <QRCode
+                      <div
+                        className="py-3"
+                        style={{
+                          backgroundColor: '#413545',
+                          borderRadius: 80
+                        }}
+                      >
+                        <h2
+                          className="m-0"
+                          style={{
+                            fontSize: 16,
+                            color: '#FFFFFF99'
+                          }}
+                        >
+                          Balance:
+                          <span
+                            className="mx-1"
+                            style={{
+                              color: '#0DF469'
+                            }}
+                            s>
+                            {BalanceAndPower
+                              ? (parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(3)
+                              : 0.0}{" "}
+                            UAXN
+                          </span>
+                        </h2>
+                      </div>
+                    </div>
+                    <div
+                      className="desk_view"
+                    >
+                      <p
+                        className="mt-5"
+                        style={{ fontWeight: "900", fontSize: "20px" }}
+                      >
+                        Receive UAXN
+                      </p>
+                      <span style={{ color: "#a8a8a8" }}>
+                        Share your UAXN Account Address or QR Code to receive
+                        UAXN Coin
+                      </span>
+                      <br />
+                      <br />
+                      <br />
+                      <div
+                      className="d-flex flex-column align-items-center"
+                        style={{
+                          height: "auto",
+                          margin: "0 auto",
+                          maxWidth: 150,
+                          width: "100%",
+                          padding: 10,
+                          // backgroundColor: "#fff",
+                        }}
+                      >
+                        <QRCode
+                          size={160}
+                          value={wallet_address}
+                          logoImage="https://cloud.uax.network/static/media/uaxdlts.54db363e73bc62fa10bfa51a1cca4350.svg"
+                          removeQrCodeBehindLogo={true}
+                          qrStyle="dots"
+                          logoOpacity="1"
+                          logoWidth={40}
+                          logoHeight={20}
+                          logoPadding={10}
+                          ecLevel="H"
+                          eyeRadius={5}
+                          eyeColor='#c006df'
+                          viewBox="0 0 256 256"
+                          bgColor="#000"
+                          fgColor="#fff"
+                        />
+                        {/* <QRCode
                           size={256}
                           style={{
                             height: "auto",
@@ -960,8 +1002,69 @@ const Dashboard = () => {
                           bgColor={"#fff"}
                           fgColor={"#000"}
                         /> */}
+                      </div>
                     </div>
-                    <div className="my-4 mx-5">
+                    <div
+                      className="mobile_view border border-2 border-dark my-4 py-4"
+                    >
+                      <QRCode
+                        size={180}
+                        value={wallet_address}
+                        logoImage="https://cloud.uax.network/static/media/uaxdlts.54db363e73bc62fa10bfa51a1cca4350.svg"
+                        removeQrCodeBehindLogo={true}
+                        qrStyle="squares"
+                        logoOpacity="2"
+                        ecLevel="H"
+                        eyeRadius={5}
+                        eyeColor='#000'
+                        // viewBox="0 0 256 256"
+                        bgColor="#fff"
+                        fgColor="#000"
+                        style={{
+                          marginTop: 6
+                        }}
+                      />
+                      <div
+                        className="mt-3 d-flex flex-row justify-content-between align-items-center px-5"
+                        style={{
+                          color: '#9493AC',
+                          fontSize: 14
+                        }}
+                      >
+                        <p
+                          className="m-0"
+                        >
+                          {wallet_address}
+                        </p>
+                        <i
+                          className="fa fa-clone"
+                          onClick={copyAddress}
+                          style={{ cursor: "pointer" }}
+                        ></i>
+                      </div>
+                      {copied ? (
+                        <span style={{ color: "green" }}>
+                          Copied to clipboard!
+                        </span>
+                      ) : (
+                        ""
+                      )}
+
+                      <hr className="m-4" />
+                      <Button
+                        style={{
+                          fontWeight: "500",
+                          backgroundColor: 'transparent',
+                          borderColor: '#9493AC'
+                        }}
+                        variant="primary"
+                        type="submit"
+                      >
+                        <i className="fa fa-upload text-white mx-2"></i>
+                        Share
+                      </Button>
+                    </div>
+                    <div className="my-3 desk_view">
                       <div
                         className="dashboard_box_001____ py-3"
                         style={{ height: "100%" }}
@@ -1011,17 +1114,17 @@ const Dashboard = () => {
                         </div>
                       </div>
                       {/* <Button
-                                        style={{fontWeight:"900",width:"100%"}}
-                                        className="primary_btnn___ mt-3"
-                                        variant="primary"
-                                        type="submit"
-                                        >
-                                         Receive
-                                    </Button> */}
+                        style={{ fontWeight: "900", width: "100%" }}
+                        className="primary_btnn___ mt-3"
+                        variant="primary"
+                        type="submit"
+                      >
+                        Receive
+                      </Button> */}
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-12 mt-2 p-4">
+                <div className="col-lg-6 col-md-12 mt-2 p-md-2 p-4">
                   <p className='mb-1' style={{ fontWeight: '600', fontSize: 16 }}>
                     Latest Transactions
                   </p>

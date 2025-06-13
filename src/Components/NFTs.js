@@ -50,7 +50,7 @@ const NFTs = () => {
   return (
     <>
       <UserInfor />
-      <div className="container" style={{ minHeight: "100vh" }}>
+      <div className="container">
         <div className='mt-3'>
           <div className='dashboard_box_001____ mb-3'>
             <ul className="nav nav-pills my-2 flex-row justify-content-center" id="pills-tab" role="tablist">
