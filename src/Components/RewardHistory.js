@@ -16,7 +16,7 @@ const cellStyle = {
 };
 const noDataStyle = {
   textAlign: 'center',
-  height: '55vh',
+  height: '40vh',
   borderBottom: "none",
   position: "relative"
 };

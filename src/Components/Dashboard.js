@@ -395,6 +395,11 @@ const Dashboard = () => {
               aria-controls="pills-home"
               aria-selected={activeTab === "pills-home"}
               onClick={() => handleTabClick("pills-home")}
+              style={{
+                backgroundColor: '#3F2146',
+                borderRadius: 4,
+                border: 0
+              }}
             >
               <i class="fa fa-chevron-left" aria-hidden="true"></i>
             </button>
@@ -533,7 +538,7 @@ const Dashboard = () => {
                 className="col-12 mt-2 position-absolute top-50"
                 style={{
                   left: 0,
-                  transform: 'translate(0,-50%)'
+                  transform: 'translate(0,-50%)',
                 }}
               >
                 <p className="mb-0 text-center">Portfolio Balance</p>
@@ -574,10 +579,10 @@ const Dashboard = () => {
                   ) : (
                     <img
                       src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"}
-                      style={{ width: "3vw" }}
+                      style={{ width: "3vw", left: '50%', transform: 'translate(-50%,0)' }}
+                      alt=""
                     />
                   )}
-
                 </span>
               </div>
             </div>
@@ -772,7 +777,7 @@ const Dashboard = () => {
               <div className="row mobile_view w-100 m-auto">
                 <div className="col-lg-6 col-md-12 mt-2">
                   <center className="mb-4">
-                    <span style={{ color: "#a8a8a8", fontSize:12 }}>
+                    <span style={{ color: "#a8a8a8", fontSize: 12 }}>
                       Enter the recipient's UAXN account address for
                       transfer
                     </span>
