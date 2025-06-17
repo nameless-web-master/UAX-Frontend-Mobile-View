@@ -142,29 +142,46 @@ const Txlist = ({ state = false }) => {
                                 <>
                                     {displayTransactions.map((index) =>
 
-                                        <div className='px-3 py-3 my-2 rounded' style={{ position: "relative", backgroundColor: '#2C2430', border: '1px solid #FFFFFF12' }}>
+                                        <div className='px-3 py-3 my-2 rounded' style={{
+                                            position: "relative", backgroundColor: (
+                                                state ?
+                                                    'transparent' : '#2C2430'
+                                            ), border: (
+                                                state ?
+                                                    '0' :
+                                                    '1px solid #FFFFFF12'
+                                            ),
+                                            borderBottom: (state ? '1px solid #FFFFFF12' : 0)
+                                        }}>
 
                                             <li className='d-flex justify-content-between align-items-center'>
                                                 <div className='d-flex'>
                                                     <div
                                                         className='d-flex justify-content-center align-items-center'
                                                         style={{
-                                                            marginRight: 5
+                                                            marginRight: 12
                                                         }}
                                                     >
-                                                        <div
-                                                            className='d-flex justify-content-center align-items-center'
-                                                            style={{
-                                                                width: 24,
-                                                                height: 24,
-                                                                borderRadius: 20,
-                                                                backgroundColor: '#fff'
-                                                            }}
-                                                        >
-                                                            <img src={Icon} alt='No icons' style={{
-                                                                width: 16
-                                                            }} />
-                                                        </div>
+                                                        {
+                                                            state ?
+                                                                <img src={Icon} alt='No icons' style={{
+                                                                    width: 28,
+                                                                }} />
+                                                                :
+                                                                <div
+                                                                    className='d-flex justify-content-center align-items-center'
+                                                                    style={{
+                                                                        width: 24,
+                                                                        height: 24,
+                                                                        borderRadius: 20,
+                                                                        backgroundColor: '#fff'
+                                                                    }}
+                                                                >
+                                                                    <img src={Icon} alt='No icons' style={{
+                                                                        width: 16
+                                                                    }} />
+                                                                </div>
+                                                        }
                                                         <i
                                                             className={index.recipient !== walletAddress ? "fa fa-arrow-up" : "fa fa-arrow-down"}
                                                             aria-hidden="true"
@@ -173,7 +190,7 @@ const Txlist = ({ state = false }) => {
                                                                 position: 'absolute',
                                                                 right: -2,
                                                                 top: -2,
-                                                                color: (index.recipient !== walletAddress ? '#FF4245' : '#27D07A')
+                                                                color: (index.recipient !== walletAddress ? '#FF4245' : '#27D07A'),
                                                             }}
                                                         >
                                                         </i>
@@ -197,9 +214,9 @@ const Txlist = ({ state = false }) => {
                                                             ) : (
                                                                 <>
                                                                     {index.recipient === walletAddress ? (
-                                                                        <span style={{ color: '#31bf24', fontSize: 12 }}>(Deposit)</span>
+                                                                        <span style={{ color: '#31bf24', fontSize: 12, marginLeft: 4 }}>(Deposit)</span>
                                                                     ) : (
-                                                                        <span style={{ color: 'red', fontSize: 12 }}>(Withdraw)</span>
+                                                                        <span style={{ color: 'red', fontSize: 12, marginLeft: 4 }}>(Withdraw)</span>
                                                                     )}
                                                                 </>
                                                             )}
@@ -258,7 +275,7 @@ const Txlist = ({ state = false }) => {
                                 </li>
                             }
                         </ul>
-                        {(displayTransactions.length > 0 && state) ?
+                        {/* {(displayTransactions.length > 0 && state) ?
                             <div className='pagination-container'>
                                 <ReactPaginate
                                     previousLabel={'Previous'}
@@ -275,7 +292,7 @@ const Txlist = ({ state = false }) => {
                             </div>
                             :
                             ''
-                        }
+                        } */}
                     </div>
                 </div>
             )}

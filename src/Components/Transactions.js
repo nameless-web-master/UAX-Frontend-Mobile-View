@@ -169,13 +169,13 @@ const Transactions = () => {
       ) : (
         <div className='container'>
           <div className='mt-3'>
-            <div className='dashboard_box_001____ px-4 mb-4'>
+            <div className='dashboard_box_001____ px-4 mb-4 desk_view'>
               <div className='my-3 for_device_difference____mx_5____'>
                 <StakingInfor />
               </div>
             </div>
 
-            <div className='dashboard_box_001____ px-4' style={{ position: "relative", maxWidth: "100vw" }}>
+            <div className='dashboard_box_001____ px-4 desk_view' style={{ position: "relative", maxWidth: "100vw" }}>
               <div className='my-4'>
                 <p className='' style={{ fontWeight: '900', fontSize: '20px' }}>
                   Transactions
@@ -283,9 +283,6 @@ const Transactions = () => {
 
                       </tbody>
                     </Table>
-                    <div className='mobile_view'>
-                      <Txlist />
-                    </div>
                   </div>
                   {displayTransactions.length > 0 ?
                     <div className='pagination-container'>
@@ -307,6 +304,32 @@ const Transactions = () => {
                   }
                 </div>
               </div>
+            </div>
+            <div className='mobile_view'>
+              <div className='d-flex gap-3'>
+                <input
+                  id="searchQueryInput"
+                  style={{ backgroundColor: "#2A1A2E !important", paddingTop: 8, paddingBottom: 8 }}
+                  type="number"
+                  name="searchQueryInput"
+                  placeholder="Search by date"
+                />
+                <button
+                  type="button"
+                  className="text-white text-sm primary_btnn___"
+                  style={{
+                    right: "2px",
+                    backgroundColor: "",
+                    padding: "4px 18px",
+                    borderRadius: "5px",
+                    border: "none",
+                    cursor: "pointer",
+                  }}
+                >
+                  Filters
+                </button>
+              </div>
+              <Txlist state={true} />
             </div>
           </div>
         </div>
