@@ -226,7 +226,7 @@ export default function ResponsiveDrawer() {
                 boxShadow: 'none'
               }}
             >
-              <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}} className='main-header'>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <IconButton
                     color="inherit"

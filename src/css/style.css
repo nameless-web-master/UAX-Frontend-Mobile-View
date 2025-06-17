@@ -1108,6 +1108,9 @@ fieldset:disabled .btn {
     padding: 12px !important;
   }
 
+  .main-header {
+    backdrop-filter: blur(8px);
+  }
 }
 
 th,
