@@ -479,7 +479,7 @@ input[type=number] {
 @media screen and (max-width: 600px) {
   #searchQueryInput {
     border: 1px solid #383639;
-    background-color: transparent !important;
+    background-color: transparent;
     padding: 12px 24px;
   }
 }

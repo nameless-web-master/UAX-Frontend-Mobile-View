@@ -113,41 +113,6 @@ const CreateNft = () => {
 
   return (
     <>
-      <div
-        className="my-3 small_view"
-        style={{
-          border: "1px solid #2f2d2f",
-          position: "relative",
-          height: "100%",
-          borderRadius: "7px",
-          backgroundColor: '#211f24',
-          borderRadius: 6
-        }} onClick={handleFileSelect}>
-        {selectedImage ? (
-          <>
-            <div className="nftUplaod">
-              <img
-                src={selectedImage}
-                alt="Selected Image"
-                style={{
-                  width: "100%",
-                  borderRadius: ".25rem",
-                }}
-              />
-            </div>
-          </>
-        ) : (
-          <div className="nftUplaod" style={{ position: "relative", }}>
-            <center className="absCenter" style={{ fontSize: "13px" }}>
-              <i
-                className="fa fa-upload mt-4"
-                style={{ fontSize: "30px" }}
-              ></i>
-              <p className="my-3">JPG, PNG, GIF, SVG, MP4 <span style={{ color: '#E12DFF' }}>Max size: 100MB</span></p>
-            </center>
-          </div>
-        )}
-      </div>
       <div className="nft_box_0001____ small_back p-md-4 p-0 py-4">
         <p style={{ fontSize: "25px", fontWeight: "700", marginBottom: "5px" }}>
           Create an NFT
@@ -155,13 +120,53 @@ const CreateNft = () => {
         <p style={{ fontSize: "13px" }}>
           Once your item is minted you will not be able to change any of its information.
         </p>
+        <div
+          className="my-3 small_view"
+          style={{
+            border: "1px solid #2f2d2f",
+            position: "relative",
+            height: "100%",
+            borderRadius: "7px",
+            backgroundColor: '#211f24',
+            borderRadius: 6
+          }} onClick={handleFileSelect}>
+          {selectedImage ? (
+            <>
+              <div className="nftUplaod">
+                <img
+                  src={selectedImage}
+                  alt="Selected Image"
+                  style={{
+                    width: "100%",
+                    borderRadius: ".25rem",
+                  }}
+                />
+              </div>
+            </>
+          ) : (
+            <div className="nftUplaod" style={{ position: "relative", }}>
+              <center className="absCenter" style={{ fontSize: "13px" }}>
+                <i
+                  className="fa fa-upload mt-4"
+                  style={{ fontSize: "30px" }}
+                ></i>
+                <p className="my-3">JPG, PNG, GIF, SVG, MP4 <span style={{ color: '#E12DFF' }}>Max size: 100MB</span></p>
+              </center>
+            </div>
+          )}
+        </div>
         <div className="row">
           <div className="col-lg-6 col-12 mt-2">
             <form>
               <div className="form-group">
-                <label htmlFor="" style={{ fontWeight: "700" }}>
+                <label className="desk_view" htmlFor="" style={{ fontWeight: "700" }}>
                   Name*
                 </label>
+                <label className="mobile_view" style={{
+                  fontWeight: 400,
+                  color: "#FFFFFFCC",
+                  fontSize: 14
+                }}>Name*</label>
                 <input
                   type=""
                   className="mt-2"
@@ -174,9 +179,14 @@ const CreateNft = () => {
               </div>
               <br />
               <div className="form-group">
-                <label htmlFor="" style={{ fontWeight: "700" }}>
+                <label className="desk_view" htmlFor="" style={{ fontWeight: "700" }}>
                   NFT Creator*
                 </label>
+                <label className="mobile_view" style={{
+                  fontWeight: 400,
+                  color: "#FFFFFFCC",
+                  fontSize: 14
+                }}>NFT Creator*</label>
                 <input
                   type=""
                   className="mt-2"
@@ -189,9 +199,14 @@ const CreateNft = () => {
               </div>
               <br />
               <div className="form-group">
-                <label htmlFor="" style={{ fontWeight: "700" }}>
+                <label className="desk_view" htmlFor="" style={{ fontWeight: "700" }}>
                   Fixed Price*
                 </label>
+                <label className="mobile_view" style={{
+                  fontWeight: 400,
+                  color: "#FFFFFFCC",
+                  fontSize: 14
+                }}>Fixed Price*</label>
                 <input
                   type="number"
                   className="mt-2"
@@ -204,9 +219,14 @@ const CreateNft = () => {
               </div>
               <br />
               <div className="form-group">
-                <label htmlFor="" style={{ fontWeight: "700" }}>
+                <label className="desk_view" htmlFor="" style={{ fontWeight: "700" }}>
                   Total Supply*
                 </label>
+                <label className="mobile_view" style={{
+                  fontWeight: 400,
+                  color: "#FFFFFFCC",
+                  fontSize: 14
+                }}>Total Supply*</label>
                 <input
                   type="number"
                   className="mt-2"
@@ -220,9 +240,14 @@ const CreateNft = () => {
               </div>
               <br />
               <div className="form-group">
-                <label htmlFor="" style={{ fontWeight: "700" }}>
+                <label className="desk_view" htmlFor="" style={{ fontWeight: "700" }}>
                   Description*
                 </label>
+                <label className="mobile_view" style={{
+                  fontWeight: 400,
+                  color: "#FFFFFFCC",
+                  fontSize: 14
+                }}> Description*</label>
                 <textarea
                   type=""
                   className="mt-2"
@@ -235,9 +260,14 @@ const CreateNft = () => {
               </div>
               <br />
               <div className="form-group">
-                <label htmlFor="" style={{ fontWeight: "700" }}>
+                <label className="desk_view" htmlFor="" style={{ fontWeight: "700" }}>
                   External Link
                 </label>
+                <label className="mobile_view" style={{
+                  fontWeight: 400,
+                  color: "#FFFFFFCC",
+                  fontSize: 14
+                }}>External Link</label>
                 <input
                   type=""
                   className="mt-2"
