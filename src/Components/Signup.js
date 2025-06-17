@@ -177,7 +177,7 @@ const Signup = () => {
                     </center>
                   </div>
                   <h1 className='welcome mobile_view'>
-                    Create an <span>Account!</span>
+                    Create an <br /><span>Account!</span>
                   </h1>
                   <Form onSubmit={signUp}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">

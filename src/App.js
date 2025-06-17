@@ -7,6 +7,8 @@ import Sidebar from './Components/Sidebar.js';
 import Verification from './Components/Verification.js';
 import FogotPassword from './Components/ForgotPassword.js';
 import ResetPassword from './Components/ResetPassword.js';
+import BackTop from './media/back-top.svg';
+import BackBottom from './media/back-bottom.svg';
 import './css/style.css';
 import axios from "axios";
 
@@ -24,8 +26,8 @@ const PublicRoute = ({ authenticated, children }) => {
   return children;
 };
 
-console.warn = () => {}; // Suppress warnings
-console.error = () => {}; // Suppress errors
+console.warn = () => { }; // Suppress warnings
+console.error = () => { }; // Suppress errors
 // console.log = () => {}; // Suppress logs
 
 function App() {
@@ -58,7 +60,7 @@ function App() {
               },
               config
             );
-            localStorage.setItem("wallet_address",responseWallet.data)
+            localStorage.setItem("wallet_address", responseWallet.data)
             setAuthenticated(true);
             if (window.opener) {
               window.opener.postMessage(
@@ -96,7 +98,7 @@ function App() {
             transform: "translate(-50%,-50%)",
           }}
         >
-          <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{width:"3vw"}} alt="Loading" />
+          <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "3vw" }} alt="Loading" />
         </center>
       </div>
     );
@@ -104,38 +106,61 @@ function App() {
 
   return (
     // <Router>
+    <>
+      <img
+        src={BackTop}
+        alt='no Backtop'
+        className="mobile_view"
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          width:'100%'
+        }}
+      />
+      <img
+        src={BackBottom}
+        alt='no Backbottom'
+        style={{
+          position: 'absolute',
+          right: 0,
+          bottom: 0,
+          width: '100%',
+        }}
+        className="mobile_view"
+      />
       <Routes>
-        <Route 
-          path="/" 
+        <Route
+          path="/"
           element={
             <PublicRoute authenticated={authenticated}>
               <Login setAuthenticated={setAuthenticated} />
             </PublicRoute>
-          } 
+          }
         />
-        <Route 
-          path="/login" 
+        <Route
+          path="/login"
           element={
             <PublicRoute authenticated={authenticated}>
               <Login setAuthenticated={setAuthenticated} />
             </PublicRoute>
-          } 
+          }
         />
-        <Route 
-          path="/signup" 
+        <Route
+          path="/signup"
           element={
             <PublicRoute authenticated={authenticated}>
               <Signup />
             </PublicRoute>
-          } 
+          }
         />
-        <Route 
-          path="/dashboard" 
+        <Route
+          path="/dashboard"
           element={
             <ProtectedRoute authenticated={authenticated}>
               <Sidebar />
             </ProtectedRoute>
-          } 
+          }
         />
         <Route path="/forgotpassword" element={<FogotPassword />} />
         <Route path="/resetpassword" element={<ResetPassword />} />
@@ -143,6 +168,7 @@ function App() {
         <Route path="/verification" element={<Verification />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+    </>
     // </Router>
   );
 }

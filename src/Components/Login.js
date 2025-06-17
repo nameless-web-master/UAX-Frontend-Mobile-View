@@ -201,7 +201,7 @@ const Login = () => {
                     </center>
                   </div>
                   <h1 className='welcome mobile_view'>
-                    Welcome <span>Back!</span>
+                    Welcome <br /><span>Back!</span>
                   </h1>
                   <Form onSubmit={handleLogin}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">

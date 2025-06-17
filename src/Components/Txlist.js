@@ -28,17 +28,10 @@ const cellStyle = {
 };
 
 const Txlist = ({ state = false }) => {
-    const [email, setEmail] = useState('');
-    const [token, setToken] = useState('');
     const [loader, setLoader] = useState(true);
     const [walletTransactions, setWalletTransactions] = useState([]);
     const [walletAddress, setWalletAddress] = useState('');
-    const [balanceAndPower, setBalanceAndPower] = useState('');
-    const [walletTransactionsSent, setWalletTransactionsSent] = useState([]);
-    const [stakedAmtState, setStakedAmtState] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
-    const [reserved_power, setreserved_power] = React.useState(0);
-    const [reserved_balance, setreserved_balance] = React.useState(0);
     const transactionsPerPage = 10;
 
     useEffect(() => {
@@ -46,8 +39,6 @@ const Txlist = ({ state = false }) => {
             const token = localStorage.getItem('token');
             const email = localStorage.getItem('email');
             if (token && email) {
-                setEmail(email);
-                setToken(token);
 
                 try {
                     const responseToken = await axios.post('https://services.uaxwallet.com/api/verifyToken', {
@@ -96,42 +87,22 @@ const Txlist = ({ state = false }) => {
                         ]);
                         // console.log("stakedAmtRequest",stakedAmt.data)
                         if (walletTransactions.data.error) {
-                            if (stakedAmt.data === 'Wallet address not found') {
-                                setStakedAmtState({ staked_amt: 0, total_devices: 0 });
-                            }
-                            else {
-                                setStakedAmtState(isNaN(stakedAmt.data.staked_amt) ? 0 : stakedAmt.data);
-                            }
-                            setBalanceAndPower(balanceAndPower.data);
                             const transactions = [];
                             setWalletTransactions(transactions);
 
-                            setreserved_power((parseFloat(getSummary.data.totalAskAmounts) * 212) + (parseFloat(getSummary.data.totalNFTsListedForSell) * 212))
-                            setreserved_balance((parseFloat(getSummary.data.totalBidAmount)))
 
                             const sentTxns = transactions.filter(txn => txn.sender === localStorage.getItem('wallet_address') && txn.recipient !== 'xjYL2vLJCFSZ.uax');
-                            setWalletTransactionsSent(sentTxns);
 
                             setLoader(false);
                         }
                         else {
-                            if (stakedAmt.data === 'Wallet address not found') {
-                                setStakedAmtState({ staked_amt: 0, total_devices: 0 });
-                            }
-                            else {
-                                setStakedAmtState(isNaN(stakedAmt.data.staked_amt) ? 0 : stakedAmt.data);
-                            }
-                            setBalanceAndPower(balanceAndPower.data);
                             // const transactions = walletTransactions.data.reverse();
                             const transactions = walletTransactions.data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
                             setWalletTransactions(transactions);
 
-                            setreserved_power((parseFloat(getSummary.data.totalAskAmounts) * 212) + (parseFloat(getSummary.data.totalNFTsListedForSell) * 212))
-                            setreserved_balance((parseFloat(getSummary.data.totalBidAmount)))
 
                             const sentTxns = transactions.filter(txn => txn.sender === localStorage.getItem('wallet_address') && txn.recipient !== 'xjYL2vLJCFSZ.uax');
-                            setWalletTransactionsSent(sentTxns);
 
                             setLoader(false);
                         }
@@ -171,7 +142,7 @@ const Txlist = ({ state = false }) => {
                                 <>
                                     {displayTransactions.map((index) =>
 
-                                        <div className='dashboard_box_001____ px-3 py-2 my-2' style={{ position: "relative" }}>
+                                        <div className='px-3 py-3 my-2 rounded' style={{ position: "relative", backgroundColor: '#2C2430', border: '1px solid #FFFFFF12' }}>
 
                                             <li className='d-flex justify-content-between align-items-center'>
                                                 <div className='d-flex'>
@@ -181,15 +152,27 @@ const Txlist = ({ state = false }) => {
                                                             marginRight: 5
                                                         }}
                                                     >
-                                                        <img src={Icon} alt='No icons' />
+                                                        <div
+                                                            className='d-flex justify-content-center align-items-center'
+                                                            style={{
+                                                                width: 24,
+                                                                height: 24,
+                                                                borderRadius: 20,
+                                                                backgroundColor: '#fff'
+                                                            }}
+                                                        >
+                                                            <img src={Icon} alt='No icons' style={{
+                                                                width: 16
+                                                            }} />
+                                                        </div>
                                                         <i
                                                             className={index.recipient !== walletAddress ? "fa fa-arrow-up" : "fa fa-arrow-down"}
                                                             aria-hidden="true"
                                                             style={{
                                                                 fontSize: 9,
                                                                 position: 'absolute',
-                                                                right: 0,
-                                                                top: 0,
+                                                                right: -2,
+                                                                top: -2,
                                                                 color: (index.recipient !== walletAddress ? '#FF4245' : '#27D07A')
                                                             }}
                                                         >

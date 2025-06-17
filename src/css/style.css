@@ -4,6 +4,16 @@ body {
   min-height: 100vh;
 }
 
+@media screen and (max-width:600px) {
+  #root {
+    min-height: 100vh;
+  }
+
+  body {
+    background-color: #000;
+  }
+}
+
 * {
   box-sizing: border-box;
   position: relative;
@@ -132,9 +142,9 @@ input[type=number] {
 }
 
 .tabs_button____ {
-  background-color: #c006df;
   margin: 4px;
-  color: #fff
+  color: #fff;
+  border: 1px solid #7B797C;
 }
 
 
@@ -153,7 +163,7 @@ input[type=number] {
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
-  background-color: #dd7aed !important;
+  background-color: #c006df;
 }
 
 .custom_tabs_____ {
@@ -466,6 +476,14 @@ input[type=number] {
   color: #fff;
 }
 
+@media screen and (max-width: 600px) {
+  #searchQueryInput {
+    border: 1px solid #383639;
+    background-color: transparent !important;
+    padding: 12px 24px;
+  }
+}
+
 #searchQuerySubmit {
   width: 3.5rem;
   /* height: 2.8rem; */
@@ -684,7 +702,7 @@ input[type=number] {
 }
 
 input:focus-visible {
-  border-color: transparent !important;
+  /* border-color: transparent !important; */
   outline: none !important;
   /* This also removes the outline that may appear */
 }

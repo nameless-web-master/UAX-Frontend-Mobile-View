@@ -16,6 +16,7 @@ import { Html5Qrcode } from "html5-qrcode";
 import Txlist from "./Txlist";
 import { UserInfor } from './UserInfor';
 import StakingInfor from "./StakeingInfor";
+import Scan from '../media/scan.svg';
 
 import Circle from '../media/circle.png';
 
@@ -382,7 +383,29 @@ const Dashboard = () => {
 
   return (
     <>
-      <UserInfor />
+      {
+        (activeTab === "pills-send" || activeTab === "pills-profile") ?
+          <div className="mobile_view mobile_view_flex align-items-center px-3">
+            <button
+              className={`nav-link tabs_button____ m-0`}
+              id="pills-home-tab"
+              data-bs-target="#pills-home"
+              type="button"
+              role="tab"
+              aria-controls="pills-home"
+              aria-selected={activeTab === "pills-home"}
+              onClick={() => handleTabClick("pills-home")}
+            >
+              <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <h3 className="flex-fill m-0 text-center">
+              {
+                activeTab === "pills-send" ? "Send UAXN" : "Receive"
+              }
+            </h3>
+          </div> :
+          <UserInfor />
+      }
       <div className="container">
         <div className="dashboard_box_001____ px-5 py-4 dashboard_box_001_____for_reducing_padding_in_mobile desk_view">
           <div className="row">
@@ -422,6 +445,7 @@ const Dashboard = () => {
                   <img
                     src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"}
                     style={{ width: "3vw" }}
+                    alt=""
                   />
                 )}
 
@@ -498,133 +522,136 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="mobile_view">
-          <div
-            className="col-12 mt-2 d-flex justify-content-center position-relative mobile_view mobile_view_flex"
-          >
-            <img src={Circle} />
+        {
+          (activeTab !== "pills-send" && activeTab !== "pills-profile") &&
+          <div className="mobile_view">
             <div
-              className="col-12 mt-2 position-absolute top-50"
-              style={{
-                left: 0,
-                transform: 'translate(0,-50%)'
-              }}
+              className="col-12 mt-2 d-flex justify-content-center position-relative mobile_view mobile_view_flex"
             >
-              <p className="mb-0 text-center">Portfolio Balance</p>
-              <span
+              <img src={Circle} alt="no Circle" />
+              <div
+                className="col-12 mt-2 position-absolute top-50"
                 style={{
-                  color: "#0ce456",
-                  fontSize: "25px",
-                  fontWeight: "900",
+                  left: 0,
+                  transform: 'translate(0,-50%)'
                 }}
               >
-                {parseFloat(coin_price) > 0 ? (
-                  <>
-                    <p className="text-center mb-2" style={{
-                      fontWeight: '600'
-                    }}>
-                      ${" "}
-                      {(() => {
-                        const amount =
-                          parseFloat(coin_price) *
-                          (parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance));
-                        return Number.isInteger(amount)
-                          ? amount
-                          : amount.toFixed(3).replace(/\.?0+$/, "");
-                      })()}
-                    </p>
+                <p className="mb-0 text-center">Portfolio Balance</p>
+                <span
+                  style={{
+                    color: "#0ce456",
+                    fontSize: "25px",
+                    fontWeight: "900",
+                  }}
+                >
+                  {parseFloat(coin_price) > 0 ? (
+                    <>
+                      <p className="text-center mb-2" style={{
+                        fontWeight: '600'
+                      }}>
+                        ${" "}
+                        {(() => {
+                          const amount =
+                            parseFloat(coin_price) *
+                            (parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance));
+                          return Number.isInteger(amount)
+                            ? amount
+                            : amount.toFixed(3).replace(/\.?0+$/, "");
+                        })()}
+                      </p>
 
-                    <p className="mb-0 text-center" style={{ fontSize: "14px", color: "#c006df" }}>
-                      {(() => {
-                        const amount =
-                          parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance);
-                        return Number.isInteger(amount)
-                          ? amount
-                          : amount.toFixed(3).replace(/\.?0+$/, "");
-                      })()}{" "}
-                      UAXN
-                    </p>
-                  </>
-                ) : (
-                  <img
-                    src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"}
-                    style={{ width: "3vw" }}
-                  />
-                )}
+                      <p className="mb-0 text-center" style={{ fontSize: "14px", color: "#c006df" }}>
+                        {(() => {
+                          const amount =
+                            parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance);
+                          return Number.isInteger(amount)
+                            ? amount
+                            : amount.toFixed(3).replace(/\.?0+$/, "");
+                        })()}{" "}
+                        UAXN
+                      </p>
+                    </>
+                  ) : (
+                    <img
+                      src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"}
+                      style={{ width: "3vw" }}
+                    />
+                  )}
 
-              </span>
+                </span>
+              </div>
+            </div>
+            <div>
+              <ul
+                className="nav nav-pills mb-3 mt-2 d-flex justify-content-center"
+                id="pills-tab"
+                role="tablist"
+              >
+                <li
+                  className="nav-item"
+                  role="presentation"
+                  style={{ display: "none" }}
+                >
+                  <button
+                    className={`nav-link tabs_button____ mt-2 ${activeTab === "pills-home" ? "active" : ""
+                      }`}
+                    id="pills-home-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-home"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-home"
+                    aria-selected={activeTab === "pills-home"}
+                    onClick={() => handleTabClick("pills-home")}
+                  >
+                    <img src={"https://images.uaxdlts.com/uax-dashboard/images/bitcoin-icons_send-filled.svg"} style={{ width: "24px" }} /> Default
+                  </button>
+                </li>
+                <li className="nav-item" role="presentation">
+                  <button
+                    onClick={() => {
+                      resetErrorsOrSuccessMsg();
+                      handleTabClick("pills-send");
+                    }}
+                    className={`nav-link tabs_button____ mt-2 ${activeTab === "pills-send" ? "active" : ""
+                      }`}
+                    id="pills-send-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-send"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-send"
+                    aria-selected={activeTab === "pills-send"}
+                  >
+                    <img src={"https://images.uaxdlts.com/uax-dashboard/images/bitcoin-icons_send-filled.svg"} style={{ width: "24px" }} /> Send
+                  </button>
+                </li>
+                <li className="nav-item" role="presentation">
+                  <button
+                    onClick={() => {
+                      resetErrorsOrSuccessMsg();
+                      handleTabClick("pills-profile");
+                    }}
+                    className={`nav-link tabs_button____ mt-2 ${activeTab === "pills-profile" ? "active" : ""
+                      }`}
+                    id="pills-profile-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-profile"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-profile"
+                    aria-selected={activeTab === "pills-profile"}
+                  >
+                    <img src={"https://images.uaxdlts.com/uax-dashboard/images/bitcoin-icons_receive-filled.svg"} style={{ width: "24px" }} />{" "}
+                    Receive
+                  </button>
+                </li>
+                <li className="nav-item sidebar_class_001____" role="presentation">
+                </li>
+              </ul>
             </div>
           </div>
-          <div>
-            <ul
-              className="nav nav-pills mb-3 mt-2 d-flex justify-content-center"
-              id="pills-tab"
-              role="tablist"
-            >
-              <li
-                className="nav-item"
-                role="presentation"
-                style={{ display: "none" }}
-              >
-                <button
-                  className={`nav-link tabs_button____ mt-2 ${activeTab === "pills-home" ? "active" : ""
-                    }`}
-                  id="pills-home-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-home"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-home"
-                  aria-selected={activeTab === "pills-home"}
-                  onClick={() => handleTabClick("pills-home")}
-                >
-                  <img src={"https://images.uaxdlts.com/uax-dashboard/images/bitcoin-icons_send-filled.svg"} style={{ width: "24px" }} /> Default
-                </button>
-              </li>
-              <li className="nav-item" role="presentation">
-                <button
-                  onClick={() => {
-                    resetErrorsOrSuccessMsg();
-                    handleTabClick("pills-send");
-                  }}
-                  className={`nav-link tabs_button____ mt-2 ${activeTab === "pills-send" ? "active" : ""
-                    }`}
-                  id="pills-send-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-send"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-send"
-                  aria-selected={activeTab === "pills-send"}
-                >
-                  <img src={"https://images.uaxdlts.com/uax-dashboard/images/bitcoin-icons_send-filled.svg"} style={{ width: "24px" }} /> Send
-                </button>
-              </li>
-              <li className="nav-item" role="presentation">
-                <button
-                  onClick={() => {
-                    resetErrorsOrSuccessMsg();
-                    handleTabClick("pills-profile");
-                  }}
-                  className={`nav-link tabs_button____ mt-2 ${activeTab === "pills-profile" ? "active" : ""
-                    }`}
-                  id="pills-profile-tab"
-                  data-bs-toggle="pill"
-                  data-bs-target="#pills-profile"
-                  type="button"
-                  role="tab"
-                  aria-controls="pills-profile"
-                  aria-selected={activeTab === "pills-profile"}
-                >
-                  <img src={"https://images.uaxdlts.com/uax-dashboard/images/bitcoin-icons_receive-filled.svg"} style={{ width: "24px" }} />{" "}
-                  Receive
-                </button>
-              </li>
-              <li className="nav-item sidebar_class_001____" role="presentation">
-              </li>
-            </ul>
-          </div>
-        </div>
+        }
         <div className="mt-3 mt-sm-5">
           <div className="tab-content" id="pills-tabContent">
             <div
@@ -725,9 +752,12 @@ const Dashboard = () => {
               </div>
 
               <div className="mobile_view mt-4">
-                <p className='mb-1' style={{ fontWeight: '600', fontSize: 16 }}>
-                  Recently Transactions
-                </p>
+                <div className="d-flex align-items-center justify-content-between">
+                  <p className='mb-1' style={{ fontWeight: '600', fontSize: 16 }}>
+                    Recently Transactions
+                  </p>
+                  <a href="#" style={{ textDecoration: "none", fontWeight: 400, color: "#c006df", fontSize: 13 }}>See All</a>
+                </div>
                 <Txlist />
               </div>
 
@@ -742,13 +772,7 @@ const Dashboard = () => {
               <div className="row mobile_view w-100 m-auto">
                 <div className="col-lg-6 col-md-12 mt-2">
                   <center className="mb-4">
-                    <p
-                      className="mt-5"
-                      style={{ fontWeight: "600", fontSize: "20px" }}
-                    >
-                      Send UAXN
-                    </p>
-                    <span style={{ color: "#a8a8a8" }}>
+                    <span style={{ color: "#a8a8a8", fontSize:12 }}>
                       Enter the recipient's UAXN account address for
                       transfer
                     </span>
@@ -830,13 +854,13 @@ const Dashboard = () => {
                         <button
                           type="button"
                           onClick={handleScan}
-                          className="text-white text-sm primary_btnn___"
+                          className="text-white text-sm"
                           style={{
                             position: "absolute",
                             right: "2px",
                             top: "50%",
                             transform: "translateY(-50%)",
-                            backgroundColor: "",
+                            backgroundColor: "transparent",
                             padding: "4px 10px",
                             borderRadius: "5px",
                             fontWeight: "bold",
@@ -844,10 +868,10 @@ const Dashboard = () => {
                             cursor: "pointer",
                           }}
                         >
-                          Scan
+                          <img src={Scan} alt="No scan" />
                         </button>
                       </div>
-                      <small style={{ fontSize: "14px", color: "#fff", fontWeight: "800" }}>
+                      <small style={{ fontSize: "14px", color: "rgb(168, 168, 168)", fontWeight: "400" }}>
                         {power_per_txn}
                         {" "}<span style={{ color: "#fff", fontWeight: "400" }}>
                           <OverlayTrigger
@@ -887,12 +911,12 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-12 mt-2 p-4">
+                {/* <div className="col-lg-6 col-md-12 mt-2 p-4">
                   <p className='mb-1' style={{ fontWeight: '600', fontSize: 16 }}>
                     Latest Transactions
                   </p>
                   <Txlist />
-                </div>
+                </div> */}
               </div>
               <div className="row d-flex flex-row desk_view desk_view_flex w-100 mx-auto">
                 <div className="col-lg-6 col-12 mt-2">
@@ -1360,7 +1384,7 @@ const Dashboard = () => {
                         ""
                       )}
 
-                      <hr className="m-4" />
+                      <hr className="mb-4 mt-2 mx-4" />
                       <Button
                         style={{
                           fontWeight: "500",
@@ -1434,14 +1458,14 @@ const Dashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-12 mt-2 p-md-2 p-4">
+                {/* <div className="col-lg-6 col-md-12 mt-2 p-md-2 p-4">
                   <p className='mb-1' style={{ fontWeight: '600', fontSize: 16 }}>
                     Latest Transactions
                   </p>
                   <Txlist />
-                </div>
+                </div> */}
               </div>
-              <div className="row desk_view">
+              <div className="row desk_view desk_view_flex">
                 <div className="col-lg-6 col-md-12 mt-2">
                   <div
                     className="dashboard_box_001____ text-center"

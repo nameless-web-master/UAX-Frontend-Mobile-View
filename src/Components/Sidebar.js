@@ -27,6 +27,8 @@ import PowerSettingsNewIcon from '@mui/icons-material/Bolt';
 import axios from 'axios';
 import Stake from './Stake'
 
+import BackTop from '../media/back-top.svg';
+import BackBottom from '../media/back-bottom.svg';
 const drawerWidth = 240;
 
 export default function ResponsiveDrawer() {
@@ -224,7 +226,7 @@ export default function ResponsiveDrawer() {
                 boxShadow: 'none'
               }}
             >
-              <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', backgroundColor: "#000" }}>
+              <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <IconButton
                     color="inherit"
@@ -415,6 +417,28 @@ export default function ResponsiveDrawer() {
                 width: '100%'
               }}
             >
+              <img
+                src={BackTop}
+                alt='no Backtop'
+                className="mobile_view"
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  width: '100%'
+                }}
+              />
+              <img
+                src={BackBottom}
+                alt='no Backbottom'
+                style={{
+                  position: 'absolute',
+                  right: 0,
+                  bottom: 0,
+                  width: '100%',
+                }}
+                className="mobile_view"
+              />
               <Toolbar />
               {loading ? (
                 <Box display="flex" justifyContent="center" alignItems="center" height="100%">
