@@ -17,11 +17,10 @@ const cellStyle = {
 const noDataStyle = {
   textAlign: 'center',
   height: '55vh',
-  backgroundColor: '#000',
   borderBottom: "none",
   position: "relative"
 };
-const RewardHistory = () => {
+const RewardHistory = ({ setshowReward }) => {
   // const [my_ref_bonus_history, setmy_ref_bonus_history] = useState('');
   const [loader, setloader] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
@@ -52,7 +51,20 @@ const RewardHistory = () => {
   const indexOfLastItem = (currentPage + 1) * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = myRefBonusHistory.slice(indexOfFirstItem, indexOfLastItem);
-
+  const data = [
+    {
+      email: 'dfhwuefhwoiefh',
+      amount: 100
+    },
+    {
+      email: 'dfhwuefhwoiefh',
+      amount: 100
+    },
+    {
+      email: 'dfhwuefhwoiefh',
+      amount: 100
+    },
+  ]
   return (
     <>
       {/* {loader?
@@ -63,8 +75,58 @@ const RewardHistory = () => {
     </div>
     :  */}
       <div className="container" style={{ minHeight: "100vh" }}>
+        <div className="mobile_view mobile_view_flex align-items-center">
+          <button
+            className={`nav-link tabs_button____ m-0`}
+            id="pills-home-tab"
+            data-bs-target="#pills-home"
+            type="button"
+            role="tab"
+            style={{
+              borderRadius: 4,
+              backgroundColor: '#3F2146',
+              border: 0
+            }}
+            aria-controls="pills-home"
+            onClick={() => setshowReward(false)}
+          >
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <h3 className="flex-fill m-0 text-center"
+            style={{
+              fontSize: 16
+            }}
+          >
+            Referral & Reward History
+          </h3>
+        </div>
         <div className='mt-3'>
-          <div className='dashboard_box_001____ px-4' style={{ minHeight: "80vh", position: "relative", maxWidth: "100vw" }}>
+          <div className='mobile_view'>
+            <div className='d-flex gap-3'>
+              <input
+                id="searchQueryInput"
+                style={{ backgroundColor: "#2A1A2E !important", paddingTop: 8, paddingBottom: 8 }}
+                type="number"
+                name="searchQueryInput"
+                placeholder="Search by date"
+              />
+              <button
+                type="button"
+                className="text-white text-sm primary_btnn___"
+                style={{
+                  right: "2px",
+                  backgroundColor: "",
+                  padding: "4px 18px",
+                  borderRadius: "5px",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Filters
+              </button>
+            </div>
+          </div>
+          <div className='dashboard_box_001____ px-4 desk_view' style={{ minHeight: "80vh", position: "relative", maxWidth: "100vw" }}>
             <div className='my-4'>
               <p className='' style={{ fontWeight: "900", fontSize: "20px" }}>Reward History</p>
               <small style={{ color: "#a8a8a8" }}>
@@ -143,6 +205,50 @@ const RewardHistory = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div className='mobile_view mt-5'>
+            {currentItems.length > 0 ?
+              currentItems.map((_itm, _idx) => {
+                return (
+                  <div className='d-flex justify-content-between border-bottom border-dark pt-3' key={_idx}>
+                    <div className='d-flex flex-column align-items-start'>
+                      <h3 style={{
+                        fontSize: 13,
+                        fontWeight: 600
+                      }}>{_itm.email}</h3>
+                      <h6 style={{
+                        fontWeight: 400,
+                        fontSize: 11,
+                        color: '#A8A8A8'
+                      }}>{new Date(_itm.timestamp).toLocaleString()}</h6>
+                    </div>
+                    <div className='d-flex flex-column align-items-end'>
+                      <span style={{ color: "#0DF469", fontWeight: 600, fontSize: 14 }}>{parseFloat(_itm.amount).toFixed(2)} UAXN</span>
+                      <span style={{
+                        fontWeight: 400,
+                        fontSize: 11,
+                        color: '#A8A8A8'
+                      }}>
+                        <>
+                          {parseFloat(_itm.amount) < 10000 ? '15%' : ''}
+                        </>
+                        <>
+                          {parseFloat(_itm.amount) > 50000 ? '25%' : ''}
+                        </>
+                        <>
+                          {parseFloat(_itm.amount) >= 50000 ? '50%' : ''}
+                        </>
+                      </span>
+                    </div>
+                  </div>
+                )
+              })
+              : (
+                loader ? '' :
+                  <div style={noDataStyle}>
+                    <img src={"https://images.uaxdlts.com/uax-dashboard/images/NO_DATA.svg"} style={{ width: 72, position: "relative", top: "40%" }} alt='' />
+                  </div>
+              )}
           </div>
         </div>
 
