@@ -17,6 +17,9 @@ import Txlist from "./Txlist";
 import { UserInfor } from './UserInfor';
 import StakingInfor from "./StakeingInfor";
 import Scan from '../media/scan.svg';
+import BuyImage from '../media/buy.svg';
+import SellImage from '../media/sell.png';
+
 
 import Circle from '../media/circle.png';
 
@@ -414,13 +417,18 @@ const Dashboard = () => {
       <div className="container">
         <div className="dashboard_box_001____ px-5 py-4 dashboard_box_001_____for_reducing_padding_in_mobile desk_view">
           <div className="row">
-            <div className="col-md-6 mt-2">
-              <p className="mb-0">Portfolio Balance</p>
+            <div className="col mt-2">
+              <p
+                className="mb-0"
+                style={{
+                  fontSize: 14
+                }}
+              >Portfolio Balance</p>
               <span
                 style={{
                   color: "#0ce456",
-                  fontSize: "25px",
-                  fontWeight: "900",
+                  fontSize: 22,
+                  fontWeight: 500,
                 }}
               >
                 {parseFloat(coin_price) > 0 ? (
@@ -456,9 +464,9 @@ const Dashboard = () => {
 
               </span>
             </div>
-            <div className="col-md-6 mt-2 desk_view">
+            <div className="col mt-2 desk_view">
               <ul
-                className="nav nav-pills mb-3 mt-2"
+                className="nav nav-pills mb-3 mt-2 d-flex justify-content-end"
                 id="pills-tab"
                 role="tablist"
               >
@@ -521,7 +529,45 @@ const Dashboard = () => {
                     Receive
                   </button>
                 </li>
-                <li className="nav-item sidebar_class_001____" role="presentation">
+                <li className="nav-item" role="presentation">
+                  <button
+                    onClick={() => {
+                      resetErrorsOrSuccessMsg();
+                      handleTabClick("pills-contact");
+                    }}
+                    className={`nav-link tabs_button____ mt-2 ${activeTab === "pills-contact" ? "active" : ""
+                      }`}
+                    id="pills-contact-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-contact"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-contact"
+                    aria-selected={activeTab === "pills-contact"}
+                  >
+                    <img src={BuyImage} style={{ width: "24px" }} alt="" />{" "}
+                    Buy
+                  </button>
+                </li>
+                <li className="nav-item" role="presentation">
+                  <button
+                    onClick={() => {
+                      resetErrorsOrSuccessMsg();
+                      handleTabClick("pills-sell");
+                    }}
+                    className={`nav-link tabs_button____ mt-2 ${activeTab === "pills-sell" ? "active" : ""
+                      }`}
+                    id="pills-sell-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-sell"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-sell"
+                    aria-selected={activeTab === "pills-sell"}
+                  >
+                    <img src={SellImage} style={{ width: "24px" }} alt="" />{" "}
+                    Sell
+                  </button>
                 </li>
               </ul>
             </div>
@@ -932,7 +978,7 @@ const Dashboard = () => {
                     <center>
                       <p
                         className="mt-5"
-                        style={{ fontWeight: "900", fontSize: "20px" }}
+                        style={{ fontWeight: 700, fontSize: "20px" }}
                       >
                         Send UAXN
                       </p>
@@ -944,8 +990,86 @@ const Dashboard = () => {
                     <div className="text-left px-2">
 
                       <p
+                        className="mt-5"
+                        style={{ fontWeight: 600, fontSize: 16 }}
+                      >
+                        Amount to send
+                      </p>
+                      <div style={{ position: 'relative', width: '100%' }}>
+                        <input
+                          id="searchQueryInput"
+                          value={AmountToTransfer}
+                          onChange={(e) =>
+                            setAmountToTransfer(
+                              parseFloat(e.target.value) > 0
+                                ? e.target.value
+                                : ''
+                            )
+                          }
+                          style={{ backgroundColor: "#403242" }}
+                          type="number"
+                          name="searchQueryInput"
+                          placeholder="Enter Amount"
+                        />
+                        <select
+                          style={{
+                            position: 'absolute',
+                            right: 0,
+                            height: '100%',
+                            borderRadius: '0 4px 4px 0',
+                            color: '#1E1E20',
+                            fontWeight: 500,
+                            fontSize: 14,
+                            lineHeight: '22px',
+                            padding: '9px 12px',
+                            border: 'none'
+                          }}
+                        >
+                          <option value='erc'>ERC</option>
+                          <option value='trc'>TRC</option>
+                        </select>
+                        {/* <button
+                          type="button"
+                          onClick={() =>
+                            setAmountToTransfer(
+                              (
+                                parseFloat(BalanceAndPower.balance) -
+                                parseFloat(reserved_balance)
+                              ).toFixed(3)
+                            )
+                          }
+                          className="text-white text-sm primary_btnn___"
+                          style={{
+                            position: "absolute",
+                            right: "2px",
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                            backgroundColor: "",
+                            padding: "4px 10px",
+                            borderRadius: "5px",
+                            fontWeight: "bold",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          Max
+                        </button> */}
+                      </div>
+                      <small style={{ fontSize: "14px", color: "#a8a8a8" }}>
+                        Available Balance :{" "}
+                        {(parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(3)} UAXN
+                      </small>
+                      {MsgForSend && (
+                        <div
+                          className="alert alert-success mt-3 text-center"
+                          role="alert"
+                        >
+                          {MsgForSend}
+                        </div>
+                      )}
+                      <p
                         className="mt-4"
-                        style={{ fontWeight: "900", fontSize: "" }}
+                        style={{ fontWeight: 600, fontSize: 16 }}
                       >
                         To address
                       </p>
@@ -974,12 +1098,12 @@ const Dashboard = () => {
                               fontWeight: "bold",
                               border: "none",
                               cursor: "pointer",
-                            }}
-                          >
-                            Scan
-                          </button> */}
+                              }}
+                              >
+                              Scan
+                              </button> */}
                       </div>
-                      <small style={{ fontSize: "14px", color: "#fff", fontWeight: "800" }}>
+                      {/* <small style={{ fontSize: "14px", color: "#fff", fontWeight: "800" }}>
                         {power_per_txn}
                         {" "}<span style={{ color: "#fff", fontWeight: "400" }}>
                           <OverlayTrigger
@@ -993,61 +1117,7 @@ const Dashboard = () => {
                             <i className="fa fa-question-circle"></i>
                           </OverlayTrigger>
                         </span>
-                      </small>
-                      {/* <div id="reader" style={{ marginTop: "20px" }}></div> */}
-                      <p
-                        className="mt-5"
-                        style={{ fontWeight: "900", fontSize: "" }}
-                      >
-                        Amount to send
-                      </p>
-                      <div style={{ position: 'relative', width: '100%' }}>
-                        <input
-                          id="searchQueryInput"
-                          value={AmountToTransfer}
-                          onChange={(e) =>
-                            setAmountToTransfer(
-                              parseFloat(e.target.value) > 0
-                                ? e.target.value
-                                : ''
-                            )
-                          }
-                          style={{ backgroundColor: "#403242" }}
-                          type="number"
-                          name="searchQueryInput"
-                          placeholder="Enter Amount"
-                        />
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setAmountToTransfer(
-                              (
-                                parseFloat(BalanceAndPower.balance) -
-                                parseFloat(reserved_balance)
-                              ).toFixed(3)
-                            )
-                          }
-                          className="text-white text-sm primary_btnn___"
-                          style={{
-                            position: "absolute",
-                            right: "2px",
-                            top: "50%",
-                            transform: "translateY(-50%)",
-                            backgroundColor: "",
-                            padding: "4px 10px",
-                            borderRadius: "5px",
-                            fontWeight: "bold",
-                            border: "none",
-                            cursor: "pointer",
-                          }}
-                        >
-                          Max
-                        </button>
-                      </div>
-                      <small style={{ fontSize: "14px", color: "#a8a8a8" }}>
-                        Available Balance :{" "}
-                        {(parseFloat(BalanceAndPower.balance) - parseFloat(reserved_balance)).toFixed(3)} UAXN
-                      </small>
+                      </small> */}
                       <Button
                         style={{
                           fontWeight: "900",
@@ -1061,14 +1131,7 @@ const Dashboard = () => {
                       >
                         Send
                       </Button>
-                      {MsgForSend && (
-                        <div
-                          className="alert alert-success mt-3 text-center"
-                          role="alert"
-                        >
-                          {MsgForSend}
-                        </div>
-                      )}
+                      {/* <div id="reader" style={{ marginTop: "20px" }}></div> */}
                     </div>
                   </div>
                 </div>
@@ -1079,9 +1142,9 @@ const Dashboard = () => {
                   >
                     <p
                       className="mt-5"
-                      style={{ fontWeight: "900", fontSize: "20px" }}
+                      style={{ fontWeight: "900", fontSize: 20 }}
                     >
-                      Latest Transactions
+                      Transaction
                     </p>
                     <br />
                     <Table responsive style={tableStyle}>

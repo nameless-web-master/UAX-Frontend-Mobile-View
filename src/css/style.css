@@ -1108,9 +1108,10 @@ fieldset:disabled .btn {
     padding: 12px !important;
   }
 
-  .main-header {
-    backdrop-filter: blur(8px);
-  }
+}
+
+.main-header {
+  backdrop-filter: blur(8px);
 }
 
 th,
@@ -1150,4 +1151,45 @@ td {
     border: none !important;
   }
 
+}
+
+.delegrate .box-template {
+  padding: 45px 24px;
+}
+
+.delegrate {
+  padding: 0 28px;
+}
+
+.delegrate>div {
+  padding: 12px;
+  width: 50%;
+}
+
+@media only screen and (max-width: 1280px) {
+
+  .delegrate .box-template {
+    padding: 24px 12px;
+  }
+
+  .delegrate {
+    padding: 0;
+  }
+
+  .delegrate>div {
+    padding: 6px;
+  }
+}
+
+@media only screen and (max-width: 1180px) {
+  .delegrate>div {
+    width: 100%;
+    padding: 12px 24px;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .delegrate>div {
+    padding: 6px 18px;
+  }
 }

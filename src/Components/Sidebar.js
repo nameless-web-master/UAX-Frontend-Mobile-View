@@ -17,6 +17,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import MenuIcon from '@mui/icons-material/Menu';
 import StakingReward from './StakingReward';
 import Dashboard from './Dashboard';
+import { Delegation } from './delegation';
 import SwapComponent from './Swap';
 import Transaction from './Transactions';
 import NFTs from './NFTs';
@@ -51,6 +52,7 @@ export default function ResponsiveDrawer() {
       { text: 'Dashboard', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/dashboard.svg"} /> },
       { text: 'NFTs', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/nft.svg"} /> },
       { text: 'Get Bandwidth', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/power.svg"} /> },
+      { text: 'Delegation', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/power.svg"} /> },
       { text: 'Staking Reward', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/staking-menu.svg"} /> },
       { text: 'Settings', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/settings.svg"} /> },
       { text: 'Invite & Earn', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/INVITE.svg"} /> },
@@ -64,6 +66,7 @@ export default function ResponsiveDrawer() {
       { text: 'Transactions', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/swap.svg"} /> },
       { text: 'NFTs', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/nft.svg"} /> },
       { text: 'Get Bandwidth', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/power.svg"} /> },
+      { text: 'Delegation', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/power.svg"} /> },
       { text: 'Staking Reward', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/staking-menu.svg"} /> },
       { text: 'Settings', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/settings.svg"} /> },
       { text: 'Invite & Earn', icon: <img src={"https://images.uaxdlts.com/uax-dashboard/images/INVITE.svg"} /> },
@@ -463,6 +466,7 @@ export default function ResponsiveDrawer() {
                       {menuItems[selectedIndex - 1].text === 'Invite & Earn' ? <InviteAndEarn /> : ''}
                       {menuItems[selectedIndex - 1].text === 'Transactions' ? <Transaction /> : ''}
                       {menuItems[selectedIndex - 1].text === 'Staking Reward' ? <Stake /> : ''}
+                      {menuItems[selectedIndex - 1].text === 'Delegation' ? <Delegation /> : ''}
                       {/* {menuItems[selectedIndex - 1].text} Content */}
                     </Typography>
                   )}
