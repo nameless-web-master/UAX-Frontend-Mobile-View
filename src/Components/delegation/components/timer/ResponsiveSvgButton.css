@@ -1,0 +1,9 @@
+.rButton {
+    transition: all ease-out 600ms;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .rButton:hover {
+        transform: scale(1.5) rotateX(360deg);
+    }
+}

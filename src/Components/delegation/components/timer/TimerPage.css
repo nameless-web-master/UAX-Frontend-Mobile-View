@@ -1,0 +1,140 @@
+  .pageCard {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100%;
+    width: 56px;
+    position: relative;
+    margin: 0;
+  }
+
+  .pageTop {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    background-color: #C006DE;
+    overflow: hidden;
+    border-radius: .5rem;
+    width: 100%;
+    position: absolute;
+    transform-origin: bottom;
+    transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
+    z-index: 2;
+  }
+
+  .numberTop {
+    position: 'sticky';
+    bottom: 0%;
+    transform: translate(0%, 50%);
+    width: 100%;
+    text-align: center;
+    height: 100%;
+  }
+
+  .pageBottom {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    background-color: #C006DE;
+    overflow: hidden;
+    position: absolute;
+    border-radius: .5rem;
+    /* -webkit-box-shadow: 0px 10px 1px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 10px 1px 0px rgba(0, 0, 0, 0.2); */
+    z-index: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .numberBottom {
+    height: 100%;
+    position: 'sticky';
+    bottom: 100%;
+    transform: translate(0%, -50%);
+    text-align: center;
+  }
+
+  .innerPageText {
+    font-size: 22px;
+    transform: scale(1.5);
+    color: #fff;
+    font-weight: 400;
+  }
+
+  .pageTopInner {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    background-color: #C006DE;
+    /* -webkit-box-shadow: 0px 10px 1px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 10px 1px 0px rgba(0, 0, 0, 0.2); */
+    overflow: hidden;
+    border-radius: .5rem;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timerPageLabel {
+    text-align: center;
+    z-index: 3;
+    position: relative;
+    padding-top: 40px;
+    font-size: 14px;
+    font-weight: 400;
+    font-family: 'Share Tech';
+    height: 100%;
+    text-transform: uppercase;
+    color: #F2F2F2;
+  }
+
+  .timerColumn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 473px) {
+    .pageCard {
+      width: 80px;
+    }
+
+    .innerPageText {
+      font-size: 2rem;
+    }
+
+    .timerPageLabel {
+      font-size: 70%;
+    }
+  }
+
+  @media screen and (max-width: 350px) {
+    .pageCard {
+      width: 60px;
+    }
+
+    .innerPageText {
+      font-size: 2rem;
+    }
+
+    .timerPageLabel {
+      font-size: 60%;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .pageCard {
+      width: 50px;
+    }
+
+    .innerPageText {
+      font-size: 2rem;
+    }
+
+    .timerPageLabel {
+      font-size: 50%;
+    }
+  }

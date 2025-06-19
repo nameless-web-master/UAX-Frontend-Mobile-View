@@ -15,7 +15,7 @@ export const Delegation = () => {
     });
     const [detail, setDetail] = useState(5);
 
-    const [state, setState] = useState('expired')
+    const [state, setState] = useState('')
 
     return (
         <div
