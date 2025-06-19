@@ -5,7 +5,7 @@ import { ReactComponent as BackgroundHills } from '../images/pattern-hills.svg';
 import './Background.css'
 export default function Background() {
     return (
-        <Container xs={12} fluid className="container" >
+        <Container xs={12} fluid className="time-container" >
             <BackgroundStars className="bg" />
             <BackgroundHills className="hills" />
         </Container >
