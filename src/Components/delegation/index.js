@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+// import children components
 import { DelegateBandwidth } from './components/Layout/bandwidth';
 import { TransferHistory } from './components/Layout/transfer';
 import { ConfirmDelegration } from './components/Layout/confirmDelegration';
