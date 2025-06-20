@@ -163,11 +163,15 @@ const Transactions = () => {
       {loader ? (
         <div className='' style={{ position: 'relative', backgroundColor: '#000' }}>
           <center style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)' }}>
-            <img src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"} style={{ width: "3vw" }} />
+            <img
+              src={"https://images.uaxdlts.com/uax-dashboard/images/LOADER.gif"}
+              style={{ width: "3vw" }}
+              alt=''
+            />
           </center>
         </div>
       ) : (
-        <div className='container'>
+        <div className='w-100 container'>
           <div className='mt-3'>
             <div className='dashboard_box_001____ px-4 mb-4 desk_view'>
               <div className='my-3 for_device_difference____mx_5____'>
@@ -175,16 +179,16 @@ const Transactions = () => {
               </div>
             </div>
 
-            <div className='dashboard_box_001____ px-4 desk_view' style={{ position: "relative", maxWidth: "100vw" }}>
-              <div className='my-4'>
+            <div className='w-100 dashboard_box_001____ px-4 desk_view' style={{ position: "relative", maxWidth: "100vw" }}>
+              <div className='my-4 w-100'>
                 <p className='' style={{ fontWeight: '900', fontSize: '20px' }}>
                   Transactions
                 </p>
                 <small>Last 100 Transactions</small>
-                <div className='mt-3'>
-                  <div className=''>
-                    <Table responsive style={tableStyle} className='desk_view'>
-                      <tbody>
+                <div className='mt-3 w-100'>
+                  <div className='overflow-auto w-100'>
+                    <Table responsive style={tableStyle} className='desk_view desk_view_table'>
+                      <tbody className='w-100'>
                         <th className='table_header_class____'>Coin</th>
                         <th className='table_header_class____'>Date</th>
                         <th className='table_header_class____'>Sender/Recipient</th>

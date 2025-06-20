@@ -229,7 +229,7 @@ export default function ResponsiveDrawer() {
                 boxShadow: 'none'
               }}
             >
-              <Toolbar sx={{ display: 'flex', justifyContent: 'space-between'}} className='main-header'>
+              <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }} className='main-header'>
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <IconButton
                     color="inherit"
@@ -417,7 +417,6 @@ export default function ResponsiveDrawer() {
                 backgroundColor: 'black',
                 color: 'white',
                 minHeight: '100vh',
-                width: '100%'
               }}
             >
               <img
@@ -450,7 +449,7 @@ export default function ResponsiveDrawer() {
               ) : (
                 <div className='w-100'>
                   {selectedIndex === 0 && (
-                    <Typography paragraph>
+                    <Typography paragraph className='w-100'>
                       <Transaction />
                     </Typography>
                   )}

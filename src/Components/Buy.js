@@ -7,6 +7,7 @@ import ABI from './BSCUSDTABI.json'
 import Table from 'react-bootstrap/Table';
 import Timer from './Timer';
 import { QRCode } from 'react-qrcode-logo';
+import { Link } from 'react-router-dom';
 
 const noDataStyle = {
   textAlign: 'center',
@@ -1006,87 +1007,67 @@ const Buy = () => {
             </div>
           </div>
         </div>
+
         <div className='col-lg-6 col-md-12 col-sm-12 mt-2'>
-
-
-
-
-
-
-          <div className='dashboard_box_001____ px-4' style={{ backgroundColor: "#222024" }}>
-            <p className='mt-5' style={{ fontWeight: "900", fontSize: "20px" }}>Latest Transactions
-              {/* <Link to="#">
-                            <span style={{float:"right",fontSize:"15px",color:"#c006df"}}>
+          <div className='dashboard_box_001____ px-4' style={{ backgroundColor: "#222024", height: "100%", overflow: "scroll" }}>
+            <p className='mt-5' style={{ fontWeight: "700", fontSize: "20px" }}>Latest Transactions
+              <Link to="#">
+                {/* <span style={{float:"right",fontSize:"15px",color:"#c006df"}}>
                                 See all
-                            </span>
-                            </Link> */}
+                            </span> */}
+              </Link>
             </p>
             <br />
-            <div style={{ height: "80vh", overflow: "scroll", width: '100vw' }}>
+            <div style={{ height: "80vh", overflow: "scroll", width: '1' }}>
               <Table responsive style={tableStyle}>
                 <tbody>
                   {Wallet_transactions.length > 0 ?
                     <>
                       {Wallet_transactions.map(index => {
-                        if (index.network === 'ETH') {
-                          return (
-                            <tr key={index.timestamp}>
-                              <td style={cellStyle} className='py-3'>
-                                <div className='d-flex'>
-                                  <img src={"https://images.uaxdlts.com/uax-dashboard/images/erc.svg"} style={{ width: "3rem" }} />
-                                  <span style={{ fontWeight: "900", marginLeft: "8px" }}>USDT {index.status === 'Pending' ? <span style={{ color: "red" }}>Pending</span> : <span style={{ color: "green" }}>Approved</span>}
-                                    <br />
-                                    <a style={{ textDecoration: "none" }} href={`https://etherscan.io/tx/${index.txn_id}`} target="_blank">
-                                      <small style={{ fontWeight: "100", color: "#f7f7f7" }}>
-                                        Txid: {index.txn_id.slice(0, 8)}...{index.txn_id.slice(-8)}
-                                      </small>
-                                    </a>
-                                  </span>
-                                </div>
-                              </td>
-                              <td style={rightAlignCellStyle} className='py-3'>{parseFloat(index.amount).toFixed(2)} <br />
-                                <small style={{ fontWeight: "100", color: "#f7f7f7" }}>{new Date(index.timestamp).toLocaleString()}</small>
-                              </td>
-                            </tr>
-                          );
-                        }
-                        else {
-                          return (
-                            <tr key={index.timestamp}>
-                              <td style={cellStyle} className='py-3'>
-                                <div className='d-flex'>
-                                  <img src={"https://images.uaxdlts.com/uax-dashboard/images/trc.svg"} style={{ width: "3rem" }} />
-                                  <span style={{ fontWeight: "900", marginLeft: "8px" }}>USDT {index.status === 'Pending' ? <span style={{ color: "red" }}>Pending</span>
-                                    :
-                                    <>
-                                      {index.status === 'Failed' ? <span style={{ color: "red" }}>Failed</span> : <span style={{ color: "green" }}>Approved</span>}
-                                    </>
-                                  }
-                                    <br />
-                                    {index.status === 'Pending' ?
-                                      ''
-                                      :
-                                      <>
-                                        {index.status === 'Failed' ?
-                                          ''
-                                          :
-                                          <a style={{ textDecoration: "none" }} href={`https://tronscan.org/#/transaction/${index.txn_id}`} target="_blank">
-                                            <small style={{ fontWeight: "100", color: "#f7f7f7" }}>
-                                              Txid: {index.txn_id.slice(0, 8)}...{index.txn_id.slice(-8)}
-                                            </small>
-                                          </a>
-                                        }
-                                      </>
-                                    }
-                                  </span>
-                                </div>
-                              </td>
-                              <td style={rightAlignCellStyle} className='py-3'>{parseFloat(index.amount).toFixed(2)} <br />
-                                <small style={{ fontWeight: "100", color: "#f7f7f7" }}>{new Date(index.timestamp).toLocaleString()}</small>
-                              </td>
-                            </tr>
-                          );
-                        }
+                        // if (index.network === 'ETH') {
+                        //   return (
+                        //     <tr key={index.timestamp}>
+                        //       <td style={cellStyle} className='py-3'>
+                        //         <div className='d-flex'>
+                        //             <img src={ERC} style={{width:"3rem"}}/>
+                        //         <span style={{ fontWeight: "900", marginLeft: "8px" }}>USDT {index.status==='Pending'?<span style={{color:"red"}}>Pending</span>:<span style={{color:"green"}}>Approved</span>}
+                        //         <br/>
+                        //         <a style={{textDecoration:"none"}} href={`https://tronscan.org/#/transaction/${index.trx_txn_id}`} target="_blank">
+                        //             <small style={{fontWeight: "100", color: "#969696" }}>
+                        //             {index.trx_txn_id.slice(0,8)}...{index.trx_txn_id.slice(-8)}
+                        //             </small>
+                        //         </a>
+                        //         </span>
+                        //         </div>
+                        //       </td>
+                        //       <td style={rightAlignCellStyle} className='py-3'>{parseFloat(index.amount).toFixed(2)} <br />
+                        //         <small style={{ fontWeight: "100", color: "#969696" }}>{new Date(index.timestamp).toLocaleString()}</small>
+                        //       </td>
+                        //     </tr>
+                        //   );
+                        // } 
+                        // else{
+                        return (
+                          <tr key={index.timestamp}>
+                            <td style={cellStyle} className='py-3'>
+                              <div className='d-flex'>
+                                <img src={"https://images.uaxdlts.com/uax-dashboard/images/trc.svg"} style={{ width: "3rem" }} />
+                                <span style={{ fontWeight: "900", marginLeft: "8px" }}>USDT {index.status === 'Pending' ? <span style={{ color: "red" }}>Pending</span> : <span style={{ color: "green" }}>Approved</span>}
+                                  <br />
+                                  <a style={{ textDecoration: "none" }} href={`https://tronscan.org/#/transaction/${index.trx_txn_id}`} target="_blank">
+                                    <small style={{ fontWeight: "100", color: "#969696" }}>
+                                      {index.trx_txn_id.slice(0, 8)}...{index.trx_txn_id.slice(-8)}
+                                    </small>
+                                  </a>
+                                </span>
+                              </div>
+                            </td>
+                            <td style={rightAlignCellStyle} className='py-3'>{parseFloat(index.amount).toFixed(2)} <br />
+                              <small style={{ fontWeight: "100", color: "#969696" }}>{new Date(index.timestamp).toLocaleString()}</small>
+                            </td>
+                          </tr>
+                        );
+                        // }
                       })}
                     </>
                     :

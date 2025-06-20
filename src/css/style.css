@@ -1075,6 +1075,10 @@ fieldset:disabled .btn {
   display: flex !important;
 }
 
+.desk_view_table {
+  display: table !important;
+}
+
 @media only screen and (max-width: 600px) {
   .mobile_view {
     display: block !important;

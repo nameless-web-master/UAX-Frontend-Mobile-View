@@ -251,7 +251,7 @@ const Buy = () => {
         <div className='col-lg-6 col-md-12 col-sm-12 mt-2'>
           <div className='dashboard_box_001____ px-4'>
             <div className='my-5'>
-              <p className='' style={{ fontWeight: "900", fontSize: "20px" }}>Swap</p>
+              <p className='' style={{ fontWeight: "700", fontSize: "20px" }}>Swap</p>
               <span>Enter the number of UAX tokens that you want to swap, then click "Swap"</span>
               <div className='mt-5'>
 
@@ -337,7 +337,7 @@ const Buy = () => {
         </div>
         <div className='col-lg-6 col-md-12 col-sm-12 mt-2'>
           <div className='dashboard_box_001____ px-4' style={{ backgroundColor: "#222024", height: "100%", overflow: "scroll" }}>
-            <p className='mt-5' style={{ fontWeight: "900", fontSize: "20px" }}>Latest Transactions
+            <p className='mt-5' style={{ fontWeight: "700", fontSize: "20px" }}>Latest Transactions
               <Link to="#">
                 {/* <span style={{float:"right",fontSize:"15px",color:"#c006df"}}>
                                 See all
