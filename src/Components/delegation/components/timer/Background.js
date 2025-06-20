@@ -1,5 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
+
 import { ReactComponent as BackgroundStars } from '../images/bg-stars.svg';
 import { ReactComponent as BackgroundHills } from '../images/pattern-hills.svg';
 import './Background.css'
