@@ -86,7 +86,7 @@ export const ActiveDelegration = ({ detail, setState, setDetail }) => {
                         <span
                             className='position-absolute d-flex align-items-center'
                             style={{
-                                top: 22 ,
+                                top: 22,
                                 right: 0,
                                 fontSize: 32
                             }}
@@ -97,7 +97,7 @@ export const ActiveDelegration = ({ detail, setState, setDetail }) => {
                         <span
                             className='position-absolute d-flex align-items-center'
                             style={{
-                                top: 22 ,
+                                top: 22,
                                 right: 0,
                                 fontSize: 32
                             }}
@@ -108,7 +108,7 @@ export const ActiveDelegration = ({ detail, setState, setDetail }) => {
                         <span
                             className='position-absolute d-flex align-items-center'
                             style={{
-                                top: 22 ,
+                                top: 22,
                                 right: 0,
                                 fontSize: 32
                             }}

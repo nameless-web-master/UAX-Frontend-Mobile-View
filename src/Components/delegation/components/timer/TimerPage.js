@@ -27,11 +27,12 @@ export default function TimerPage({ label, initialVal = 3, intervalInMs = 1000, 
 
     const [{ x, }, setX] = useSpring(() => ({
         onRest: () => {
-            setContentBottom(contentTop.value)
+            setContentBottom(prev => prev - 1);
             setX({ x: 0, config: { duration: 0 }, delay: 0 })
 
         },
-        onStart: () => {;
+        onStart: () => {
+            ;
             setTopBgColor('#C006DF');
 
         },
