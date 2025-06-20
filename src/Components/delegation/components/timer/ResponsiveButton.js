@@ -12,7 +12,7 @@ export default function ResponsiveSvgButton({ component: Component, color, class
         setC(undefined)
     }
     return (
-        <a href="#" className={`${className} rButton`}>
+        <a href className={`${className} rButton`}>
             <Component onMouseOut={onMouseOut} onMouseOver={onMouseOver} fill={c} />
         </a>
     )

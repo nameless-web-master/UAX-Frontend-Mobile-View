@@ -19,7 +19,7 @@
     position: absolute;
     transform-origin: bottom;
     transform: rotateX(0deg);
-    -webkit-transform: rotateX(0deg);
+    /* -webkit-transform: rotateX(0deg); */
     z-index: 2;
   }
 

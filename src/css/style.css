@@ -166,10 +166,6 @@ input[type=number] {
   background-color: #c006df;
 }
 
-.custom_tabs_____ {
-  /* background: #2c2a2f; */
-}
-
 .customized_button_for_nav_link_____ {
   padding: 11px;
   font-size: 17px;
@@ -224,13 +220,6 @@ input[type=number] {
   justify-content: flex-end;
   align-items: center;
 }
-
-.currencySelect {
-  /* margin-left: 10px;  */
-}
-
-
-
 
 .section {
   margin-bottom: 20px;
@@ -1067,7 +1056,7 @@ fieldset:disabled .btn {
 }
 
 .sticky-navbar {
-  position: sticky;
+  position: 'sticky';
   top: 0;
   z-index: 1000;
   background-color: white;
